@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Address Books</title>
+	<link rel="stylesheet" href="page.css" type="text/css"></style>
+	<script defer="" src="page.js" type="application/javascript"></script>
+</head>
+<body>
+	<div>
+		<button id="reload">reload</button>
+		<button id="open">open UI</button>
+	</div>
+	<div id="contents">
+		<ul id="addressBooks"></ul>
+		<ul id="entries"></ul>
+		<form id="contactDetails" hidden="">
+			<template>
+				<label><span></span><input type="text" /></label>
+			</template>
+			<div class="save"><button>Save</button></div>
+		</form>
+		<form id="mailingListDetails" hidden="">
+			<label><span>Name:</span><input type="text" name="name" /></label>
+			<label><span>Nickname:</span><input type="text" name="nickName" /></label>
+			<label><span>Description:</span><input type="text" name="description" /></label>
+			<div class="save"><button>Save</button></div>
+			<div>Members:</div>
+			<ul id="members"></ul>
+		</form>
+	</div>
+	<ul id="eventlog"></ul>
+</body>
+</html>

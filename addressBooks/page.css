@@ -1,0 +1,92 @@
+body {
+	margin: 1em;
+	display: flex;
+	flex-direction: column;
+}
+
+li {
+	padding: 5px;
+	line-height: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+label {
+	display: flex;
+}
+
+label > span {
+	width: 10em;
+}
+
+#contents {
+	display: flex;
+	flex: 1;
+}
+
+.selected {
+	background-color: highlight;
+	color: highlighttext;
+}
+
+#addressBooks {
+	width: 20em;
+	padding: 0;
+	list-style: none;
+}
+
+.addressBook::before {
+	content: "\1F4D5";
+	font-size: 20px;
+	margin-inline-end: 0.25em;
+}
+
+#entries {
+	width: 20em;
+	padding: 0 1em;
+	list-style: none;
+}
+
+#addressBooks li,
+#entries li {
+	cursor: pointer;
+}
+
+.mailingList::before {
+	content: "\1F46A";
+	font-size: 20px;
+	margin-inline-end: 0.25em;
+}
+
+.contact::before {
+	content: "\1F469";
+	font-size: 20px;
+	margin-inline-end: 0.25em;
+}
+
+#contactDetails,
+#mailingListDetails {
+	margin: 1em;
+}
+
+#mailingListDetails:not([hidden]) {
+	display: flex;
+	flex-direction: column;
+}
+
+#members {
+	padding: 0;
+	list-style: none;
+	flex: 1;
+}
+
+.save {
+	text-align: right;
+}
+
+#eventlog {
+	width: 100%;
+	overflow: auto;
+	box-sizing: border-box;
+	flex: 1;
+}
