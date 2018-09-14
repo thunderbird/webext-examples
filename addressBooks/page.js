@@ -11,6 +11,7 @@ ui.open.onclick = function() {
 };
 
 ui.addressBooks.onclick = async function(event) {
+	ui.addressBookDetails.hidden = true;
 	ui.contactDetails.hidden = true;
 	ui.mailingListDetails.hidden = true;
 	let selected = this.querySelector(".selected");
@@ -35,7 +36,10 @@ ui.addressBooks.onclick = async function(event) {
 	target.classList.add("selected");
 	let bookId = target.dataset.id;
 
-	ui.entries.dataset.id = bookId;
+	let book = await browser.addressBooks.get(bookId);
+	ui.addressBookDetails.dataset.id = bookId;
+	ui.addressBookDetails.name.value = book.name;
+
 	for (let list of await browser.mailingLists.list(bookId)) {
 		ui.entries.appendChild(lists.makeItem(list));
 	}
@@ -44,6 +48,7 @@ ui.addressBooks.onclick = async function(event) {
 		ui.entries.appendChild(contacts.makeItem(contact, true));
 	}
 
+	ui.addressBookDetails.hidden = false;
 	ui.entries.hidden = false;
 };
 
@@ -106,33 +111,48 @@ ui.members.onclick = function(event) {
 	}
 };
 
-ui.contactDetails.onsubmit = async function() {
-	let id = ui.contactDetails.dataset.id;
+ui.addressBookDetails.onsubmit = function() {
+	let id = this.dataset.id;
+
+	let button = this.querySelector("button");
+	button.disabled = true;
+	browser.addressBooks.update(id, {
+		name: this.name.value,
+	}).then(() => {
+		button.disabled = false;
+	});
+
+	return false;
+};
+
+ui.contactDetails.onsubmit = function() {
+	let id = this.dataset.id;
 	let properties = {};
-	for (let input of ui.contactDetails.querySelectorAll("label input")) {
+	for (let input of this.querySelectorAll("label input")) {
 		properties[input.name] = input.value || null;
 	}
 
 	let button = this.querySelector("button");
 	button.disabled = true;
-	await browser.contacts.update(id, properties);
-	button.disabled = false;
+	browser.contacts.update(id, properties).then(() => {
+		button.disabled = false;
+	});
 
 	return false;
 };
 
-ui.mailingListDetails.onsubmit = async function() {
-	let id = ui.mailingListDetails.dataset.id;
+ui.mailingListDetails.onsubmit = function() {
+	let id = this.dataset.id;
 
 	let button = this.querySelector("button");
 	button.disabled = true;
-	await browser.mailingLists.update(id, {
-		name: ui.mailingListDetails.name.value,
-		nickName: ui.mailingListDetails.nickName.value,
-		description: ui.mailingListDetails.description.value,
+	browser.mailingLists.update(id, {
+		name: this.name.value,
+		nickName: this.nickName.value,
+		description: this.description.value,
+	}).then(() => {
+		button.disabled = false;
 	});
-	ui.entries.querySelector(`[data-id="${id}"]`).textContent = ui.mailingListDetails.name.value;
-	button.disabled = false;
 
 	return false;
 };
@@ -163,11 +183,14 @@ var books = {
 		ui.addressBooks.appendChild(books.makeItem(book));
 	},
 	onUpdated(book) {
-		ui.addressBooks.querySelector(`li.addressBook[data-id="${book.id}"]`).textContent = book.name;
+		let li = ui.addressBooks.querySelector(`li.addressBook[data-id="${book.id}"]`);
+		if (li) {
+			li.querySelector("span").textContent = book.name;
+		}
 	},
 	onDeleted(id) {
 		ui.addressBooks.querySelector(`li.addressBook[data-id="${id}"]`).remove();
-		if (ui.entries.dataset.id == id) {
+		if (ui.addressBookDetails.dataset.id == id) {
 			ui.entries.hidden = true;
 			ui.contactDetails.hidden = true;
 			ui.mailingListDetails.hidden = true;
@@ -237,20 +260,20 @@ var contacts = {
 		ui.contactDetails.hidden = false;
 	},
 	onCreated(contact) {
-		if (ui.entries.dataset.id == contact.parentId) {
+		if (ui.addressBookDetails.dataset.id == contact.parentId) {
 			ui.entries.appendChild(contacts.makeItem(contact, true));
 		}
 	},
 	onUpdated(contact) {
 		for (let li of document.querySelectorAll(`li.contact[data-id="${contact.id}"]`)) {
-			li.textContent = contacts.getLabel(contact);
+			li.querySelector("span").textContent = contacts.getLabel(contact);
 		}
 		if (ui.contactDetails.dataset.id == contact.id) {
 			contacts.showDetails(contact.id);
 		}
 	},
 	onDeleted(parentId, id) {
-		if (ui.entries.dataset.id == parentId) {
+		if (ui.addressBookDetails.dataset.id == parentId) {
 			ui.entries.querySelector(`li.contact[data-id="${id}"]`).remove();
 		}
 		if (ui.contactDetails.dataset.id == id) {
@@ -303,14 +326,14 @@ var lists = {
 		ui.mailingListDetails.hidden = false;
 	},
 	onCreated(list) {
-		if (ui.entries.dataset.id == list.parentId) {
+		if (ui.addressBookDetails.dataset.id == list.parentId) {
 			ui.entries.insertBefore(lists.makeItem(list), ui.entries.querySelector(".contact"));
 		}	
 	},
 	onUpdated(list) {
-		let li = ui.entries.querySelector(`li.contact[data-id="${list.id}"]`);
+		let li = ui.entries.querySelector(`li.mailingList[data-id="${list.id}"]`);
 		if (li) {
-			li.textContent = list.name;
+			li.querySelector("span").textContent = list.name;
 
 			if (ui.mailingListDetails.dataset.id == list.id) {
 				lists.showDetails(list.id);
@@ -318,7 +341,7 @@ var lists = {
 		}
 	},
 	onDeleted(parentId, id) {
-		if (ui.entries.dataset.id == parentId) {
+		if (ui.addressBookDetails.dataset.id == parentId) {
 			ui.entries.querySelector(`li.mailingList[data-id="${id}"]`).remove();
 		}	
 		if (ui.mailingListDetails.dataset.id == id) {

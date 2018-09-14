@@ -22,12 +22,18 @@ body {
 	font-size: 10px;
 }
 
-label {
-	display: flex;
+#contents li.selected {
+	background-color: highlight;
+	color: highlighttext;
 }
 
 label > span {
-	width: 10em;
+	display: block;
+}
+
+label > input {
+	width: 100%;
+	box-sizing: border-box;
 }
 
 #contents {
@@ -35,33 +41,30 @@ label > span {
 	flex: 1;
 }
 
-.selected {
-	background-color: highlight;
-	color: highlighttext;
+#addressBooks,
+#addressBookDetails,
+#contactDetails,
+#mailingListDetails {
+	width: 20em;
+	margin: 1em;
 }
 
 #addressBooks,
+#entries,
 #members {
-	width: 20em;
 	padding: 0;
-	list-style: none;
-}
-
-.addressBook::before {
-	content: "\1F4D5";
-	font-size: 20px;
-	margin-inline-end: 0.25em;
-}
-
-#entries {
-	width: 20em;
-	padding: 0 1em;
 	list-style: none;
 }
 
 #addressBooks li,
 #entries li {
 	cursor: pointer;
+}
+
+.addressBook::before {
+	content: "\1F4D5";
+	font-size: 20px;
+	margin-inline-end: 0.25em;
 }
 
 .mailingList::before {
@@ -75,11 +78,6 @@ li.contact::before {
 	content: "\1F469";
 	font-size: 20px;
 	margin-inline-end: 0.25em;
-}
-
-#contactDetails,
-#mailingListDetails {
-	margin: 1em;
 }
 
 #mailingListDetails:not([hidden]) {
