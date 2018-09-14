@@ -61,7 +61,11 @@ ui.entries.onclick = function(event) {
 	}
 
 	if (event.target.classList.contains("delete")) {
-		browser.contacts.delete(target.dataset.id);
+		if (target.classList.contains("mailingList")) {
+			browser.mailingLists.delete(target.dataset.id);
+		} else {
+			browser.contacts.delete(target.dataset.id);
+		}
 		return;
 	}
 
@@ -102,33 +106,35 @@ ui.members.onclick = function(event) {
 	}
 };
 
-ui.contactDetails.onsubmit = function() {
-	return false;
-};
-ui.contactDetails.querySelector("button").onclick = async function() {
+ui.contactDetails.onsubmit = async function() {
 	let id = ui.contactDetails.dataset.id;
 	let properties = {};
 	for (let input of ui.contactDetails.querySelectorAll("label input")) {
 		properties[input.name] = input.value || null;
 	}
-	this.disabled = true;
-	await browser.contacts.update(id, properties);
-	this.disabled = false;
-};
 
-ui.mailingListDetails.onsubmit = function() {
+	let button = this.querySelector("button");
+	button.disabled = true;
+	await browser.contacts.update(id, properties);
+	button.disabled = false;
+
 	return false;
 };
-ui.mailingListDetails.querySelector("button").onclick = async function() {
+
+ui.mailingListDetails.onsubmit = async function() {
 	let id = ui.mailingListDetails.dataset.id;
-	this.disabled = true;
+
+	let button = this.querySelector("button");
+	button.disabled = true;
 	await browser.mailingLists.update(id, {
 		name: ui.mailingListDetails.name.value,
 		nickName: ui.mailingListDetails.nickName.value,
 		description: ui.mailingListDetails.description.value,
 	});
 	ui.entries.querySelector(`[data-id="${id}"]`).textContent = ui.mailingListDetails.name.value;
-	this.disabled = false;
+	button.disabled = false;
+
+	return false;
 };
 
 var books = {
@@ -270,10 +276,10 @@ var lists = {
 		});
 	},
 	makeItem(list) {
-		let li = document.createElement("li");
-		li.dataset.id = list.id;
+		let li = ui.itemTemplate.content.firstElementChild.cloneNode(true);
 		li.classList.add("mailingList");
-		li.textContent = list.name;
+		li.dataset.id = list.id;
+		li.querySelector("span").textContent = list.name;
 		return li;
 	},
 	async showDetails(id) {
