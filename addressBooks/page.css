@@ -4,11 +4,22 @@ body {
 	flex-direction: column;
 }
 
-li {
+#contents li {
 	padding: 5px;
 	line-height: 20px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	display: flex;
+}
+
+#contents li > span {
+	flex: 1;
+}
+
+#contents li > button.delete {
+	padding: 0;
+	font-weight: bold;
+	font-size: 10px;
 }
 
 label {
@@ -29,7 +40,8 @@ label > span {
 	color: highlighttext;
 }
 
-#addressBooks {
+#addressBooks,
+#members {
 	width: 20em;
 	padding: 0;
 	list-style: none;
@@ -58,7 +70,8 @@ label > span {
 	margin-inline-end: 0.25em;
 }
 
-.contact::before {
+
+li.contact::before {
 	content: "\1F469";
 	font-size: 20px;
 	margin-inline-end: 0.25em;
@@ -78,6 +91,14 @@ label > span {
 	padding: 0;
 	list-style: none;
 	flex: 1;
+}
+
+#members:empty::before {
+	content: "No members";
+	padding: 5px;
+	line-height: 20px;
+	color: #999;
+	font-style: italic;
 }
 
 .save {

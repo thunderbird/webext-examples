@@ -26,6 +26,12 @@ ui.addressBooks.onclick = async function(event) {
 	if (!target) {
 		return;
 	}
+
+	if (event.target.classList.contains("delete")) {
+		browser.addressBooks.delete(target.dataset.id);
+		return;
+	}
+
 	target.classList.add("selected");
 	let bookId = target.dataset.id;
 
@@ -53,6 +59,12 @@ ui.entries.onclick = function(event) {
 	if (!target) {
 		return;
 	}
+
+	if (event.target.classList.contains("delete")) {
+		browser.contacts.delete(target.dataset.id);
+		return;
+	}
+
 	target.classList.add("selected");
 
 	if (target.classList.contains("contact")) {
@@ -79,9 +91,15 @@ ui.members.ondragenter = ui.members.ondragover = function(event) {
 	}
 	event.preventDefault();
 };
-ui.members.ondrop = async function(event) {
+ui.members.ondrop = function(event) {
 	let id = event.dataTransfer.getData("x/dragged");
 	browser.mailingLists.addMember(ui.mailingListDetails.dataset.id, id);
+};
+ui.members.onclick = function(event) {
+	if (event.target.classList.contains("delete")) {
+		let target = event.target.closest("li");
+		browser.mailingLists.removeMember(ui.mailingListDetails.dataset.id, target.dataset.id);
+	}
 };
 
 ui.contactDetails.onsubmit = function() {
@@ -129,10 +147,10 @@ var books = {
 		});
 	},
 	makeItem(book) {
-		let li = document.createElement("li");
-		li.dataset.id = book.id;
+		let li = ui.itemTemplate.content.firstElementChild.cloneNode(true);
 		li.classList.add("addressBook");
-		li.textContent = book.name;
+		li.dataset.id = book.id;
+		li.querySelector("span").textContent = book.name;
 		return li;
 	},
 	onCreated(book) {
@@ -149,7 +167,7 @@ var books = {
 			ui.mailingListDetails.hidden = true;
 		}
 	},
-}
+};
 books.init();
 
 var contacts = {
@@ -177,10 +195,10 @@ var contacts = {
 		}
 	},
 	makeItem(contact, draggable = false) {
-		let li = document.createElement("li");
-		li.dataset.id = contact.id;
+		let li = ui.itemTemplate.content.firstElementChild.cloneNode(true);
 		li.classList.add("contact");
-		li.textContent = contacts.getLabel(contact);
+		li.dataset.id = contact.id;
+		li.querySelector("span").textContent = contacts.getLabel(contact);
 		if (draggable) {
 			li.setAttribute("draggable", "true");
 		}

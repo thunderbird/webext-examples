@@ -21,9 +21,6 @@
 		"tabs"
 	],
 	"browser_action": {
-		"default_icon": {
-			"48": "icon.svg"
-		},
 		"default_title": "__MSG_extensionName__"
 	},
 	"default_locale": "en",
