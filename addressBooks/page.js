@@ -34,22 +34,12 @@ ui.addressBooks.onclick = async function(event) {
 	}
 
 	target.classList.add("selected");
-	let bookId = target.dataset.id;
-
-	let book = await browser.addressBooks.get(bookId);
-	ui.addressBookDetails.dataset.id = bookId;
-	ui.addressBookDetails.name.value = book.name;
-
-	for (let list of await browser.mailingLists.list(bookId)) {
-		ui.entries.appendChild(lists.makeItem(list));
-	}
-
-	for (let contact of await browser.contacts.list(bookId)) {
-		ui.entries.appendChild(contacts.makeItem(contact, true));
-	}
-
-	ui.addressBookDetails.hidden = false;
-	ui.entries.hidden = false;
+	books.showDetails(target.dataset.id);
+};
+ui.addAddressBook.onclick = function() {
+	ui.contactDetails.hidden = true;
+	ui.mailingListDetails.hidden = true;
+	books.showCreateForm();
 };
 
 ui.entries.onclick = function(event) {
@@ -91,6 +81,15 @@ ui.entries.ondragstart = function(event) {
 	event.dataTransfer.setData("x/dragged", target.dataset.id);
 	event.dataTransfer.effectAllowed = "copy";
 };
+ui.addMailingList.onclick = function() {
+	ui.contactDetails.hidden = true;
+	lists.showCreateForm();
+};
+ui.addContact.onclick = function() {
+	ui.mailingListDetails.hidden = true;
+	contacts.showCreateForm();
+};
+
 ui.members.ondragenter = ui.members.ondragover = function(event) {
 	let id = event.dataTransfer.getData("x/dragged");
 	for (let child of ui.members.children) {
@@ -113,12 +112,19 @@ ui.members.onclick = function(event) {
 
 ui.addressBookDetails.onsubmit = function() {
 	let id = this.dataset.id;
+	let properties = { name: this.name.value };
 
 	let button = this.querySelector("button");
+	let promise;
 	button.disabled = true;
-	browser.addressBooks.update(id, {
-		name: this.name.value,
-	}).then(() => {
+	if (id) {
+		promise = browser.addressBooks.update(id, properties);
+	} else {
+		promise = browser.addressBooks.create(properties).then(() => {
+			this.hidden = true;
+		});
+	}
+	promise.then(() => {
 		button.disabled = false;
 	});
 
@@ -133,8 +139,16 @@ ui.contactDetails.onsubmit = function() {
 	}
 
 	let button = this.querySelector("button");
+	let promise;
 	button.disabled = true;
-	browser.contacts.update(id, properties).then(() => {
+	if (id) {
+		promise = browser.contacts.update(id, properties);
+	} else {
+		promise = browser.contacts.create(ui.addressBookDetails.dataset.id, properties).then(() => {
+			this.hidden = true;
+		});
+	}
+	promise.then(() => {
 		button.disabled = false;
 	});
 
@@ -143,14 +157,23 @@ ui.contactDetails.onsubmit = function() {
 
 ui.mailingListDetails.onsubmit = function() {
 	let id = this.dataset.id;
-
-	let button = this.querySelector("button");
-	button.disabled = true;
-	browser.mailingLists.update(id, {
+	let properties = {
 		name: this.name.value,
 		nickName: this.nickName.value,
 		description: this.description.value,
-	}).then(() => {
+	};
+
+	let button = this.querySelector("button");
+	let promise;
+	button.disabled = true;
+	if (id) {
+		promise = browser.mailingLists.update(id, properties);
+	} else {
+		promise = browser.mailingLists.create(ui.addressBookDetails.dataset.id, properties).then(() => {
+			this.hidden = true;
+		});
+	}
+	promise.then(() => {
 		button.disabled = false;
 	});
 
@@ -178,6 +201,30 @@ var books = {
 		li.dataset.id = book.id;
 		li.querySelector("span").textContent = book.name;
 		return li;
+	},
+	showCreateForm() {
+		delete ui.addressBookDetails.dataset.id;
+		ui.addressBookDetails.reset();
+		ui.addressBookDetails.name.focus();
+
+		ui.addressBookDetails.hidden = false;
+		ui.entries.hidden = true;
+	},
+	async showDetails(id) {
+		let book = await browser.addressBooks.get(id);
+		ui.addressBookDetails.dataset.id = id;
+		ui.addressBookDetails.name.value = book.name;
+
+		for (let list of await browser.mailingLists.list(id)) {
+			ui.entries.appendChild(lists.makeItem(list));
+		}
+
+		for (let contact of await browser.contacts.list(id)) {
+			ui.entries.appendChild(contacts.makeItem(contact, true));
+		}
+
+		ui.addressBookDetails.hidden = false;
+		ui.entries.hidden = false;
 	},
 	onCreated(book) {
 		ui.addressBooks.appendChild(books.makeItem(book));
@@ -232,6 +279,24 @@ var contacts = {
 			li.setAttribute("draggable", "true");
 		}
 		return li;
+	},
+	showCreateForm() {
+		delete ui.contactDetails.dataset.id;
+		for (let label of [...ui.contactDetails.querySelectorAll("label")]) {
+			label.remove();
+		}
+
+		let fields = ["DisplayName", "FirstName", "LastName", "PrimaryEmail"];
+		let template = ui.contactDetails.querySelector("template");
+		for (let field of fields) {
+			let label = template.content.firstElementChild.cloneNode(true);
+			label.querySelector("span").textContent = `${field}:`;
+			label.querySelector("input").name = field;
+			ui.contactDetails.insertBefore(label, ui.contactDetails.lastElementChild);
+		}
+
+		ui.contactDetails.DisplayName.focus();
+		ui.contactDetails.hidden = false;
 	},
 	async showDetails(id) {
 		ui.contactDetails.dataset.id = id;
@@ -305,6 +370,12 @@ var lists = {
 		li.querySelector("span").textContent = list.name;
 		return li;
 	},
+	showCreateForm() {
+		delete ui.mailingListDetails.dataset.id;
+		ui.mailingListDetails.reset();
+		ui.mailingListDetails.name.focus();
+		ui.mailingListDetails.hidden = false;
+	},
 	async showDetails(id) {
 		ui.mailingListDetails.dataset.id = id;
 		let list = await browser.mailingLists.get(id);
@@ -328,7 +399,7 @@ var lists = {
 	onCreated(list) {
 		if (ui.addressBookDetails.dataset.id == list.parentId) {
 			ui.entries.insertBefore(lists.makeItem(list), ui.entries.querySelector(".contact"));
-		}	
+		}
 	},
 	onUpdated(list) {
 		let li = ui.entries.querySelector(`li.mailingList[data-id="${list.id}"]`);
@@ -343,7 +414,7 @@ var lists = {
 	onDeleted(parentId, id) {
 		if (ui.addressBookDetails.dataset.id == parentId) {
 			ui.entries.querySelector(`li.mailingList[data-id="${id}"]`).remove();
-		}	
+		}
 		if (ui.mailingListDetails.dataset.id == id) {
 			ui.mailingListDetails.hidden = true;
 		}
@@ -351,7 +422,7 @@ var lists = {
 	onMemberAdded(contact) {
 		if (ui.mailingListDetails.dataset.id == contact.parentId) {
 			ui.members.appendChild(contacts.makeItem(contact));
-		}	
+		}
 	},
 	onMemberRemoved(listId, id) {
 		if (ui.mailingListDetails.dataset.id == listId) {

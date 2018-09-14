@@ -12,11 +12,15 @@
 		<button id="open">open UI</button>
 	</div>
 	<div id="contents">
-		<ul id="addressBooks"></ul>
+		<div id="addressBooksWrapper">
+			<ul id="addressBooks"></ul>
+			<div><button type="button" id="addAddressBook">New address book</button></div>
+		</div>
 		<form id="addressBookDetails" hidden="">
 			<label><span>Name:</span><input type="text" name="name" /></label>
 			<div class="save"><button type="submit">Save</button></div>
 			<ul id="entries"></ul>
+			<div><button type="button" id="addMailingList">New mailing list</button><button type="button" id="addContact">New contact</button></div>
 		</form>
 		<form id="contactDetails" hidden="">
 			<template>

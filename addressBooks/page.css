@@ -41,7 +41,7 @@ label > input {
 	flex: 1;
 }
 
-#addressBooks,
+#addressBooksWrapper,
 #addressBookDetails,
 #contactDetails,
 #mailingListDetails {
