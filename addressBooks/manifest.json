@@ -1,28 +1,28 @@
 {
-	"name": "__MSG_extensionName__",
-	"description": "__MSG_extensionDescription__",
-	"version": "1",
-	"applications": {
-		"gecko": {
-			"id": "addressBooks@darktrojan.net"
-		}
-	},
-	"background": {
-		"scripts": [
-			"background.js"
-		]
-	},
-	"options_ui": {
-		"open_in_tab": true,
-		"page": "page.html"
-	},
-	"permissions": [
-		"addressBooks",
-		"tabs"
-	],
-	"browser_action": {
-		"default_title": "__MSG_extensionName__"
-	},
-	"default_locale": "en",
-	"manifest_version": 2
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "addressBooks@darktrojan.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "page.html"
+  },
+  "permissions": [
+    "addressBooks",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_extensionName__"
+  },
+  "default_locale": "en",
+  "manifest_version": 2
 }

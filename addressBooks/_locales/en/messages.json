@@ -1,8 +1,8 @@
 {
-	"extensionDescription": {
-		"message": "A sample addon that exercises the address books webextension API"
-	},
-	"extensionName": {
-		"message": "Address Books"
-	}
+  "extensionDescription": {
+    "message": "A sample addon that exercises the address books webextension API"
+  },
+  "extensionName": {
+    "message": "Address Books"
+  }
 }
