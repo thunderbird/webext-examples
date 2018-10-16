@@ -1,0 +1,50 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "apiList@darktrojan.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "addressBooks",
+    "alarms",
+    "browserSettings",
+    "clipboardRead",
+    "clipboardWrite",
+    "contextualIdentities",
+    "cookies",
+    "dns",
+    "downloads",
+    "downloads.open",
+    "geolocation",
+    "idle",
+    "management",
+    "nativeMessaging",
+    "notifications",
+    "privacy",
+    "proxy",
+    "storage",
+    "tabHide",
+    "tabs",
+    "telemetry",
+    "theme",
+    "topSites",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_extensionName__"
+  },
+  "default_locale": "en",
+  "manifest_version": 2
+}

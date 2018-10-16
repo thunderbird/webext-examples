@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title></title>
+  <style type="text/css">
+    body {
+      column-width: 20em;
+    }
+    ul {
+      margin: 0;
+    }
+    .collapsed::after {
+      content: " \2026";
+      cursor: pointer;
+    }
+    .collapsed > ul {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <ul></ul>
+  <script type="application/javascript" src="apis.js"></script>
+</body>
+</html>
