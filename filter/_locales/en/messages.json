@@ -1,0 +1,8 @@
+{
+  "extensionDescription": {
+    "message": "A sample addon that sets the Quick Filter based on the selected message"
+  },
+  "extensionName": {
+    "message": "Filter"
+  }
+}

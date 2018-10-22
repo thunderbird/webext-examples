@@ -1,0 +1,19 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "filter@darktrojan.net"
+    }
+  },
+  "browser_action": {
+    "default_popup": "filter.html",
+    "default_title": "Filter"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "default_locale": "en",
+  "manifest_version": 2
+}
