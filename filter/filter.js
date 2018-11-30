@@ -1,26 +1,18 @@
-document.getElementById("sender").onclick = async () => {
-  let messages = await browser.mailTabs.getSelectedMessages();
-  if (messages.length == 0) {
-    return;
-  }
-  await browser.mailTabs.setQuickFilter({ text: messages[0].author, sender: true });
-  window.close();
-};
-
-document.getElementById("recipients").onclick = async () => {
-  let messages = await browser.mailTabs.getSelectedMessages();
-  if (messages.length == 0) {
-    return;
-  }
-  await browser.mailTabs.setQuickFilter({ text: messages[0].recipients, recipients: true });
-  window.close();
-};
-
-document.getElementById("subject").onclick = async () => {
-  let messages = await browser.mailTabs.getSelectedMessages();
-  if (messages.length == 0) {
-    return;
-  }
-  await browser.mailTabs.setQuickFilter({ text: messages[0].subject, subject: true });
-  window.close();
-};
+for (let key of ["sender", "recipients", "subject"]) {
+  let button = document.getElementById(key);
+  button.textContent = browser.i18n.getMessage(key);
+  button.onclick = async () => {
+    let messageList = await browser.mailTabs.getSelectedMessages();
+    if (messageList.messages.length != 1) {
+      return;
+    }
+    let messageKey = key == "sender" ? "author" : key;
+    await browser.mailTabs.setQuickFilter({
+      text: {
+        text: messageList.messages[0][messageKey],
+        [key]: true,
+      },
+    });
+    window.close();
+  };
+}

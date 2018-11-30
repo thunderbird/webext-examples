@@ -4,5 +4,14 @@
   },
   "extensionName": {
     "message": "Filter"
+  },
+  "recipients": {
+    "message": "Recipients"
+  },
+  "sender": {
+    "message": "Sender"
+  },
+  "subject": {
+    "message": "Subject"
   }
 }
