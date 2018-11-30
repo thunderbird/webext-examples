@@ -4,7 +4,7 @@
   "version": "1",
   "applications": {
     "gecko": {
-      "id": "filter@darktrojan.net"
+      "id": "filter-webExt-sample@thunderbird.net"
     }
   },
   "browser_action": {
@@ -12,7 +12,8 @@
     "default_title": "Filter"
   },
   "permissions": [
-    "tabs"
+    "mailTabs",
+    "messagesRead"
   ],
   "default_locale": "en",
   "manifest_version": 2

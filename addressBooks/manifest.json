@@ -4,7 +4,7 @@
   "version": "1",
   "applications": {
     "gecko": {
-      "id": "addressBooks@darktrojan.net"
+      "id": "addressBooks-webExt-sample@thunderbird.net"
     }
   },
   "background": {

@@ -4,7 +4,7 @@
   "version": "1",
   "applications": {
     "gecko": {
-      "id": "apiList@darktrojan.net"
+      "id": "apiList-webExt-sample@thunderbird.net"
     }
   },
   "background": {
@@ -13,12 +13,14 @@
     ]
   },
   "permissions": [
+    "accountsRead",
     "activeTab",
     "addressBooks",
     "alarms",
     "browserSettings",
     "clipboardRead",
     "clipboardWrite",
+    "cloudFile",
     "contextualIdentities",
     "cookies",
     "dns",
@@ -27,6 +29,8 @@
     "geolocation",
     "idle",
     "management",
+    "mailTabs",
+    "messagesRead",
     "nativeMessaging",
     "notifications",
     "privacy",
