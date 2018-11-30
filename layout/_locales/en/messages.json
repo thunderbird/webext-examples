@@ -1,0 +1,23 @@
+{
+  "extensionDescription": {
+    "message": "A sample addon that sets the layout of the mail tab"
+  },
+  "extensionName": {
+    "message": "Layout"
+  },
+  "folderPaneVisible": {
+    "message": "Folder Pane"
+  },
+  "messagePaneVisible": {
+    "message": "Message Pane"
+  },
+  "standard": {
+    "message": "Standard"
+  },
+  "vertical": {
+    "message": "Vertical"
+  },
+  "wide": {
+    "message": "Wide"
+  }
+}
