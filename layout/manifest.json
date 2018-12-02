@@ -4,7 +4,7 @@
   "version": "1",
   "applications": {
     "gecko": {
-      "id": "layout-webExt-sample@thunderbird.net"
+      "id": "layout@sample.extensions.thunderbird.net"
     }
   },
   "browser_action": {
