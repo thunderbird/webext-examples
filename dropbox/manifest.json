@@ -1,0 +1,25 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "dropbox@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "cloud_file": {
+    "name": "__MSG_serviceName__",
+    "settings_url": "settings.html",
+    "management_url": "management.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "default_locale": "en",
+  "manifest_version": 2
+}
