@@ -11,7 +11,7 @@ browser.storage.local.get([accountId]).then(accountInfo => {
 document.querySelector("button").onclick = async () => {
   input.disabled = button.disabled = true;
   let start = Date.now();
-  await browser.storage.local.set({ accountId: input.value });
+  await browser.storage.local.set({ [accountId]: { oauth_token: input.value } });
   setTimeout(() => {
     input.disabled = button.disabled = false;
   }, Math.max(0, start + 500 - Date.now()));
