@@ -1,3 +1,5 @@
+/* eslint-disable object-shorthand */
+
 // Get various parts of the WebExtension framework that we need.
 ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 
@@ -12,6 +14,11 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
       // Again, this key must have the same name.
       myapi: {
 
+        // A function.
+        sayHello: async function(name) {
+          Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "!");
+        },
+
         // An event. Most of this is boilerplate you don't need to worry about, just copy it.
         onToolbarClick: new ExtensionCommon.EventManager({
           context,
@@ -20,21 +27,16 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
           // function that removes those listeners. To have the event fire in your extension,
           // call fire.async.
           register(fire) {
-            let callback = function(event, id, x, y) {
+            function callback(event, id, x, y) {
               return fire.async(id, x, y);
-            };
+            }
 
             windowListener.add(callback);
-            return () => {
+            return function() {
               windowListener.remove(callback);
             };
           },
         }).api(),
-
-        // A function.
-        sayHello(name) {
-          Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "!");
-        },
 
       },
     };
@@ -42,7 +44,8 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
 };
 
 // A helpful class for listening to windows opening and closing.
-ChromeUtils.import("resource:///modules/extensionSupport.jsm");
+// (This file had a lowercase E in Thunderbird 65 and earlier.)
+ChromeUtils.import("resource:///modules/ExtensionSupport.jsm");
 
 // This object is just what we're using to listen for toolbar clicks. The implementation isn't
 // what this example is about, but you might be interested as it's a common pattern. We count the
@@ -65,9 +68,9 @@ var windowListener = new class extends ExtensionCommon.EventEmitter {
     if (this.callbackCount == 1) {
       ExtensionSupport.registerWindowListener("windowListener", {
         chromeURLs: ["chrome://messenger/content/messenger.xul"],
-        onLoadWindow: (window) => {
+        onLoadWindow: function(window) {
           let toolbox = window.document.getElementById("mail-toolbox");
-          toolbox.addEventListener("click", this.handleEvent);
+          toolbox.addEventListener("click", windowListener.handleEvent);
         },
       });
     }
