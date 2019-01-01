@@ -6,10 +6,22 @@ for (let key of ["sender", "recipients", "subject"]) {
     if (messageList.messages.length != 1) {
       return;
     }
-    let messageKey = key == "sender" ? "author" : key;
+    let message = messageList.messages[0];
+    let text;
+    switch (key) {
+      case "sender":
+        text = message.author;
+        break;
+      case "recipients":
+        text = message.recipients.join(", ");
+        break;
+      case "subject":
+        text = message.subject;
+        break;
+    }
     await browser.mailTabs.setQuickFilter({
       text: {
-        text: messageList.messages[0][messageKey],
+        text,
         [key]: true,
       },
     });

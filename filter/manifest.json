@@ -18,6 +18,7 @@
   },
   "permissions": [
     "mailTabs",
+    "menus",
     "messagesRead"
   ],
   "default_locale": "en",
