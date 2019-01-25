@@ -374,6 +374,7 @@ var lists = {
     ui.mailingListDetails.reset();
     ui.mailingListDetails.name.focus();
     ui.mailingListDetails.hidden = false;
+    ui.membersHeading.hidden = ui.members.hidden = true;
   },
   async showDetails(id) {
     ui.mailingListDetails.dataset.id = id;
@@ -394,6 +395,7 @@ var lists = {
     }
 
     ui.mailingListDetails.hidden = false;
+    ui.membersHeading.hidden = ui.members.hidden = false;
   },
   onCreated(list) {
     if (ui.addressBookDetails.dataset.id == list.parentId) {
