@@ -1,10 +1,10 @@
 /* eslint-disable object-shorthand */
 
 // Get various parts of the WebExtension framework that we need.
-ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
+var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 
 // You probably already know what this does.
-ChromeUtils.import("resource://gre/modules/Services.jsm");
+var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 // This is the important part. It implements the functions and events defined in schema.json.
 // The variable must have the same name you've been using so far, "myapi" in this case.
@@ -45,7 +45,7 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
 
 // A helpful class for listening to windows opening and closing.
 // (This file had a lowercase E in Thunderbird 65 and earlier.)
-ChromeUtils.import("resource:///modules/ExtensionSupport.jsm");
+var { ExtensionSupport } = ChromeUtils.import("resource:///modules/ExtensionSupport.jsm");
 
 // This object is just what we're using to listen for toolbar clicks. The implementation isn't
 // what this example is about, but you might be interested as it's a common pattern. We count the
