@@ -12,7 +12,6 @@
     "default_title": "__MSG_extensionName__"
   },
   "permissions": [
-    "mailTabs"
   ],
   "default_locale": "en",
   "manifest_version": 2
