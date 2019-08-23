@@ -12,6 +12,7 @@ browser.mailTabs.onSelectedMessagesChanged.addListener(async (tabId, messageList
 browser.menus.create({
   id: "sender",
   title: "Sender",
+  contexts: ["message_list"],
   async onclick(info) {
     let message = info.selectedMessages.messages[0];
     await browser.mailTabs.setQuickFilter({
@@ -25,6 +26,7 @@ browser.menus.create({
 browser.menus.create({
   id: "recipients",
   title: "Recipients",
+  contexts: ["message_list"],
   async onclick(info) {
     let message = info.selectedMessages.messages[0];
     await browser.mailTabs.setQuickFilter({
@@ -38,6 +40,7 @@ browser.menus.create({
 browser.menus.create({
   id: "subject",
   title: "Subject",
+  contexts: ["message_list"],
   async onclick(info) {
     let message = info.selectedMessages.messages[0];
     await browser.mailTabs.setQuickFilter({
