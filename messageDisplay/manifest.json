@@ -1,0 +1,23 @@
+{
+  "name": "Message Display",
+  "description": "A sample addon that does things when a message is displayed",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "messageDisplay@sample.extensions.thunderbird.net"
+    }
+  },
+  "permissions": [
+    "messagesRead"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "message_display_action": {
+    "default_popup": "popup.html",
+    "default_title": "Action"
+  },
+  "manifest_version": 2
+}
