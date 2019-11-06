@@ -1,0 +1,13 @@
+[
+  {
+    "namespace": "myapi",
+    "functions": [
+      {
+        "name": "openSearchDialog",
+        "type": "function",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]
