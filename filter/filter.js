@@ -10,6 +10,7 @@ for (let key of ["sender", "recipients", "subject"]) {
     let text;
     switch (key) {
       case "sender":
+        key = "author";
         text = message.author;
         break;
       case "recipients":

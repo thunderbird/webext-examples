@@ -18,7 +18,7 @@ browser.menus.create({
     await browser.mailTabs.setQuickFilter({
       text: {
         text: message.author,
-        sender: true,
+        author: true,
       },
     });
   },
