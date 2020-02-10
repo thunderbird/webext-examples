@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Extension containing an experimental API to migrate prefs",
+  "applications": {
+    "gecko": {
+      "id": "my@addon.org",
+      "strict_min_version": "68.0a1"
+    }
+  },
+  "version": "1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["storage"],
+  "experiment_apis": {
+    "myapi": {
+      "schema": "schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "myapi"
+          ]
+        ],
+        "script": "implementation.js"
+      }
+    }
+  }
+}
