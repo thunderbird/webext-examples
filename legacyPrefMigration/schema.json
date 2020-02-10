@@ -1,0 +1,20 @@
+[
+  {
+    "namespace": "myapi",
+    "functions": [
+      {
+        "name": "getPref",
+        "type": "function",
+        "description": "Gets a preference.",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "The preference name"
+          }
+        ]
+      }
+    ]
+  }
+]
