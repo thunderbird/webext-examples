@@ -12,11 +12,12 @@
       "background.js"
     ]
   },
-    "cloud_file": {
+  "cloud_file": {
     "name": "__MSG_extensionName__",
     "management_url": "apis.html"
   },
   "permissions": [
+    "accountsFolders",
     "accountsRead",
     "activeTab",
     "addressBooks",
@@ -24,6 +25,7 @@
     "browserSettings",
     "clipboardRead",
     "clipboardWrite",
+    "compose",
     "contextualIdentities",
     "cookies",
     "dns",
@@ -32,6 +34,9 @@
     "geolocation",
     "idle",
     "management",
+    "menus",
+    "menus.overrideContext",
+    "messagesMove",
     "messagesRead",
     "nativeMessaging",
     "notifications",
@@ -41,15 +46,19 @@
     "storage",
     "tabHide",
     "tabs",
-    "telemetry",
     "theme",
-    "topSites",
     "unlimitedStorage",
     "webNavigation",
     "webRequest",
     "webRequestBlocking"
   ],
   "browser_action": {
+    "default_title": "__MSG_extensionName__"
+  },
+  "compose_action": {
+    "default_title": "__MSG_extensionName__"
+  },
+  "message_display_action": {
     "default_title": "__MSG_extensionName__"
   },
   "default_locale": "en",
