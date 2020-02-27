@@ -1,0 +1,24 @@
+{
+  "name": "Sobriety",
+  "description": "description",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "sobriety@sample.extensions.thunderbird.net",
+      "strict_min_version": "75.0a1"
+    }
+  },
+  "permissions": [
+    "compose"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "compose_action": {
+    "default_popup": "popup.html",
+    "default_title": "🍺"
+  },
+  "manifest_version": 2
+}
