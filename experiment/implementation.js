@@ -66,8 +66,11 @@ var windowListener = new class extends ExtensionCommon.EventEmitter {
     this.callbackCount++;
 
     if (this.callbackCount == 1) {
-      ExtensionSupport.registerWindowListener("windowListener", {
-        chromeURLs: ["chrome://messenger/content/messenger.xul"],
+      ExtensionSupport.registerWindowListener("experimentListener", {
+        chromeURLs: [
+          "chrome://messenger/content/messenger.xhtml",
+          "chrome://messenger/content/messenger.xul",
+        ],
         onLoadWindow: function(window) {
           let toolbox = window.document.getElementById("mail-toolbox");
           toolbox.addEventListener("click", windowListener.handleEvent);
@@ -82,12 +85,15 @@ var windowListener = new class extends ExtensionCommon.EventEmitter {
 
     if (this.callbackCount == 0) {
       for (let window of ExtensionSupport.openWindows) {
-        if (window.location.href == "chrome://messenger/content/messenger.xul") {
+        if ([
+          "chrome://messenger/content/messenger.xhtml",
+          "chrome://messenger/content/messenger.xul",
+        ].includes(window.location.href)) {
           let toolbox = window.document.getElementById("mail-toolbox");
           toolbox.removeEventListener("click", this.handleEvent);
         }
       }
-      ExtensionSupport.unregisterWindowListener("windowListener");
+      ExtensionSupport.unregisterWindowListener("experimentListener");
     }
   }
 };
