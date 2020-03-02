@@ -1,7 +1,7 @@
 ## Sobriety
 
 This extension shows one way to use the `compose.onBeforeSend` event added in Thunderbird 74,
-although due to some bugs it won't work until Thunderbird 75.
+although due to some bugs it won't work until Thunderbird 74 beta 2.
 
 In `background.js` the extension listens for `onBeforeSend` events, opening a `composeAction` popup
 in the composition window that fired the event. If the user is not sober enough to correctly answer
