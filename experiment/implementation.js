@@ -30,7 +30,7 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 // inside another JSM. 
 //
 var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
-let extension = ExtensionParent.GlobalManager.getExtension("experiment@sample.extensions.thunderbird.net")
+let extension = ExtensionParent.GlobalManager.getExtension("experiment@sample.extensions.thunderbird.net");
 var { myModule } = ChromeUtils.import(extension.getURL("modules/myModule.jsm"));
 
 // This is the important part. It implements the functions and events defined in schema.json.
