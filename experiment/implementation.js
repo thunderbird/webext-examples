@@ -6,6 +6,33 @@ var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCo
 // You probably already know what this does.
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
+// ChromeUtils.import() works in experiments for core resource urls as it did
+// in legacy add-ons. However, chrome:// urls that point to add-on resources no
+// longer work, as the "chrome.manifest" file is no longer supported, which
+// defined the root path for each add-on. Instead, ChromeUtils.import() needs
+// a mozExtension:// url, which can access any resource in an add-on:
+//
+// mozExtension://<Add-On-UUID>/path/to/modue.jsm
+//
+// The add-on UUID is a random identifier generated on install for each add-on.
+// The extension object of the WebExtension has a getURL() method, to get the
+// required url:
+//
+// let mozExtensionUrl = extension.getURL("path/to/modue.jsm");
+//
+// You can get the extension object from the context parameter passed to
+// getAPI() of the WebExtension experiment implementation:
+//
+// let extension = context.extension;
+//
+// or you can generate the extension object from a given add-on ID as shown in
+// the example below. This allows to import JSM out of context, for example
+// inside another JSM. 
+//
+var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
+let extension = ExtensionParent.GlobalManager.getExtension("experiment@sample.extensions.thunderbird.net")
+var { myModule } = ChromeUtils.import(extension.getURL("modules/myModule.jsm"));
+
 // This is the important part. It implements the functions and events defined in schema.json.
 // The variable must have the same name you've been using so far, "myapi" in this case.
 var myapi = class extends ExtensionCommon.ExtensionAPI {
@@ -16,7 +43,8 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
 
         // A function.
         sayHello: async function(name) {
-          Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "!");
+          myModule.incValue();
+          Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "! I counted <" + myModule.getValue() + "> clicks so far.");
         },
 
         // An event. Most of this is boilerplate you don't need to worry about, just copy it.
