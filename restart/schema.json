@@ -1,0 +1,12 @@
+[
+  {
+    "namespace": "restart",
+    "functions": [
+      {
+        "name": "init",
+        "type": "function",
+        "parameters": []
+      }
+    ]
+  }
+]
