@@ -5,10 +5,28 @@
       "id": "spam@sample.extensions.thunderbird.net"
     }
   },
-  "legacy": {
-    "type": "bootstrap"
-  },
   "name": "Spam Score",
   "description": "Adds a spam score column to the thread pane",
-  "version": "6"
+  "version": "7",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "experiment_apis": {
+    "spamScore": {
+      "schema": "schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "spamScore"
+          ]
+        ],
+        "script": "implementation.js"
+      }
+    }
+  }
 }
