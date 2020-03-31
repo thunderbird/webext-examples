@@ -1,12 +1,11 @@
 async function main() {
   // Get the current visible mailTab
-
   // browser.mailTabs.query() returns a Promise and one could use
   // the .then() syntax to execute commands after the Promise has
   // been fulfilled. Another option is to use async functions which
   // allow to "await" the Promise. One could say the execution flow
   // of this function halts until the Promise is fulfilled.
-  // As the await keyword only works inside async function, the
+  // As the await keyword only works inside async functions, the
   // entire code must wrapped.
   let tabs = await browser.mailTabs.query({active: true, currentWindow: true});
 
@@ -34,7 +33,6 @@ async function main() {
       };
       label.appendChild(document.createTextNode(" " + browser.i18n.getMessage(key)));
     }
-  } else {
   }
 }
 
