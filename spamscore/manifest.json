@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "spam@sample.extensions.thunderbird.net"
+    }
+  },
+  "legacy": {
+    "type": "bootstrap"
+  },
+  "name": "Spam Score",
+  "description": "Adds a spam score column to the thread pane",
+  "version": "6"
+}
