@@ -4,7 +4,8 @@
   "applications": {
     "gecko": {
       "id": "my@addon.org",
-      "strict_min_version": "68.0a1"
+      "strict_min_version": "68.0a1",
+      "strict_max_version": "73.*"
     }
   },
   "version": "1",

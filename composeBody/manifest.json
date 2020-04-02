@@ -4,7 +4,8 @@
   "version": "1",
   "applications": {
     "gecko": {
-      "id": "composebody@sample.extensions.thunderbird.net"
+      "id": "composebody@sample.extensions.thunderbird.net",
+      "strict_min_version": "74.0b2"
     }
   },
   "permissions": [
