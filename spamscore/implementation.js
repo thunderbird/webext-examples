@@ -102,7 +102,17 @@ columnHandler.prototype = {
 
 var spamScore = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
-    // mailnews.customHeaders;X-Spam-Status
+    let prefValue = Services.prefs.getStringPref("mailnews.customHeaders");
+    if (prefValue) {
+      prefValue = prefValue.split(": ");
+      if (!prefValue.includes("X-Spam-Status")) {
+        prefValue.push("X-Spam-Status");
+        Services.prefs.setStringPref("mailnews.customHeaders", prefValue.join(": "));
+      }
+    } else {
+      Services.prefs.setStringPref("mailnews.customHeaders", "X-Spam-Status");
+    }
+
     context.callOnClose(this);
     return {
       spamScore: {
