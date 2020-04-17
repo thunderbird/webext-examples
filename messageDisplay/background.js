@@ -1,3 +1,3 @@
-browser.messageDisplay.onMessageDisplayed.addListener((tabId, message) => {
-  console.log(`Message displayed in tab ${tabId}: ${message.subject}`);
+browser.messageDisplay.onMessageDisplayed.addListener((tab, message) => {
+  console.log(`Message displayed in tab ${tab.id}: ${message.subject}`);
 });
