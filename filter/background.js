@@ -1,11 +1,11 @@
 browser.browserAction.disable();
 
-browser.mailTabs.onSelectedMessagesChanged.addListener(async (tabId, messageList) => {
+browser.mailTabs.onSelectedMessagesChanged.addListener(async (tab, messageList) => {
   let messageCount = messageList.messages.length;
   if (messageCount == 1) {
-    browser.browserAction.enable(tabId);
+    browser.browserAction.enable(tab.id);
   } else {
-    browser.browserAction.disable(tabId);
+    browser.browserAction.disable(tab.id);
   }
 });
 
