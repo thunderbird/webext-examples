@@ -73,6 +73,11 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
     // remember this version of the module and continue to use it, even if your extension receives
     // an update.) You should *always* unload JSMs provided by your extension.
     Cu.unload(extension.getURL("modules/myModule.jsm"));
+    // Imported JSM modules are also cached by Thunderbird. This cache will NOT be automatically
+    // invalidated by the above `unload()`. This has to be triggered explicitly.
+    // If you don't do this, it can happen that the next time `import` is called for your JSM,
+    // a cached and outdated version is imported instead of the current one.
+    Services.obs.notifyObservers(null, "startupcache-invalidate");
   }
 };
 
