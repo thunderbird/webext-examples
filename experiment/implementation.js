@@ -72,7 +72,7 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
     // load it afresh next time `import` is called. (If you don't call `unload`, Thunderbird will
     // remember this version of the module and continue to use it, even if your extension receives
     // an update.) You should *always* unload JSMs provided by your extension.
-    Cu.unload(extension.getURL("modules/myModule.jsm"));
+    Cu.unload(extension.rootURI.resolve("modules/myModule.jsm"));
   }
 };
 
