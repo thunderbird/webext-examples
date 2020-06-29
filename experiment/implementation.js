@@ -73,6 +73,11 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
     // remember this version of the module and continue to use it, even if your extension receives
     // an update.) You should *always* unload JSMs provided by your extension.
     Cu.unload(extension.rootURI.resolve("modules/myModule.jsm"));
+
+    // Thunderbird might still cache some of your JavaScript files and even if JSMs have been unloaded,
+    // the last used version could be reused on next load, ignoring any changes. Get around this issue
+    // by invalidating the caches (this is identical to restarting TB with the -purgecaches parameter):
+    Services.obs.notifyObservers(null, "startupcache-invalidate", null);    
   }
 };
 
