@@ -16,7 +16,12 @@
     "name": "__MSG_extensionName__",
     "management_url": "apis.html"
   },
-  "permissions": [
+  "options_ui": {
+      "page": "apis.html",
+      "open_in_tab": true,
+      "browser_style": true
+    },
+    "permissions": [
     "accountsFolders",
     "accountsRead",
     "activeTab",
@@ -38,6 +43,7 @@
     "menus.overrideContext",
     "messagesMove",
     "messagesRead",
+    "messagesModify",
     "nativeMessaging",
     "notifications",
     "pkcs11",
