@@ -1,0 +1,16 @@
+{
+  "name": "onbeforesend",
+  "description": "onbeforesend",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "onbeforesend@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "permissions": ["downloads"
+  ],
+  "manifest_version": 2
+}

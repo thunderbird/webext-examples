@@ -1,0 +1,14 @@
+{
+  "name": "popupTest",
+  "description": "popupTest",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "popupTest@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "manifest_version": 2
+}

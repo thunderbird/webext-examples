@@ -1,0 +1,15 @@
+{
+  "name": "contentScript",
+  "description": "contentScript",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "contentScript@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "permissions": [ "compose" ],
+  "manifest_version": 2
+}

@@ -1,0 +1,18 @@
+{
+  "name": "composeAction",
+  "description": "composeAction",
+  "version": "1",
+  "applications": {
+    "gecko": {
+      "id": "composeAction@sample.extensions.thunderbird.net"
+    }
+  },
+  "compose_action" : {
+    "default_title" : "getBody"
+  },
+  "permissions" : [ "compose" ],
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "manifest_version": 2
+}
