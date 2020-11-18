@@ -8,11 +8,10 @@
     }
   },
   "compose_action" : {
-    "default_title" : "getBody"
+    "default_title" : "addContentAtCursor",
+    "default_popup" : "popup.html"
   },
   "permissions" : [ "compose" ],
-  "background": {
-    "scripts" : [ "background.js"]
-  },
+
   "manifest_version": 2
 }

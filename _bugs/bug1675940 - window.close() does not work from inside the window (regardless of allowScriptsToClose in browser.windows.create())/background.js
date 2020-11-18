@@ -1,5 +1,5 @@
 browser.windows.create({
-  allowScriptsToClose: true,
+  allowScriptsToClose: false,
   url: "popup.html",
   type: "popup",
   });

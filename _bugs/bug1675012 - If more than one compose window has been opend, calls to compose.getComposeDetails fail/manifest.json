@@ -1,0 +1,9 @@
+{
+  "name": "1675012",
+  "version": "1",
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "permissions" : ["compose"],
+  "manifest_version": 2
+}

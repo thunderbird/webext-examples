@@ -1,0 +1,14 @@
+{
+  "name": "bug1664423",
+  "version": "1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "menus",
+    "messagesRead"
+  ],
+  "manifest_version": 2
+}
