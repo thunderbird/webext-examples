@@ -1,8 +1,0 @@
-{
-  "name": "bug1675940",
-  "version": "1",
-  "background": {
-    "scripts" : [ "background.js"]
-  },
-  "manifest_version": 2
-}
