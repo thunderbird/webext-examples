@@ -1,5 +1,9 @@
-let mainList = document.querySelector("ul");
+let body = document.querySelector("body");
+let mainList = document.createElement("ul");
+body.appendChild(mainList);
+
 displayObject(browser, mainList);
+
 mainList.onclick = function({target}) {
   target = target.closest("li");
   if (target) {
