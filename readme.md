@@ -2,7 +2,7 @@
 
 This is a collection of WebExtensions that can be used to test stuff in Thunderbird.
 
-| Example Extension     | Description |
+| Sample Extension     | Description |
 |:----------------------|:------------|
 | addressBooks          | Uses the `addressbooks`, `contacts`, and `mailingLists` APIs and its dependencies. |
 | apiList               | Lists all available APIs in different windows: tabs, options, message compose and message display window. It uses the `tabs` API to [inject scripts](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#executescript-tabid-details) and [css](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#insertcss-tabid-details) into the message compose and message display windows. |
