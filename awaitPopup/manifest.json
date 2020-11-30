@@ -1,0 +1,12 @@
+{
+  "name": "await popup",
+  "version": "1",
+  "browser_action": {
+    "default_title": "await popup"
+  },
+  "background": {
+    "scripts" : [ "background.js"]
+  },
+  "permissions": [],
+  "manifest_version": 2
+}
