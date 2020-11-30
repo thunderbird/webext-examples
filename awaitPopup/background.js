@@ -9,9 +9,9 @@ async function blockingPopup() {
 		}
 		return new Promise(resolve => {
 			let popupCloseMode = defaultPopupCloseMode;
-			function removeListener(closedId) {
+			function windowRemoveListener(closedId) {
 				if (popupId == closedId) {
-					messenger.windows.onRemoved.removeListener(removeListener);
+					messenger.windows.onRemoved.removeListener(windowRemoveListener);
 					messenger.runtime.onMessage.removeListener(messageListener);
 					resolve(popupCloseMode);
 				}
@@ -22,7 +22,7 @@ async function blockingPopup() {
 				}
 			}
 			messenger.runtime.onMessage.addListener(messageListener);
-			messenger.windows.onRemoved.addListener(removeListener);
+			messenger.windows.onRemoved.addListener(windowRemoveListener);
 		});
 	}
 
