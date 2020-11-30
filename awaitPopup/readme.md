@@ -1,3 +1,3 @@
 ## Await Popup
 
-This extension opens a popup and awaits user feedback. It uses the WebExtension windows API to create the popup and uses the messaging system to receive notifications from the popup and waits for the `onRemoved` event before returning.
+This extension opens a popup window and awaits user feedback. It uses the WebExtension windows API to create the popup. User feedback is received via the WebExtension messaging system and the extension waits for the `onRemoved` event from the windows API before continuing.
