@@ -1,5 +1,11 @@
 {
   "name": "await popup",
+  "applications": {
+    "gecko": {
+      "id": "awaitpopup@sample.extensions.thunderbird.net",
+      "strict_min_version": "78.0"
+    }
+  },
   "version": "1",
   "browser_action": {
     "default_title": "await popup"
