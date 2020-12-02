@@ -17,7 +17,7 @@ async function blockingPopup() {
 				}
 			}
 			function messageListener(request, sender, sendResponse) {
-				if (sender.tab.windowId == popupId && request?.popupCloseMode) {
+				if (sender.tab.windowId == popupId && request && request.popupCloseMode) {
 					popupCloseMode = request.popupCloseMode;
 				}
 			}
