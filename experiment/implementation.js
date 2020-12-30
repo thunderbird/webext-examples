@@ -26,10 +26,6 @@ var { myModule } = ChromeUtils.import(extension.rootURI.resolve("modules/myModul
 // The variable must have the same name you've been using so far, "myapi" in this case.
 var myapi = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
-    // To be notified of the extension going away, call callOnClose with any object that has a
-    // close function, such as this one.
-    context.callOnClose(this);
-
     return {
       // Again, this key must have the same name.
       myapi: {
@@ -63,9 +59,12 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
     };
   }
 
-  close() {
+  onShutdown(isAppShutdown) {
     // This function is called if the extension is disabled or removed, or Thunderbird closes.
-    // We registered it with callOnClose, above.
+    // We usually do not have to do any cleanup, if Thunderbird is shutting down entirely
+    if (isAppShutdown) {
+      return;
+    }
     console.log("Goodbye world!");
 
     // Unload the JSM we imported above. This will cause Thunderbird to forget about the JSM, and
