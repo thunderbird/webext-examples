@@ -15,7 +15,7 @@ This is a collection of WebExtensions that can be used to test stuff in Thunderb
 | legacyPrefMigration   | Shows how to migrate preferences from the legacy pref system to the WebExtension local storage. |
 | messageDisplay        | Uses the `messageDisplay`, and `messageDisplayAction` APIs to shows how to add a button to the message header, and how to react when a message is displayed.|
 | openSearchDialog      | Uses an Experiment to open the message search dialog. The Experimnt has been created with [the Experiment Generator](https://darktrojan.github.io/generator/generator.html).|
-| restart               | Uses an Experiment to add a *Restart* entry to Thunderbird's *file menu*. The extension also shows how to cleanup the UI when the extension gets disabled/removed. |
+| restart               | This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and a second Experiment to perform the restart. |
 | sobriety              | Shows how the `compose.onBeforeSend` event can be used: Opening a `composeAction` popup in the composition window when an email is about to be send, to request confirmation. |
 
 
