@@ -15,7 +15,7 @@
   },
   "experiment_apis": {
     "restart": {
-      "schema": "schema.json",
+      "schema": "api/restart/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
@@ -25,8 +25,22 @@
             "restart"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/restart/implementation.js"
       }
-    }
+    },
+    "LegacyMenu": {
+      "schema": "api/LegacyMenu/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "LegacyMenu"
+          ]
+        ],
+        "script": "api/LegacyMenu/implementation.js"
+      }
+    }    
   }
 }

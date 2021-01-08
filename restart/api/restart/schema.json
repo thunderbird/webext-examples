@@ -3,7 +3,7 @@
     "namespace": "restart",
     "functions": [
       {
-        "name": "init",
+        "name": "execute",
         "type": "function",
         "parameters": []
       }
