@@ -1,6 +1,6 @@
 {
   "name": "Theme Experiment",
-  "description": "How to use theme_experiment.",
+  "description": "Changing the color of the chat icon using a theme_experiment.",
   "version": "1",
   "applications": {
     "gecko": {
