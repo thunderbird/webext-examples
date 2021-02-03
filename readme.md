@@ -17,6 +17,7 @@ This is a collection of WebExtensions that can be used to test stuff in Thunderb
 | openSearchDialog      | Uses an Experiment to open the message search dialog. The Experimnt has been created with [the Experiment Generator](https://darktrojan.github.io/generator/generator.html).|
 | restart               | This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and a second Experiment to perform the restart. |
 | sobriety              | Shows how the `compose.onBeforeSend` event can be used: Opening a `composeAction` popup in the composition window when an email is about to be send, to request confirmation. |
+| theme_experiment      | A theme using the theme_experiment API to change the color of the chat icon. |
 
 
 To use one of the extensions, clone or download this repository and either:
