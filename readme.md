@@ -6,7 +6,8 @@ This is a collection of WebExtensions that can be used to test stuff in Thunderb
 |:----------------------|:------------|
 | addressBooks          | Uses the `addressbooks`, `contacts`, and `mailingLists` APIs and its dependencies. |
 | apiList               | Lists all available APIs in different windows: tabs, options, message compose and message display window. It uses the `tabs` API to [inject scripts](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#executescript-tabid-details) and [css](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#insertcss-tabid-details) into the message compose and message display windows. |
-| awaitPopup               | Open a blocking popup and await user feedback. |
+| attachmentPreview     | Preview attachments using `messages.listAttachments()` and `messages.getAttachmentFile` |
+| awaitPopup            | Open a blocking popup and await user feedback. |
 | composeBody           | Uses the `compose` API to access and manipulate the content of the message compose window. |
 | dropbox               | Uses the `cloudFile` (a.k.a. FileLink) API to upload attachments to dropbox. |
 | experiment            | Shows how to write an Experiment API including a function and an event and how to listen to the custom event. |
