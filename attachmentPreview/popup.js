@@ -1,10 +1,8 @@
 async function main() {
-  let tab = await browser.tabs.query({
-    active: true,
-    currentWindow: true,
-  });
+  let url = new URL(window.location.href);
+  let tabId = parseInt(url.searchParams.get("tabId"), 10);
   
-  let messages = await browser.messageDisplay.getDisplayedMessages(tab[0].id);
+  let messages = await browser.messageDisplay.getDisplayedMessages(tabId);
   if (messages.length != 1)
     return;
   

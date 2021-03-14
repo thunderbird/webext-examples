@@ -11,9 +11,13 @@
   "permissions": [
     "messagesRead"
   ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
   "message_display_action": {
-    "default_popup": "popup.html",
-    "default_title": "Action"
+    "default_title": "Preview"
   },
   "manifest_version": 2
 }
