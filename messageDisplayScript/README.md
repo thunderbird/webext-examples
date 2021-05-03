@@ -10,14 +10,10 @@ The button communicates with the background script via `sendMessage` by sending 
 
 ```
 {
-    type: "command",
-    command: "markUnread",
-    payload: {
-        id: 0                // the tab id
-    }
+    command: "markUnread"
 }
 ```
-***Hint:** the message can be of any structure which can be [serialized](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities#data_cloning_algorithm), there isn't a rule what structure nees to be used.*
+***Hint:** the message can be of any structure which can be [serialized](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities#data_cloning_algorithm), there isn't a rule what structure needs to be used.*
 
 
-The background script receives the message and check for its `type` property, if the message type matches `command`. If so, the entire message is passed to a command handler, which destructure the message payload and then get the `tabId`. Then the current displayed message in the tab, identified by the `tabId`, is marked as unread.
+The background script receives the message and check for its `command` property, whether the received message has a non-empty `command` property. If so, the entire message is passed to a command handler which takes different actions on the currently selected mail message, based on the passed command. If the command handler returns an object, this object will be passed back to the message content script.
