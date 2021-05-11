@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Thunderbird messageDisplayScript example",
+    "description": "An extension example how to use messageDisplayScript",
+    "applications": {
+        "gecko": {
+            "id": "thunderbird-example--messageDisplayScript@arndissler.net",
+            "strict_min_version": "78.0"
+        }
+    },
+    "author": "Arnd Issler",
+    "version": "0.0.1",
+    "background": {
+        "scripts": [
+            "src/background.js"
+        ]
+    },
+    "permissions": [
+        "messagesModify",
+        "messagesRead"
+    ]
+}
