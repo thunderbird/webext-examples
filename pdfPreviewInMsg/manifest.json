@@ -3,9 +3,10 @@
     "description": "Preview your pdf and your images !",
     "manifest_version": 2,
     "version": "1.0",
+    "author":"rom.holec@gmail.com,edouard@e-gaulue.com",
     "applications": {
         "gecko": {
-            "id": "rom.holec@gmail.com",
+            "id": "pdf_preview_in_msg",
             "strict_min_version": "88.0"
         }
     },
