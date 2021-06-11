@@ -6,7 +6,7 @@
     "author":"rom.holec@gmail.com,edouard@e-gaulue.com",
     "applications": {
         "gecko": {
-            "id": "pdf_preview_in_msg",
+            "id": "pdfPreviewInMsg@sample.extensions.thunderbird.net",
             "strict_min_version": "88.0"
         }
     },
