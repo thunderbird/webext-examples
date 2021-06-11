@@ -1,0 +1,33 @@
+{
+    "name": "PDF Preview",
+    "description": "Preview your pdf and your images !",
+    "manifest_version": 2,
+    "version": "1.0",
+    "applications": {
+        "gecko": {
+            "id": "rom.holec@gmail.com",
+            "strict_min_version": "88.0"
+        }
+    },
+    "permissions": [
+        "messagesRead",
+        "downloads",
+        "tabs",
+        "messagesModify",
+        "downloads.open"
+    ],
+    "background": {
+        "scripts": [
+            "pdf.js",
+            "pdf.worker.js",
+            "background.js"
+        ]
+    },
+
+    "icons": {
+        "16": "pdficon.png",
+        "32": "pdficon.png",
+        "64": "pdficon.png"
+    }
+
+}
