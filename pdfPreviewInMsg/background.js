@@ -4,9 +4,6 @@ This extension for Thunderbird was made by : e-gaulue & rholeczy
                         © 2021
 ----------------------------------------------------------------
 */
-var tabID;
-
-
 
 /**
  * Preview a pdf in the mail.
