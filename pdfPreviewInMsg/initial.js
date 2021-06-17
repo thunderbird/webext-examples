@@ -1,75 +1,67 @@
-/*
-----------------------------------------------------------------
-This extension for Thunderbird was made by : e-gaulue & rholeczy
-                        © 2021
-----------------------------------------------------------------
-*/
+/**
+ * This example extension is based on work from:
+ *  - e-gaulue
+ *  - rholeczy
+ */
 
-var divCreate = false;
 
-// RH : Listener if we received a message.
+// Listener for messages received from the background.
 browser.runtime.onMessage.addListener((data, sender) => {
-    if (data.lastPage == true) {
-        document.getElementById("monloader").setAttribute("style", "display:none");
-    }
+  if (data.command == "hideSpinner") {
+    document.getElementById("loader").setAttribute("style", "display:none");
+  }
 
-    if (data.file_type == "waiter") {
-        if (divCreate == false) {
-            // RH : We build the html page for preview the message.
-            let bodyA = document.body.innerHTML;
-            document.body.innerHTML = "";
+  if (data.command == "prepareMessageBody") {
+    let originalBody = document.body.innerHTML;
+    document.body.innerHTML = "";
 
-            let mainDiv = document.createElement("div");
-            mainDiv.setAttribute("style", "display: flex;");
-            document.body.appendChild(mainDiv);
-            mainDiv.id = "mainDiv";
+    let mainDiv = document.createElement("div");
+    mainDiv.setAttribute("style", "display: flex;");
+    document.body.appendChild(mainDiv);
+    mainDiv.id = "mainDiv";
 
-            let firstDiv = document.createElement("div");
-            mainDiv.appendChild(firstDiv);
-            firstDiv.setAttribute("style", "flex-grow: 1");
-            firstDiv.innerHTML = bodyA;
+    let firstDiv = document.createElement("div");
+    mainDiv.appendChild(firstDiv);
+    firstDiv.setAttribute("style", "flex-grow: 1");
+    firstDiv.innerHTML = originalBody;
 
-            let secondDiv = document.createElement("div");
-            secondDiv.setAttribute("style", "width: 170px;padding-left:5px;");
-            mainDiv.appendChild(secondDiv);
+    let secondDiv = document.createElement("div");
+    secondDiv.setAttribute("style", "width: 170px;padding-left:5px;");
+    mainDiv.appendChild(secondDiv);
 
-            firstDiv.id = "firstDiv";
-            secondDiv.id = "secondDiv";
+    firstDiv.id = "firstDiv";
+    secondDiv.id = "secondDiv";
 
-            let loader = new Image();
-            loader.id = "monloader";
-            loader.src = data.img;
-            secondDiv.appendChild(loader);
-            divCreate = true;
-        }
-    }
+    let loader = new Image();
+    loader.id = "loader";
+    loader.src =
+      "data:image/gif;base64,R0lGODlhEAALAPQAAO/v72ZmZtvb29XV1eTk5GhoaGZmZn5+fqurq5mZmcrKynd3d42Nja+vr5ubm8vLy3l5eWdnZ4+Pj+Hh4dra2unp6YODg9zc3Ofn58fHx7u7u9LS0uXl5QAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA";
+    loader.style.float = "right";
+    secondDiv.appendChild(loader);
+  }
 
-    // RH : This is the image who contains the page of the pdf document or just the image of the attachment.
-    if (data.type === "handle_me") {
-        let image = new Image();
-        image.src = data.image;
-        image.setAttribute(
-            "style",
-            "width:160;margin-bottom:10px;border:1px solid black;"
-        );
+  if (data.command === "addImagePreview") {
+    let image = new Image();
+    image.src = data.imageDataUrl;
+    image.style.width = `${data.width}px`;
+    image.style["margin-bottom"] = "10px";
+    image.style.border = "1px solid black";
 
-        image.addEventListener("click", event => {
-            // Send a message when click on an page or image.
-            browser.runtime.sendMessage({
-                part_name: data.part_name,
-                numPage: data.numPage,
-                messageId: data.messageId,
-            });
-        });
+    image.addEventListener("click", event => {
+      // Open a bigger popup preview, when the preview image has been clicked.
+      browser.runtime.sendMessage({
+        command: "openPopupPreview",
+        partName: data.partName,
+        pageNumber: data.pageNumber,
+        messageId: data.messageId,
+      });
+    });
 
-        // Add the image before the last element.
-        document
-            .getElementById("secondDiv")
-            .insertBefore(image, document.getElementById("monloader"));
-
-        return Promise.resolve("done");
-    }
-    return false;
+    // Add the image before the last element.
+    document
+      .getElementById("secondDiv")
+      .insertBefore(image, document.getElementById("loader"));
+  }
 });
 
-browser.runtime.sendMessage({ 'initialized': true });
+browser.runtime.sendMessage({ command: "addInlinePreviews" });

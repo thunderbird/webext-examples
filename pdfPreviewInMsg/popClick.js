@@ -1,122 +1,98 @@
-/*
-----------------------------------------------------------------
-This extension for Thunderbird was made by : e-gaulue & rholeczy
-                        © 2021
-----------------------------------------------------------------
-*/
+/**
+ * This example extension is based on work from:
+ *  - e-gaulue
+ *  - rholeczy
+ */
+
 
 /**
- * We preview the pdf in the new window.
- * 
- * @param {*} url : URL of the attachement
- * @param {*} canvas : This is the canvas we used to show a page
- * @param {*} nbP : Number of page
+ * Load a preview of the provided PDF data URL into the specified canvas.
+ *
+ * @param {String} url - data URL of the PDF attachment
+ * @param {HTMLElement} canvas - the HTML canvas Element to render the preview in
+ * @param {Integer} pageNumber - the page number of the PDF document to be rendered
  */
-async function pdfPreview(url, canvas, nbP) {
-    let pdf = await pdfjsLib.getDocument(url).promise;
-    let page = await pdf.getPage(nbP);
-    let viewport = await page.getViewport({ scale: 1.0 });
-    let scale = Math.min(
-        canvas.width / viewport.width,
-        canvas.height / viewport.height
-    );
-    let thumbViewPort = await page.getViewport({ scale });
-    let context = canvas.getContext("2d");
-    page.render({ canvasContext: context, viewport: thumbViewPort });
+async function pdfPreview(url, canvas, pageNumber) {
+  // We actually use the canvas to display the PDF preview. We could have also
+  // used a temporary canvas and extract its image data URL as done for the
+  // inline previews.
+  let pdf = await pdfjsLib.getDocument(url).promise;
+  if (pageNumber > pdf._pdfInfo.numPages) {
+    pageNumber = pdf._pdfInfo.numPages;
+  }
+
+  let page = await pdf.getPage(pageNumber);
+  let viewport = await page.getViewport({ scale: 1.0 });
+  let scale = Math.min(
+    canvas.width / viewport.width,
+    canvas.height / viewport.height
+  );
+  let thumbViewPort = await page.getViewport({ scale });
+  let context = canvas.getContext("2d");
+  page.render({ canvasContext: context, viewport: thumbViewPort });
 }
 
 /**
- * Convert our attachement to document
+ * Generate a big preview of the attached PDF or image.
  */
-async function generateThumbs() {
-    let url = new URL(window.location.href); // RH : We get the URL of the document.
-    let messageId = await parseInt(url.searchParams.get("messageId")); // rh :We get the messageID in the parameters of the URL.
-    let partname = await url.searchParams.get("partname"); // RH : We get the partName in the parameters of the URL.
-    let numPage = await parseInt(url.searchParams.get("numPage")); // RH : We get the number of the pages in the parameters of the URL.
-    let attachments = await messenger.messages.listAttachments(messageId);
-    for (let attachment of attachments) {
-        if (attachment.partName == partname) {
-            // RH : If the partname get == the partname of the for
-            let file = await messenger.messages.getAttachmentFile(
-                messageId,
-                attachment.partName
-            );
-            let reader = new FileReader();
-            attachment.url = await new Promise(resolve => {
-                reader.onload = e => {
-                    resolve(e.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
+async function generateBigPreview() {
+  // Get the URL of the document.
+  let url = new URL(window.location.href);
 
-            let id = `attachmentElement_${messageId}_${attachment.partName}`;
-            let t = document.querySelector("#attachmentTemplate");
-            t.content.querySelector("div").id = id;
-            t.content.querySelector("p").textContent = partname;
-            document.body.appendChild(document.importNode(t.content, true));
+  // Get the paramter values passed in via the page URL.
+  // * messageId - id of the WebExtension MessageHeader of the selected message
+  // * partName - the name of the MIME part of selected PDF attachment
+  // * pageNumber - the selected page of the selected PDF attachment
+  let messageId = parseInt(url.searchParams.get("messageId"));
+  let partName = url.searchParams.get("partName");
+  let pageNumber = parseInt(url.searchParams.get("pageNumber"));
 
-            // Event listeners cannot be attached to documentFragments before being added
-            // to the DOM. Find the new element.
-            let attachmentElement = document.getElementById(id);
+  // Find the requested attachment, abort if not found.
+  let attachments = await messenger.messages.listAttachments(messageId);
+  let attachment = attachments.find(a => a.partName == partName);
+  if (!attachment) {
+    return;
+  }
 
-            for (let button of attachmentElement.querySelectorAll("button")) {
-                button.setAttribute("data-message-id", messageId);
-                button.setAttribute("data-attachment-part-name", attachment.partName);
-                button.addEventListener("click", clickHandler);
-            }
+  // Get the requested attachment.
+  let file = await messenger.messages.getAttachmentFile(messageId, partName);
 
-            if (attachment.contentType.toLowerCase().startsWith("image/")) {
-                attachmentElement.querySelector("img").src = attachment.url;
-            }
-            // RH : We put our image in attachment.
-            else {
-                attachmentElement.querySelector("img").style.display = "none";
-            }
+  // Get a data URL of the attachment.
+  let reader = new FileReader();
+  attachment.url = await new Promise(resolve => {
+    reader.onload = e => {
+      resolve(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
 
-            if (attachment.contentType.toLowerCase() == "application/pdf") {
-                pdfPreview(
-                    attachment.url,
-                    attachmentElement.querySelector("canvas"),
-                    numPage
-                ); // We call the function pdfPreview.
-            } else {
-                attachmentElement.querySelector("canvas").style.display = "none";
-            }
-        }
-    }
-}
+  let id = `attachmentElement_${messageId}_${attachment.partName}`;
+  let t = document.querySelector("#attachmentTemplate");
+  t.content.querySelector("div").id = id;
+  t.content.querySelector("p").textContent = partName;
+  document.body.appendChild(document.importNode(t.content, true));
 
-async function clickHandler(e) {
-    const file = await browser.messages.getAttachmentFile(
-        parseInt(e.target.dataset.messageId, 10),
-        e.target.dataset.attachmentPartName
+  // Event listeners cannot be attached to documentFragments before being added
+  // to the DOM. Find the new element.
+  let attachmentElement = document.getElementById(id);
+
+  // Handle image attachments.
+  if (attachment.contentType.toLowerCase().startsWith("image/")) {
+    attachmentElement.querySelector("img").src = attachment.url;
+  } else {
+    attachmentElement.querySelector("img").style.display = "none";
+  }
+
+  // Handle PDF attachments.
+  if (attachment.contentType.toLowerCase() == "application/pdf") {
+    pdfPreview(
+      attachment.url,
+      attachmentElement.querySelector("canvas"),
+      pageNumber
     );
-    const objectURL = URL.createObjectURL(file);
-
-    switch (e.target.getAttribute("action")) {
-        // Open the pdf, but it's not finish, Waiting API developpement
-        case "open":
-            {
-                let id = await browser.downloads.download({
-                    partname: `_temp_${file.name}`,
-                    saveAs: false,
-                    url: objectURL,
-                });
-                browser.runtime.sendMessage({ file_open: id });
-            }
-            break;
-
-            // Download the pdf but it's not finish, Waiting API developpement
-        case "download":
-            {
-                await browser.downloads.download({
-                    partname: file.name,
-                    saveAs: true,
-                    url: objectURL,
-                });
-            }
-            break;
-    }
+  } else {
+    attachmentElement.querySelector("canvas").style.display = "none";
+  }
 }
 
-generateThumbs();
+generateBigPreview();
