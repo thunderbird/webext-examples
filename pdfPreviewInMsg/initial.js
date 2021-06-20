@@ -12,25 +12,19 @@ browser.runtime.onMessage.addListener((data, sender) => {
   }
 
   if (data.command == "prepareMessageBody") {
-    let originalBody = document.body.innerHTML;
-    document.body.innerHTML = "";
-
     let mainDiv = document.createElement("div");
-    mainDiv.setAttribute("style", "display: flex;");
-    document.body.appendChild(mainDiv);
     mainDiv.id = "mainDiv";
+    mainDiv.setAttribute("style", "display: flex;");
 
     let firstDiv = document.createElement("div");
-    mainDiv.appendChild(firstDiv);
+    firstDiv.id = "firstDiv";
     firstDiv.setAttribute("style", "flex-grow: 1");
-    firstDiv.innerHTML = originalBody;
+    mainDiv.appendChild(firstDiv);
 
     let secondDiv = document.createElement("div");
+    secondDiv.id = "secondDiv";
     secondDiv.setAttribute("style", "width: 170px;padding-left:5px;");
     mainDiv.appendChild(secondDiv);
-
-    firstDiv.id = "firstDiv";
-    secondDiv.id = "secondDiv";
 
     let loader = new Image();
     loader.id = "loader";
@@ -38,6 +32,14 @@ browser.runtime.onMessage.addListener((data, sender) => {
       "data:image/gif;base64,R0lGODlhEAALAPQAAO/v72ZmZtvb29XV1eTk5GhoaGZmZn5+fqurq5mZmcrKynd3d42Nja+vr5ubm8vLy3l5eWdnZ4+Pj+Hh4dra2unp6YODg9zc3Ofn58fHx7u7u9LS0uXl5QAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA";
     loader.style.float = "right";
     secondDiv.appendChild(loader);
+    
+    // Move content of body into firstDiv.
+    while (document.body.firstChild) {
+      firstDiv.appendChild(document.body.firstChild);
+    }
+    // Add mainDiv to empty body.
+    document.body.appendChild(mainDiv);
+    
   }
 
   if (data.command === "addImagePreview") {
