@@ -69,7 +69,11 @@ async function generateBigPreview() {
   let id = `attachmentElement_${messageId}_${attachment.partName}`;
   let t = document.querySelector("#attachmentTemplate");
   t.content.querySelector("div").id = id;
-  t.content.querySelector("p").textContent = partName;
+  
+  let description = attachment.name || `mime_part_${partName}`;
+  if (pageNumber) description += ` (page ${pageNumber})`;
+  t.content.querySelector("p").textContent = description;
+
   document.body.appendChild(document.importNode(t.content, true));
 
   // Event listeners cannot be attached to documentFragments before being added
