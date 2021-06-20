@@ -16,11 +16,11 @@ const PREVIEW_HEIGHT = PREVIEW_WIDTH * 1.5;
  *
  * returns {String} A data URL of the rendered PDF preview
  */
-async function generatePdfImageUrl(pdf, pageNumber) {
+async function generatePdfImageUrl(pdf, pageNumber, width, height) {
   // The PDF will be rendered into a temporary HTML canvas element.
   let canvas = document.createElement("canvas");
-  canvas.width = PREVIEW_WIDTH;
-  canvas.height = PREVIEW_HEIGHT;
+  canvas.width = width;
+  canvas.height = height;
 
   let page = await pdf.getPage(pageNumber);
   let viewport = await page.getViewport({ scale: 1.0 });
@@ -94,8 +94,8 @@ async function addInlinePreviews(tabId, messageId) {
         pageNumber <= pdf._pdfInfo.numPages && pageNumber < 4;
         pageNumber++
       ) {
-        // Generate a preview for each page.
-        let imageDataUrl = await generatePdfImageUrl(pdf, pageNumber);
+        // Generate an image data URL for each page preview.
+        let imageDataUrl = await generatePdfImageUrl(pdf, pageNumber, PREVIEW_WIDTH, PREVIEW_HEIGHT);
         // Send a message to the tab to display the preview.
         await browser.tabs.sendMessage(tabId, {
           command: "addImagePreview",
