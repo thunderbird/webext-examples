@@ -15,7 +15,7 @@
 async function pdfPreview(url, canvas, pageNumber) {
   // We actually use the canvas to display the PDF preview. We could have also
   // used a temporary canvas and extract its image data URL as done for the
-  // inline previews.
+  // inline previews. Using the canvas directly is faster.
   let pdf = await pdfjsLib.getDocument(url).promise;
   if (pageNumber > pdf._pdfInfo.numPages) {
     pageNumber = pdf._pdfInfo.numPages;
@@ -54,9 +54,12 @@ async function generateBigPreview() {
     return;
   }
 
+  // Use the filename as description, if possible.
+  let description = attachment.name || `mime_part_${partName}`;
+  if (pageNumber) description += ` (page ${pageNumber})`;
+
   // Get the requested attachment.
   let file = await messenger.messages.getAttachmentFile(messageId, partName);
-
   // Get a data URL of the attachment.
   let reader = new FileReader();
   attachment.url = await new Promise(resolve => {
@@ -66,19 +69,10 @@ async function generateBigPreview() {
     reader.readAsDataURL(file);
   });
 
-  let id = `attachmentElement_${messageId}_${attachment.partName}`;
+  // Clone the HTML template.
   let t = document.querySelector("#attachmentTemplate");
-  t.content.querySelector("div").id = id;
-  
-  let description = attachment.name || `mime_part_${partName}`;
-  if (pageNumber) description += ` (page ${pageNumber})`;
-  t.content.querySelector("p").textContent = description;
-
-  document.body.appendChild(document.importNode(t.content, true));
-
-  // Event listeners cannot be attached to documentFragments before being added
-  // to the DOM. Find the new element.
-  let attachmentElement = document.getElementById(id);
+  let attachmentElement = document.importNode(t.content, true); 
+  attachmentElement.querySelector("p").textContent = description;
 
   // Handle image attachments.
   if (attachment.contentType.toLowerCase().startsWith("image/")) {
@@ -97,6 +91,8 @@ async function generateBigPreview() {
   } else {
     attachmentElement.querySelector("canvas").style.display = "none";
   }
+  
+  document.body.appendChild(attachmentElement);
 }
 
 generateBigPreview();
