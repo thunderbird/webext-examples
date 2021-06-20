@@ -12,10 +12,7 @@
     },
     "permissions": [
         "messagesRead",
-        "downloads",
-        "tabs",
-        "messagesModify",
-        "downloads.open"
+        "messagesModify"
     ],
     "background": {
         "scripts": [
