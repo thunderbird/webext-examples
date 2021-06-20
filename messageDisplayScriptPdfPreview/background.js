@@ -148,7 +148,7 @@ browser.runtime.onMessage.addListener((data, sender) => {
       }&pageNumber=${data.pageNumber || 0}&messageId=${data.messageId}`,
       type: "popup",
       width: 600,
-      height: 900,
+      height: 940,
     });
   }
 });
