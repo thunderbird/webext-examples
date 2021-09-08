@@ -13,6 +13,7 @@ This is a collection of WebExtensions that can be used to test stuff in Thunderb
 | filter                         | Uses the `mailTabs`, `menus` and `messages` APIs to add a *Filter* context menu to the message list which can set certain quickfilter settings. |
 | layout                         | Uses the `mailTabs` APIs to manipulate the appearance of the main Thunderbird window.|
 | legacyPrefMigration            | Shows how to migrate preferences from the legacy pref system to the WebExtension local storage. |
+| managedStorage                 | Uses `storage.managed` to access data defined by enterprice policies.|
 | messageDisplay                 | Uses the `messageDisplay` and `messageDisplayAction` APIs to show how to add a button to the message header, and how to react when a message is displayed.|
 | messageDisplayScript           | Uses the `messageDisplayScript` API to display a banner with information from the currently selected message along with a button to trigger an action in the background script via `runtime.sendMessage`. |
 | messageDisplayScriptPdfPreview | Uses the `listAttachments()` and `getAttachmentFile()` functions of the `messages` API to extract attached PDFs and images, and uses the `messageDisplayScript` API to display an inline preview directly in the message window. |
