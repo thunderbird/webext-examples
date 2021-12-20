@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "Example OptIn Screen",
+    "description": "Example add-on asking the user for extended consent.",
+    "version": "1.0",
+    "author": "John Bieling",
+    "applications": {
+        "gecko": {
+            "id": "optIn@examples.thunderbird.net",
+            "strict_min_version": "78.0"
+        }
+    },
+    "permissions": [
+        "storage"
+    ],
+    "background": {
+        "page": "background.html"
+    },
+    "icons": {
+        "64": "images/internet.png",
+        "32": "images/internet-32px.png",
+        "16": "images/internet-16px.png"
+    }
+}
