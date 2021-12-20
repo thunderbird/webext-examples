@@ -18,7 +18,7 @@ This is a collection of WebExtensions that can be used to test stuff in Thunderb
 | messageDisplayScript           | Uses the `messageDisplayScript` API to display a banner with information from the currently selected message along with a button to trigger an action in the background script via `runtime.sendMessage`. |
 | messageDisplayScriptPdfPreview | Uses the `listAttachments()` and `getAttachmentFile()` functions of the `messages` API to extract attached PDFs and images, and uses the `messageDisplayScript` API to display an inline preview directly in the message window. |
 | openSearchDialog               | Uses an Experiment to open the message search dialog. The Experiment has been created with [the Experiment Generator](https://darktrojan.github.io/generator/generator.html).|
-| optIn                          | This is the extension shows how to ask the user for extended consent before using the add-on.|
+| optIn                          | This extension shows how to ask the user for extended consent before using the add-on.|
 | restart                        | This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and a second Experiment to perform the restart. |
 | sobriety                       | Shows how the `compose.onBeforeSend` event can be used: Opening a `composeAction` popup in the composition window when an email is about to be send, to request confirmation. |
 | theme_experiment               | A theme using the theme_experiment API to change the color of the chat icon. |
