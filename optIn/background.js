@@ -1,26 +1,3 @@
-// Make sure we do not run into race conditions and protect load() from being
-// run twice.
-var loadRun = false;
-
-// Add the onInstall listener before anything else, so we do not miss it.
-messenger.runtime.onInstalled.addListener(async () => {
-    let { optIn } = await messenger.storage.local.get({ "optIn": false });
-    if (!optIn) {
-        // The user installed this extension but has not yet acknowledged the
-        // optIn screen. Prompt.
-        let consent = await prompt4Consent();
-        if (consent) {
-            await messenger.storage.local.set({ "optIn": true });
-            // Start.
-            load();
-        } else {
-            // Uups. User rejected.
-
-            await messenger.management.uninstallSelf();
-        }
-    }
-});
-
 // Prompt the user for consent.
 function prompt4Consent() {
     return new Promise(resolve => {
@@ -51,15 +28,20 @@ function prompt4Consent() {
 // Check if the user has acknowledged the optIn screen.
 async function check4OptIn() {
     let { optIn } = await messenger.storage.local.get({ "optIn": false });
-    if (optIn) load();
-}
-
-// Make sure load is only called once.
-function check4Load() {
-    if (!loadRun) {
-        loadRun = true;
-        load();
+    if (!optIn) {
+        // The user installed this extension but has not yet acknowledged the
+        // optIn screen. Prompt.
+        let consent = await prompt4Consent();
+        if (consent) {
+            await messenger.storage.local.set({ "optIn": true });
+        } else {
+            // Uups. User rejected.
+            await messenger.management.uninstallSelf();
+            return;
+        }
     }
+    // Start.
+    load();
 }
 
 async function load() {
