@@ -162,7 +162,7 @@
     }
   };
 
-  // Export the api by assigning in to the export parameter of the anonymous closure
+  // Export the api by assigning in to the exports parameter of the anonymous closure
   // function, which is the global this.
   exports.myapi = myapi;
 
