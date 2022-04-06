@@ -98,10 +98,12 @@
    * We count the number of callbacks waiting for events so that we're only listening if we
    * need to be.
    * 
-   * EventEmitter.on(emitterName, listener)
+   * An EventEmitter has the following basic functions:
+   * 
+   * EventEmitter.on(emitterName, callback)
    *   Registers a callback for a custom emitter.
    * 
-   * EventEmitter.off(emitterName, listener)
+   * EventEmitter.off(emitterName, callback)
    *   Unregisters a callback for a custom emitter.
    * 
    * EventEmitter.emit(emitterName)
@@ -160,6 +162,8 @@
     }
   };
 
+  // Export the api by assigning in to the export parameter of the anonymous closure
+  // function, which is the global this.
   exports.myapi = myapi;
 
 })(this)
