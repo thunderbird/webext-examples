@@ -22,9 +22,6 @@
   var { ExtensionCommon } = ChromeUtils.import(
     "resource://gre/modules/ExtensionCommon.jsm"
   );
-  var { ExtensionSupport } = ChromeUtils.import(
-    "resource:///modules/ExtensionSupport.jsm"
-  );
   var { ExtensionUtils } = ChromeUtils.import(
     "resource://gre/modules/ExtensionUtils.jsm"
   );
