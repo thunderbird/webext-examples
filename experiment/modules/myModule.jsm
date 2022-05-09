@@ -1,11 +1,11 @@
 var EXPORTED_SYMBOLS = ["myModule"];
 
 var myModule = {
-  value : 0,
-  incValue: function() {
+  value: 0,
+  incValue: function () {
     this.value++;
   },
-  getValue: function() {
+  getValue: function () {
     return this.value;
   },
 };

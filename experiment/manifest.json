@@ -8,21 +8,37 @@
     }
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "experiment_apis": {
-    "myapi": {
-      "schema": "schema.json",
+    "ExampleAPI": {
+      "schema": "api/ExampleAPI/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "myapi"
+            "ExampleAPI"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/ExampleAPI/implementation.js"
+      }
+    },
+    "ResourceUrl": {
+      "schema": "api/ResourceUrl/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "ResourceUrl"
+          ]
+        ],
+        "script": "api/ResourceUrl/implementation.js"
       }
     }
   }
