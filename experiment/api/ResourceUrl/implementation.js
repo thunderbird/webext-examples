@@ -2,10 +2,7 @@
  * This file is provided by the addon-developer-support repository at
  * https://github.com/thundernest/addon-developer-support
  *
- * Version 1.2
- * - fix multiple context not overwriting class members
- *
- * Version: 1.1
+ * Version 1.0
  * - initial release
  *
  * Authors:
