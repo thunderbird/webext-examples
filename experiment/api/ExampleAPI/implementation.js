@@ -6,7 +6,7 @@
 (function (exports) {
 
   // The resource url used here is defined in our background script.
-  var { myModule } = ChromeUtils.import("resource://exampleapi/modules/myModule.jsm");
+  var { myModule } = ChromeUtils.import("resource://exampleapi/myModule.jsm");
 
   // Get various parts of the WebExtension framework that we need.
   var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
