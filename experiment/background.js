@@ -1,6 +1,6 @@
 async function main() {
   //Define the resource url.
-  await browser.ResourceUrl.register("exampleapi", "modules");
+  await browser.ResourceUrl.register("exampleapi", "modules/");
 
   // We defined this event in our schema.
   browser.ExampleAPI.onToolbarClick.addListener(function (toolbar, x, y) {
