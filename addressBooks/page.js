@@ -314,6 +314,9 @@ var contacts = {
 
     let template = ui.contactDetails.querySelector("template");
     for (let field of fields) {
+      if (field == "vCard") {
+        continue;
+      }
       let label = template.content.firstElementChild.cloneNode(true);
       label.querySelector("span").textContent = `${field}:`;
       label.querySelector("input").name = field;
