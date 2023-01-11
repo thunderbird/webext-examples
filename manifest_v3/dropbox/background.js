@@ -1,9 +1,10 @@
 // Thunderbird can terminate idle backgrounds in manifest v3.
 // Any listener directly added during add-on startup will be registered as a
-// persistent listener and the background will wake up (restart), each time the
+// persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-// State data has to be stored in storage.
+// State data has to be stored in storage, because it will not survive a
+// background termination.
 class UploadState { 
   async set(key, value) {
     let { uploadState } = await browser.storage.local.get({ uploadState: new Map() });

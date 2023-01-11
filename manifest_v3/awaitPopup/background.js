@@ -1,6 +1,6 @@
 // Thunderbird can terminate idle backgrounds in manifest v3.
 // Any listener directly added during add-on startup will be registered as a
-// persistent listener and the background will wake up (restart), each time the
+// persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
 // Note: Promises which need a longer time to fulfill will not keep the background
