@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Extension containing an experimental API",
+  "version": "1",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "experiment_apis": {
+    "ExampleAPI": {
+      "schema": "api/ExampleAPI/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "ExampleAPI"
+          ]
+        ],
+        "script": "api/ExampleAPI/implementation.js"
+      }
+    },
+    "ResourceUrl": {
+      "schema": "api/ResourceUrl/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "ResourceUrl"
+          ]
+        ],
+        "script": "api/ResourceUrl/implementation.js"
+      }
+    }
+  }
+}
