@@ -4,7 +4,7 @@ body.appendChild(mainList);
 
 displayObject(browser, mainList);
 
-mainList.onclick = function({target}) {
+mainList.onclick = function ({ target }) {
   target = target.closest("li");
   if (target) {
     target.classList.toggle("collapsed");
