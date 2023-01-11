@@ -1,0 +1,26 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "3",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "filter@sample.extensions.thunderbird.net",
+      "strict_min_version": "76.0a1"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_popup": "filter.html",
+    "default_title": "__MSG_extensionName__"
+  },
+  "permissions": [
+    "menus",
+    "messagesRead"
+  ],
+  "default_locale": "en",
+  "manifest_version": 3
+}
