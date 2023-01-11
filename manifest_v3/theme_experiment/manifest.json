@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "Theme Experiment Example",
@@ -7,7 +7,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "theme_experiment@sample.extensions.thunderbird.net",
-      "strict_min_version": "102.0"
+      "strict_min_version": "110.0a1"
     }
   },
   "theme_experiment": {
