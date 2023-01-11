@@ -122,7 +122,10 @@
         // In this function we add listeners for any events we want to listen to,
         // and return a function that removes those listeners. To have the event
         // fire in your extension, call fire.async.
-        function callback(event, id, x, y) {
+        async function callback(event, id, x, y) {
+          if (fire.wakeup) {
+            await fire.wakeup();
+          }
           return fire.async(id, x, y);
         }
         windowListener.add(callback);

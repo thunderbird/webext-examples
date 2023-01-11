@@ -1,12 +1,14 @@
 {
-  "name": "await popup",
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Await Popup Example",
   "browser_specific_settings": {
     "gecko": {
       "id": "awaitpopup@sample.extensions.thunderbird.net",
-      "strict_min_version": "68.0"
+      "strict_min_version": "110.0a1"
     }
   },
-  "version": "1",
   "action": {
     "default_title": "await popup"
   },
@@ -17,6 +19,5 @@
   },
   "permissions": [
     "storage"
-  ],
-  "manifest_version": 3
+  ]
 }

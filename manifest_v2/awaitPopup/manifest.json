@@ -1,18 +1,20 @@
 {
-  "name": "await popup",
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Await Popup Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "awaitpopup@sample.extensions.thunderbird.net",
-      "strict_min_version": "68.0"
+      "id": "awaitpopup@sample.extensions.thunderbird.net"
     }
   },
-  "version": "1",
   "browser_action": {
     "default_title": "await popup"
   },
   "background": {
-    "scripts" : [ "background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
-  "permissions": [],
-  "manifest_version": 2
+  "permissions": []
 }

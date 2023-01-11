@@ -3,6 +3,6 @@
     "message": "A sample addon that lists all available WebExtension APIs"
   },
   "extensionName": {
-    "message": "API List"
+    "message": "API List Example"
   }
 }

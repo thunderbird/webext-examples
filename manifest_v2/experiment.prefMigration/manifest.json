@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Legacy Preference Migration Experiment Example",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.prefMigration@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["storage"],
+  "experiment_apis": {
+    "myapi": {
+      "schema": "schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "myapi"
+          ]
+        ],
+        "script": "implementation.js"
+      }
+    }
+  }
+}

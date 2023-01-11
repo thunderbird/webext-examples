@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Restart Experiment Example",
+  "description": "Extension containing an experimental API that restarts Thunderbird from a menu item",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.restart@sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "experiment_apis": {
+    "restart": {
+      "schema": "api/restart/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "restart"
+          ]
+        ],
+        "script": "api/restart/implementation.js"
+      }
+    },
+    "LegacyMenu": {
+      "schema": "api/LegacyMenu/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "LegacyMenu"
+          ]
+        ],
+        "script": "api/LegacyMenu/implementation.js"
+      }
+    }    
+  }
+}

@@ -1,11 +1,11 @@
 {
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
   "name": "Sobriety",
-  "description": "description",
-  "version": "1",
   "browser_specific_settings": {
     "gecko": {
-      "id": "sobriety@sample.extensions.thunderbird.net",
-      "strict_min_version": "74.0b2"
+      "id": "sobriety@sample.extensions.thunderbird.net"
     }
   },
   "permissions": [
@@ -19,6 +19,5 @@
   "compose_action": {
     "default_popup": "popup.html",
     "default_title": "🍺"
-  },
-  "manifest_version": 2
+  }
 }

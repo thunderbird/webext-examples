@@ -1,0 +1,13 @@
+[
+  {
+    "namespace": "searchDialog",
+    "functions": [
+      {
+        "name": "open",
+        "type": "function",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

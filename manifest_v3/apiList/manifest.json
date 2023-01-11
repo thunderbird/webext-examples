@@ -1,10 +1,13 @@
 {
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team",
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "1",
   "browser_specific_settings": {
     "gecko": {
-      "id": "apiList@sample.extensions.thunderbird.net"
+      "id": "apiList@sample.extensions.thunderbird.net",
+      "strict_min_version": "110.0a1"
     }
   },
   "background": {
@@ -76,6 +79,5 @@
       "description": "Send a 'toggle-feature' event"
     }
   },
-  "default_locale": "en",
-  "manifest_version": 3
+  "default_locale": "en"
 }

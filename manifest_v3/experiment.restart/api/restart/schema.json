@@ -1,0 +1,12 @@
+[
+  {
+    "namespace": "restart",
+    "functions": [
+      {
+        "name": "execute",
+        "type": "function",
+        "parameters": []
+      }
+    ]
+  }
+]

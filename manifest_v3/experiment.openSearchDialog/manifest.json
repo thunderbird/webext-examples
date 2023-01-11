@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Open Search Dialog Experiment Example",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.openSearchDialog@sample.extensions.thunderbird.net",
+      "strict_min_version": "110.0a1"
+    }
+  },
+  "experiment_apis": {
+    "searchDialog": {
+      "schema": "schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "searchDialog"
+          ]
+        ],
+        "script": "implementation.js"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_title": "Search",
+    "default_icon": "search.svg"
+  }
+}
