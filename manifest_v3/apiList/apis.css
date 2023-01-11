@@ -1,0 +1,13 @@
+body {
+  column-width: 20em;
+}
+ul {
+  margin: 0;
+}
+.collapsed::after {
+  content: " \2026";
+  cursor: pointer;
+}
+.collapsed > ul {
+  display: none;
+}

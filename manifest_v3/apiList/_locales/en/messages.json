@@ -1,0 +1,8 @@
+{
+  "extensionDescription": {
+    "message": "A sample addon that lists all available WebExtension APIs"
+  },
+  "extensionName": {
+    "message": "API List"
+  }
+}
