@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Extension containing an experimental API to migrate prefs",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "my@addon.org",
       "strict_min_version": "68.0a1",

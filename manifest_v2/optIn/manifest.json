@@ -4,7 +4,7 @@
     "description": "Example add-on asking the user for extended consent.",
     "version": "1.0",
     "author": "John Bieling",
-    "applications": {
+    "browser_specific_settings": {
         "gecko": {
             "id": "optIn@examples.thunderbird.net",
             "strict_min_version": "78.0"

@@ -2,7 +2,7 @@
   "name": "Sobriety",
   "description": "description",
   "version": "1",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "sobriety@sample.extensions.thunderbird.net",
       "strict_min_version": "74.0b2"

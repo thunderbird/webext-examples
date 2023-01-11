@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Extension containing an experimental API",
   "version": "1",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "experiment@sample.extensions.thunderbird.net"
     }

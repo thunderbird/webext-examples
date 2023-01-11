@@ -3,7 +3,7 @@
   "name": "Restart",
   "description": "Extension containing an experimental API that restarts Thunderbird from a menu item",
   "version": "1",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "restart@sample.extensions.thunderbird.net"
     }
