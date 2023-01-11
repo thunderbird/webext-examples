@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Address Books</title>
+  <link rel="stylesheet" href="page.css" type="text/css"></style>
+  <script defer="" src="page.js" type="application/javascript"></script>
+</head>
+<body>
+  <div>
+    <button id="reload">reload</button>
+    <button id="open">open UI</button>
+  </div>
+  <div id="contents">
+    <div id="addressBooksWrapper">
+      <ul id="addressBooks"></ul>
+      <div><button type="button" id="addAddressBook">New address book</button></div>
+    </div>
+    <form id="addressBookDetails" hidden="">
+      <label><span>Name:</span><input type="text" name="name" /></label>
+      <div class="save"><button type="submit">Save</button></div>
+      <ul id="entries"></ul>
+      <div><button type="button" id="addMailingList">New mailing list</button><button type="button" id="addContact">New contact</button></div>
+    </form>
+    <form id="contactDetails" hidden="">
+      <template>
+        <label><span></span><input type="text" /></label>
+      </template>
+      <div class="save"><button type="submit">Save</button></div>
+    </form>
+    <form id="mailingListDetails" hidden="">
+      <label><span>Name:</span><input type="text" name="name" /></label>
+      <label><span>Nickname:</span><input type="text" name="nickName" /></label>
+      <label><span>Description:</span><input type="text" name="description" /></label>
+      <div class="save"><button type="submit">Save</button></div>
+      <div id="membersHeading">Members:</div>
+      <ul id="members"></ul>
+    </form>
+  </div>
+  <ul id="eventlog"></ul>
+  <template id="itemTemplate">
+    <li><span></span><button type="button" class="delete">&#x274C;</button></li>
+  </template>
+</body>
+</html>

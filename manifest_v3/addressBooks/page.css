@@ -1,0 +1,111 @@
+body {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+#contents li {
+  padding: 5px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+}
+
+#contents li > span {
+  flex: 1;
+}
+
+#contents li > button.delete {
+  padding: 0;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+#contents li.selected {
+  background-color: highlight;
+  color: highlighttext;
+}
+
+label > span {
+  display: block;
+}
+
+label > input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#contents {
+  display: flex;
+  flex: 1;
+}
+
+#addressBooksWrapper,
+#addressBookDetails,
+#contactDetails,
+#mailingListDetails {
+  width: 20em;
+  margin: 1em;
+}
+
+#addressBooks,
+#entries,
+#members {
+  padding: 0;
+  list-style: none;
+}
+
+#addressBooks li,
+#entries li {
+  cursor: pointer;
+}
+
+.addressBook::before {
+  content: "\1F4D5";
+  font-size: 20px;
+  margin-inline-end: 0.25em;
+}
+
+.mailingList::before {
+  content: "\1F46A";
+  font-size: 20px;
+  margin-inline-end: 0.25em;
+}
+
+
+li.contact::before {
+  content: "\1F469";
+  font-size: 20px;
+  margin-inline-end: 0.25em;
+}
+
+#mailingListDetails:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+}
+
+#members {
+  padding: 0;
+  list-style: none;
+  flex: 1;
+}
+
+#members:empty::before {
+  content: "No members";
+  padding: 5px;
+  line-height: 20px;
+  color: #999;
+  font-style: italic;
+}
+
+.save {
+  text-align: right;
+}
+
+#eventlog {
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: 1;
+}
