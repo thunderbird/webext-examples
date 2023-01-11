@@ -1,0 +1,11 @@
+{
+  "extensionDescription": {
+    "message": "A sample addon that uses the cloudFile API to upload to DropBox"
+  },
+  "extensionName": {
+    "message": "DropBox Uploader"
+  },
+  "serviceName": {
+    "message": "DropBox"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Compose Body",
+  "description": "A very basic example of message body manipulation",
+  "version": "1",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "composebody@sample.extensions.thunderbird.net",
+      "strict_min_version": "74.0b2"
+    }
+  },
+  "permissions": [
+    "compose"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "compose_action": {
+    "default_title": "Alter message body"
+  },
+  "manifest_version": 3
+}
