@@ -7,11 +7,11 @@ For more information, check out the [documentation](https://thunderbird-webexten
 ### Differences from the version for manifest v2
 
 The event listener registration was moved to the top level file scope, so it is
-registered as persistent and can wake up the background.
+registered as a persistent listener and can wake up the background.
 
 The implementation of the `ExampleAPI` Experiment had to be updated to support
-persistent events.
+persistent event listeners.
 
 **Note:** It is currently not possible to distinguish an add-on enable from a 
-background restart. The used ResourceUrl Experiment therefore throws an error,
-since it tries to re-register the url.
+background restart. The used `ResourceUrl` Experiment throws an error, since it
+tries to re-register the url on each background wake up.

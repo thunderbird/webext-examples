@@ -20,3 +20,4 @@ No code changes needed. All event listener were already registered at the top le
        is actually able to ignore termination requests if they have not yet been
        fulfilled. However D155071 (Bug 1785294) enforces termination after the
        second termination request (ca 60s). That dead-locks the compose window.
+

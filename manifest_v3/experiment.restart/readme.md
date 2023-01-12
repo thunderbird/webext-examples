@@ -6,11 +6,11 @@ This extension uses an Experiment to add a *Restart* entry to Thunderbird's *fil
 
 The two used event listeners are are added inside an async function which is executed
 during add-on startup. One of them was registered AFTER the first async `await`
-had been encountered which caused this listener to not be registered as persistent.
-It had to be moved before the first async `await`.
+had been encountered which caused this listener to not be registered as a persistent
+listener. It had to be moved before the first async `await`.
 
 The implementation of the `LegacyMenu` Experiment had to be updated to support
-persistent events. Additionally, its usage of 
+persistent event listeners. Additionally, its usage of 
 
 ```
 context.callOnClose({
