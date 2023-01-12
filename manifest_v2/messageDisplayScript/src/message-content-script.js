@@ -10,12 +10,12 @@ const showNotification = async () => {
   const notification = document.createElement("div");
   notification.className = "thunderbirdMessageDisplayActionExample";
 
-  // create the notificatino text element
+  // create the notification text element
   const notificationText = document.createElement("div");
   notificationText.className = "thunderbirdMessageDisplayActionExample_Text";
   notificationText.innerText = text;
 
-  // create a button to diplay it in the notification
+  // create a button to display it in the notification
   const markUnreadButton = document.createElement("button");
   markUnreadButton.innerText = "Mark unread";
   markUnreadButton.addEventListener("click", async () => {

@@ -3,6 +3,7 @@
   "version": "1.0",
   "author": "Arnd Issler",
   "name": "Message Display Script Example",
+  "description": "An extension example how to use messageDisplayScript",
   "browser_specific_settings": {
     "gecko": {
       "id": "messageDisplayScript@sample.extensions.thunderbird.net",
