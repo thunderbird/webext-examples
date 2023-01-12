@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title></title>
+  <style type="text/css">
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      min-width: 15em;
+      min-height: 7.5em;
+    }
+    body.right {
+      color: #fff;
+      background-color: #0c0;
+    }
+    body.wrong {
+      color: #fff;
+      background-color: #c00;
+    }
+    #question {
+      font-size: xx-large;
+    }
+    body.right #answers,
+    body.wrong #answers {
+      display: none;
+    }
+    input {
+      font-size: large;
+    }
+    #rightAnswer {
+      font-size: 3em;
+      display: none;
+    }
+    body.right #rightAnswer,
+    body.wrong #rightAnswer {
+      display: unset;
+    }
+  </style>
+  <script src="popup.js" defer=""></script>
+</head>
+<body>
+  <div id="question">
+    <span id="operand1"></span>
+    <span id="operation"></span>
+    <span id="operand2"></span>
+    <span id="equals">=</span>
+  </div>
+  <div id="answers">
+    <input type="button" id="choice1"/>
+    <input type="button" id="choice2"/>
+    <input type="button" id="choice3"/>
+  </div>
+  <div id="rightAnswer"></div>
+</body>
+</html>
