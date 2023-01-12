@@ -32,5 +32,5 @@ It depends on the extension how the information from the managed storage is used
 
 ### Differences from the version for manifest v2
 
-The `browser_action` manifest entry had to be changed into an `action` manifest key and all call to
+The `browser_action` manifest entry had to be changed into an `action` manifest key and all calls to
 `browser.browserAction.*` had to be replaced by `browser.action.*`.
