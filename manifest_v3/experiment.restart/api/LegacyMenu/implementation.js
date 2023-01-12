@@ -374,12 +374,16 @@
       }
     }
 
+    // The menus should not be removed when the background is terminated, but
+    // only when the add-on is shutdown.
+    onShutdown(isAppShutdown) {
+      if (isAppShutdown) {
+        return; // the application gets unloaded anyway
+      }
+      clearAllWindows();
+    }
+
     getAPI(context) {
-
-      context.callOnClose({
-        close: () => { clearAllWindows(); }
-      });
-
       return {
         LegacyMenu: {
 
