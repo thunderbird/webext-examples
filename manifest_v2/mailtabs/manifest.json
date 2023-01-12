@@ -13,7 +13,6 @@
     "default_popup": "layout.html",
     "default_title": "__MSG_extensionName__"
   },
-  "permissions": [
-  ],
+  "permissions": [],
   "default_locale": "en"
 }

@@ -3,6 +3,7 @@
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
   "browser_specific_settings": {
     "gecko": {
       "id": "layout@sample.extensions.thunderbird.net",
