@@ -13,7 +13,7 @@ user will be unable to do anything with the message (even save it).
 
 ### Required changes for manifest v3
 
-No code changes needed. All event listener where already registered at the top level file scope.
+No code changes needed. All event listener were already registered at the top level file scope.
 
 **Note:** The onBeforeSend event is not yet 100% compatible with manifest v3. The
        background page can detect if event listeners are returning Promises and

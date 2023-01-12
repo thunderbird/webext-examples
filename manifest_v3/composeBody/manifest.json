@@ -3,6 +3,7 @@
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "Compose Body Example",
+  "description": "A very basic example of message body manipulation",
   "browser_specific_settings": {
     "gecko": {
       "id": "composebody@sample.extensions.thunderbird.net",
