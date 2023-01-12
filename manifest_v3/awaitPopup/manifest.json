@@ -17,7 +17,5 @@
       "background.js"
     ]
   },
-  "permissions": [
-    "storage"
-  ]
+  "permissions": []
 }
