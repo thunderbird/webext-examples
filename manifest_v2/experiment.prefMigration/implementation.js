@@ -33,12 +33,12 @@ function prefType(name) {
 
 
 // This is the important part. It implements the functions and events defined in schema.json.
-// The variable must have the same name you've been using so far, "myapi" in this case.
-var myapi = class extends ExtensionCommon.ExtensionAPI {
+// The variable must have the same name you've been using so far, "migratePrefs" in this case.
+var migratePrefs = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
     return {
       // Again, this key must have the same name.
-      myapi: {
+      migratePrefs: {
 
         async getPref(name) {
           try {

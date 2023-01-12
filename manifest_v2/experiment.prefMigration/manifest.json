@@ -9,11 +9,15 @@
     }
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "experiment_apis": {
-    "myapi": {
+    "migratePrefs": {
       "schema": "schema.json",
       "parent": {
         "scopes": [
@@ -21,7 +25,7 @@
         ],
         "paths": [
           [
-            "myapi"
+            "migratePrefs"
           ]
         ],
         "script": "implementation.js"

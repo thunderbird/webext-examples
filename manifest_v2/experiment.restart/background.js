@@ -41,5 +41,5 @@ async function main () {
     messenger.windows.onCreated.addListener(addRestartMenuEntry);
 }
 
-//Execute the asynchronous init() funtion.
+//Execute the asynchronous init() function.
 main();

@@ -32,7 +32,7 @@ async function migratePrefs() {
 
   if (currentMigration < 1) {
     for (const prefName of Object.getOwnPropertyNames(kPrefDefaults)) {
-      prefs[prefName] = await browser.myapi.getPref(prefName);
+      prefs[prefName] = await browser.migratePrefs.getPref(prefName);
       if (prefs[prefName] === undefined) {
         prefs[prefName] = kPrefDefaults[prefName];
       }

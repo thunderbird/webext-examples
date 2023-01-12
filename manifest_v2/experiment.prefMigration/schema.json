@@ -1,6 +1,6 @@
 [
   {
-    "namespace": "myapi",
+    "namespace": "migratePrefs",
     "functions": [
       {
         "name": "getPref",
