@@ -29,3 +29,8 @@ Once an extension supports the managed storage, IT administrators can deploy a g
 ![image](https://user-images.githubusercontent.com/5830621/129869571-a8f9bead-30b6-4a8a-a0e7-ef080cae0647.png)
 
 It depends on the extension how the information from the managed storage is used. In this case it is just shown as an information, but the extension could also lock the config field and enforce the value from the management.
+
+### Required changes for manifest v3
+
+The `browser_action` manifest entry had to be changed into an `action` manifest key and all call to
+`browser.browserAction.*` had to be replaced by `browser.action.*`.

@@ -3,6 +3,7 @@
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "Managed Storage Example",
+  "description": "An example options ui using values from the managed storage",
   "browser_specific_settings": {
     "gecko": {
       "id": "managed-storage@examples.thunderbird.net",
