@@ -11,7 +11,7 @@ things to happen (opening the popup and waiting for a response) but it should be
 The composition window is locked until the `Promise` is resolved, and if it is never resolved the
 user will be unable to do anything with the message (even save it).
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 No code changes needed. All event listener were already registered at the top level file scope.
 

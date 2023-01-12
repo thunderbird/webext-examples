@@ -4,7 +4,7 @@ This contains a WebExtension experiment created with [the Experiment Generator](
 
 It was created in response to a developer's question on how to open the search dialog.
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 The `browser_action` manifest entry had to be changed into an `action` manifest key and all call to
 `browser.browserAction.*` had to be replaced by `browser.action.*`.

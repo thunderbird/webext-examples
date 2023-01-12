@@ -4,6 +4,6 @@ This add-on includes a `theme_experiment` definition for a new CSS variable `--w
 
 The new CSS variable itself is defined by an included CSS file.
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 No code changes needed.

@@ -2,7 +2,7 @@
 
 This extension shows how to ask the user for extended consent before using the add-on.
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 The manifest v2 version of this extension was adding a temporary `runtime.onMessage`
 event listener for the opened prompt tab. Such listeners are not registered as

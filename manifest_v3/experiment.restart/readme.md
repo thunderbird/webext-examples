@@ -2,7 +2,7 @@
 
 This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and a second Experiment to perform the restart.
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 The two used event listeners are are added inside an async function which is executed
 during add-on startup. One of them was registered AFTER the first async `await`

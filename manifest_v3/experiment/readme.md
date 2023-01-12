@@ -4,7 +4,7 @@ This extension shows how to write an Experiment API including a function and a p
 
 For more information, check out the [documentation](https://thunderbird-webextensions.readthedocs.io/en/latest/how-to/experiments.html).
 
-### Required changes for manifest v3
+### Differences from the version for manifest v2
 
 The event listener registration was moved to the top level file scope, so it is
 registered as persistent and can wake up the background.
