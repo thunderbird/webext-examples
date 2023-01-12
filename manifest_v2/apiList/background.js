@@ -1,10 +1,6 @@
-if ("browserAction" in browser) {
-  browser.browserAction.onClicked.addListener(async () => {
-    browser.tabs.create({ url: "apis.html" });
-  });
-} else {
+browser.browserAction.onClicked.addListener(async () => {
   browser.tabs.create({ url: "apis.html" });
-}
+});
 
 async function injectIntoContent(tab, info) {
   await browser.tabs.insertCSS(tab.id, {
