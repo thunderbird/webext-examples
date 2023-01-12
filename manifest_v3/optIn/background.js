@@ -3,9 +3,16 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-// Note: Promises which need a longer time to fulfill will not keep the background
-//       from being terminated. The approach used by the MV2 version of this example
-//       therefore no longer works. It had to be rewritten to be purely event-based.
+/**
+ * The extension was adding a temporary `runtime.onMessage` event listener for
+ * the opened prompt tab. This listener is not registered as persistent and will
+ * not wake up the background, after the tab stays open longer then the background
+ * idle timeout without the user interacting with it.
+ * 
+ * The tab could send a periodic ping to the `runtime.onMessage` listener in
+ * the background to keep the background busy. The example however was updated
+ * to use a global persistent `runtime.onMessage` event listener.
+ */
 
 messenger.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const { command } = message;
