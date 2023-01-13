@@ -1,6 +1,6 @@
 # Sample Extensions
 
-This is a collection of WebExtensions to showcase how the available WebExtension APIs can be used in Thunderbird. Each example exists for manifest v2 and v3.
+This is a collection of WebExtensions to showcase how the available WebExtension APIs can be used in Thunderbird. Each example exists for Manifest V2 and V3. The MV3 compatible versions include comments to highlight the required changes.
 
 | Sample Extension                | Description |
 |:--------------------------------|:------------|
