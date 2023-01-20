@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Hello World Example",
     "description": "A basic Hello World example extension!",
-    "version": "1.0",
+    "version": "2.0",
     "author": "Thunderbird Team",
     "browser_specific_settings": {
         "gecko": {
@@ -15,6 +15,14 @@
         "default_title": "Hello World",
         "default_icon": "images/internet-32px.png"
     },
+    "message_display_action": {
+        "default_popup": "messagePopup/popup.html",
+        "default_title": "Details",
+        "default_icon": "images/internet-32px.png"
+    },
+    "permissions": [
+        "messagesRead"
+    ],
     "icons": {
         "64": "images/internet.png",
         "32": "images/internet-32px.png",
