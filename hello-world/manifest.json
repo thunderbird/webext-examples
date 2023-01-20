@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Hello World Example",
     "description": "A basic Hello World example extension!",
-    "version": "3.0",
+    "version": "4.0",
     "author": "Thunderbird Team",
     "browser_specific_settings": {
         "gecko": {
@@ -25,7 +25,8 @@
         "accountsRead",
         "storage",
         "menus",
-        "notifications"
+        "notifications",
+        "messagesModify"
     ],
     "background": {
         "page": "background.html"
