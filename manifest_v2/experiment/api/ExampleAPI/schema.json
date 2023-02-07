@@ -20,7 +20,7 @@
       {
         "name": "onToolbarClick",
         "type": "function",
-        "description": "Fires when the user clicks anywhere on the toolbar in the main window.",
+        "description": "Fires when the user clicks the secondary mouse button anywhere on the toolbar in the main window.",
         "parameters": [
           {
             "name": "toolbarId",

@@ -49,10 +49,13 @@
     }
 
     handleEvent(event) {
-      let toolbar = event.target.closest("toolbar");
-      // Emit "toolbar-clicked" and send toolbar.id, event.clientX, event.clientY to
-      // the registered callbacks.
-      windowListener.emit("toolbar-clicked", toolbar.id, event.clientX, event.clientY);
+      // Only react to the secondary mouse button.
+      if (event.button == 2) {
+        let toolbar = event.target.closest("toolbar");
+        // Emit "toolbar-clicked" and send toolbar.id, event.clientX, event.clientY to
+        // the registered callbacks.
+        windowListener.emit("toolbar-clicked", toolbar.id, event.clientX, event.clientY);
+      }
     }
 
     add(callback) {
