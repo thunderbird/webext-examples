@@ -5,7 +5,11 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // The resource url used here is defined in our background script.
+  // The resource url used here is defined in our background script. To be sure it
+  // has been successfully registered, we use the background to first register the
+  // url and then call a method of this API. Using onStartup events can break this
+  // desired order, because the API will be loaded directly and not when first used
+  // in the background.
   var { myModule } = ChromeUtils.import("resource://exampleapi/myModule.jsm");
 
   // Get various parts of the WebExtension framework that we need.
