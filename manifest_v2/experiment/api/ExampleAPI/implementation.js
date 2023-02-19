@@ -5,13 +5,6 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // The resource url used here is defined in our background script. To be sure it
-  // has been successfully registered, we use the background to first register the
-  // url and then call a method of this API. Using onStartup events can break this
-  // desired order, because the API will be loaded directly and not when first used
-  // in the background.
-  var { myModule } = ChromeUtils.import("resource://exampleapi/myModule.jsm");
-
   // Get various parts of the WebExtension framework that we need.
   var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 
@@ -117,13 +110,12 @@
 
     getAPI(context) {
       return {
-        // Again, this key must have the same name.
+        // This key must match the class name.
         ExampleAPI: {
 
           // A function.
           sayHello: async function (name) {
-            myModule.incValue();
-            Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "! I counted <" + myModule.getValue() + "> clicks so far.");
+            Services.wm.getMostRecentWindow("mail:3pane").alert(name);
           },
 
           // An event. Most of this is boilerplate you don't need to worry about, just copy it.
@@ -156,7 +148,6 @@
         return;
       }
 
-      // Unloading of our JSM module is done by the PrivilegedUrl API, so we do not do that here.
       console.log("Goodbye world!");
     }
   };

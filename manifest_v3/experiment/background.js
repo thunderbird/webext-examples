@@ -3,15 +3,13 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-// Define the resource url. It is currently not possible to distinguish add-on
-// enable from background restart. The following command should only be called
-// on enable/startup/install, but not on restart. The Experiment will throw an
-// error.
-browser.ResourceUrl.register("exampleapi", "modules/");
-
 // We defined this event in our schema.
-browser.ExampleAPI.onToolbarClick.addListener(function (toolbar, x, y) {
-  // We could do something interesting here with toolbar, x, and y, but we're not going to.
+browser.ExampleAPI.onToolbarClick.addListener(async function (x, y) {
+  let { clickCounts } = await browser.storage.local.get({clickCounts: 1});
+
   // We defined this function in our schema.
-  browser.ExampleAPI.sayHello("world");
+  // We could do something interesting here with x, and y, but we're not going to.
+  browser.ExampleAPI.sayHello(`Hello world! I counted <${clickCounts}> clicks so far.`);
+  clickCounts++;
+  await browser.storage.local.set({clickCounts});
 });

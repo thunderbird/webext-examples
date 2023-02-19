@@ -5,13 +5,6 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // The resource url used here is defined in our background script. To be sure it
-  // has been successfully registered, we use the background to first register the
-  // url and then call a method of this API. Using onStartup events can break this
-  // desired order, because the API will be loaded directly and not when first used
-  // in the background.
-  var { myModule } = ChromeUtils.import("resource://exampleapi/myModule.jsm");
-
   // Get various parts of the WebExtension framework that we need.
   var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 
@@ -53,13 +46,9 @@
     }
 
     handleEvent(event) {
-      // Only react to the secondary mouse button.
-      if (event.button == 2) {
-        let toolbar = event.target.closest("toolbar");
-        // Emit "toolbar-clicked" and send toolbar.id, event.clientX, event.clientY to
-        // the registered callbacks.
-        windowListener.emit("toolbar-clicked", toolbar.id, event.clientX, event.clientY);
-      }
+      // Emit "toolbar-clicked" and send event.clientX, event.clientY to
+      // the registered callbacks.
+      windowListener.emit("toolbar-clicked", event.clientX, event.clientY);
     }
 
     add(callback) {
@@ -74,7 +63,7 @@
             "chrome://messenger/content/messenger.xul",
           ],
           onLoadWindow: function (window) {
-            let toolbox = window.document.getElementById("mail-toolbox");
+            let toolbox = window.document.getElementById("unifiedToolbarContainer");
             toolbox.addEventListener("click", windowListener.handleEvent);
           },
         });
@@ -129,11 +118,11 @@
         // In this function we add listeners for any events we want to listen to,
         // and return a function that removes those listeners. To have the event
         // fire in your extension, call fire.async.
-        async function callback(event, id, x, y) {
+        async function callback(event, x, y) {
           if (fire.wakeup) {
             await fire.wakeup();
           }
-          return fire.async(id, x, y);
+          return fire.async(x, y);
         }
         windowListener.add(callback);
 
@@ -151,13 +140,12 @@
 
     getAPI(context) {
       return {
-        // Again, this key must have the same name.
+        // This key must match the class name.
         ExampleAPI: {
 
           // A function.
           sayHello: async function (name) {
-            myModule.incValue();
-            Services.wm.getMostRecentWindow("mail:3pane").alert("Hello " + name + "! I counted <" + myModule.getValue() + "> clicks so far.");
+            Services.wm.getMostRecentWindow("mail:3pane").alert(name);
           },
 
           // A persistent event. Most of this is boilerplate you don't need to
@@ -180,7 +168,6 @@
         return;
       }
 
-      // Unloading of our JSM module is done by the PrivilegedUrl API, so we do not do that here.
       console.log("Goodbye world!");
     }
   };

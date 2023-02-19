@@ -23,11 +23,6 @@
         "description": "Fires when the user clicks the secondary mouse button anywhere on the toolbar in the main window.",
         "parameters": [
           {
-            "name": "toolbarId",
-            "type": "string",
-            "description": "The ID of the toolbar the user clicked."
-          },
-          {
             "type": "integer",
             "name": "x",
             "minimum": 0,

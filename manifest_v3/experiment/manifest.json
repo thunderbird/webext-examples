@@ -6,7 +6,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "experiment@sample.extensions.thunderbird.net",
-      "strict_min_version": "110.0a1"
+      "strict_min_version": "111.0a1"
     }
   },
   "background": {
@@ -14,6 +14,9 @@
       "background.js"
     ]
   },
+  "permissions": [
+    "storage"
+  ],
   "experiment_apis": {
     "ExampleAPI": {
       "schema": "api/ExampleAPI/schema.json",
@@ -27,20 +30,6 @@
           ]
         ],
         "script": "api/ExampleAPI/implementation.js"
-      }
-    },
-    "ResourceUrl": {
-      "schema": "api/ResourceUrl/schema.json",
-      "parent": {
-        "scopes": [
-          "addon_parent"
-        ],
-        "paths": [
-          [
-            "ResourceUrl"
-          ]
-        ],
-        "script": "api/ResourceUrl/implementation.js"
       }
     }
   }

@@ -5,7 +5,8 @@
   "name": "Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment@sample.extensions.thunderbird.net"
+      "id": "experiment@sample.extensions.thunderbird.net",
+      "strict_max_version": "110.*"
     }
   },
   "background": {
@@ -13,6 +14,9 @@
       "background.js"
     ]
   },
+  "permissions": [
+    "storage"
+  ],
   "experiment_apis": {
     "ExampleAPI": {
       "schema": "api/ExampleAPI/schema.json",
@@ -26,20 +30,6 @@
           ]
         ],
         "script": "api/ExampleAPI/implementation.js"
-      }
-    },
-    "ResourceUrl": {
-      "schema": "api/ResourceUrl/schema.json",
-      "parent": {
-        "scopes": [
-          "addon_parent"
-        ],
-        "paths": [
-          [
-            "ResourceUrl"
-          ]
-        ],
-        "script": "api/ResourceUrl/implementation.js"
       }
     }
   }
