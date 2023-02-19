@@ -37,7 +37,7 @@ function prefType(name) {
 var migratePrefs = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
     return {
-      // Again, this key must have the same name.
+      // This key must match th class name.
       migratePrefs: {
 
         async getPref(name) {
