@@ -8,6 +8,7 @@ This is a collection of MailExtensions (Thunderbird add-ons based on WebExtensio
 | apiList                         | List all available APIs in different windows: tabs, options, message compose and message display window. It uses the `tabs` API to [inject scripts](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#executescript-tabid-details) and [css](https://thunderbird-webextensions.readthedocs.io/en/latest/tabs.html#insertcss-tabid-details) into the message compose and message display windows. |
 | awaitPopup                      | Open a blocking popup and await user feedback. |
 | composeBody                     | Use the `compose` API to access and manipulate the content of the message compose window. |
+| composeScript                   | Use the `composeScript` API to access and manipulate the content of the message compose window. |
 | dropbox                         | Use the `cloudFile` (a.k.a. FileLink) API to upload attachments to dropbox. |
 | experiment                      | Show how to write an Experiment API including a function and an event and how to listen to the custom event. |
 | experiment.openSearchDialog     | Use an Experiment to open the message search dialog. The Experiment has been created with [the Experiment Generator](https://darktrojan.github.io/generator/generator.html).|
