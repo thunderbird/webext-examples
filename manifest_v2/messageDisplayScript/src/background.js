@@ -1,15 +1,4 @@
 /**
- * Use the startup phase to tell Thunderbird that it should load
- * our message-content-script.js file whenever a message is displayed
- */
-const handleStartup = () => {
-  messenger.messageDisplayScripts.register({
-    js: [{ file: "/src/message-content-script.js" }],
-    css: [{ file: "/src/message-content-styles.css" }],
-  });
-};
-
-/**
  * command handler: handles the commands received from the content script
  */
 const doHandleCommand = async (message, sender) => {
@@ -61,4 +50,13 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // If we have a command, return a promise from the command handler.
     return doHandleCommand(message, sender);
   }
+});
+
+/**
+ * Tell Thunderbird that it should load our message-content-script.js file
+ * whenever a message is displayed
+ */
+messenger.messageDisplayScripts.register({
+  js: [{ file: "/src/message-content-script.js" }],
+  css: [{ file: "/src/message-content-styles.css" }],
 });
