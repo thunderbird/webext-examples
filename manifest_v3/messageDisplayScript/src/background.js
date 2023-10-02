@@ -66,4 +66,5 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // If we have a command, return a promise from the command handler.
     return doHandleCommand(message, sender);
   }
+  return false;
 });
