@@ -51,6 +51,20 @@ messenger.messageDisplayScripts.register({
     css: [{ file: "messageDisplay/message-content-styles.css" }],
 });
 
+// Inject script and CSS in all already open tabs.
+let openTabs = await messenger.tabs.query();
+let messageTabs = openTabs.filter(
+    tab => ["mail", "messageDisplay"].includes(tab.type)
+);
+for (let messageTab of messageTabs) {
+    browser.tabs.executeScript(messageTab.id, {
+        file: "messageDisplay/message-content-script.js"
+    })
+    browser.tabs.insertCSS(messageTab.id, {
+        file: "messageDisplay/message-content-styles.css"
+    })
+}
+
 /**
  * Add a handler for the communication with other parts of the extension,
  * like our message display script.
