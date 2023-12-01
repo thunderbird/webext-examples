@@ -1,4 +1,4 @@
-# Notification banner messageDisplayScript example
+# Notification Banner messageDisplayScript example
 
 Brief example on Thunderbirds `messageDisplayScript` API by displaying a notification banner in the message reading pane. The notification banner shows the subject of the currently selected message and offer a button to mark the message as unread. 
 
