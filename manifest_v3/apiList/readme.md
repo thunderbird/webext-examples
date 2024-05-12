@@ -8,3 +8,5 @@ All available permissions are asked for, which might result in warning messages 
 
 The `browser_action` manifest entry had to be changed into an `action` manifest key and all calls to
 `browser.browserAction.*` had to be replaced by `browser.action.*`.
+
+The methods `tabs.executeScript()` and `tabs.insertCSS()` have been moved to the `browser.scripting.*` namespace and require the additional `scripting` permission.
