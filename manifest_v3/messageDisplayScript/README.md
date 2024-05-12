@@ -21,17 +21,19 @@ The background script receives the message and check for its `command` property,
 ### Differences from the version for manifest v2
 
 The `messageDisplayScripts` API is not yet compatible with manifest v3. Its usage
-was replaced by a `messageDisplay.onMessageDisplayed` listener:
+was replaced by a `messageDisplay.onMessageDisplayed` listener and the scripting API:
 
 ```
 browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
   // Inject styles.
-  await browser.tabs.insertCSS(tab.id, {
-    file: "/src/message-content-styles.css"
+  await browser.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["/src/message-content-styles.css"]
   });
   // Inject script.
-  await browser.tabs.executeScript(tab.id, {
-    file: "/src/message-content-script.js"
+  await browser.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["/src/message-content-script.js"]
   })
 });
 ```
