@@ -18,9 +18,9 @@ The button communicates with the background script via `sendMessage` by sending 
 
 The background script receives the message and check for its `command` property, whether the received message has a non-empty `command` property. If so, the entire message is passed to a command handler which takes different actions on the currently selected mail message, based on the passed command. If the command handler returns an object, this object will be passed back to the message content script.
 
-### Differences from the version for manifest v2
+### Differences from the version for Manifest V2
 
-The `messageDisplayScripts` API is not yet compatible with manifest v3. Its usage
+The `messageDisplayScripts` API is not yet compatible with Manifest V3. Its usage
 was replaced by a `messageDisplay.onMessageDisplayed` listener and the scripting API:
 
 ```

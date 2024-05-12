@@ -1,4 +1,4 @@
-// Thunderbird can terminate idle backgrounds in manifest v3.
+// Thunderbird can terminate idle backgrounds in Manifest V3.
 // Any listener directly added during add-on startup will be registered as a
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
@@ -36,7 +36,7 @@ browser.menus.create({
   contexts: ["message_list"],
 });
 
-// menus.create no longer supports the onclick property in manifest v3, instead
+// menus.create no longer supports the onclick property in Manifest V3, instead
 // an onClicked event has to be used.
 browser.menus.onClicked.addListener(async (info) => {
   console.log(info);

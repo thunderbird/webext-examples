@@ -30,7 +30,7 @@ Once an extension supports the managed storage, IT administrators can deploy a g
 
 It depends on the extension how the information from the managed storage is used. In this case it is just shown as an information, but the extension could also lock the config field and enforce the value from the management.
 
-### Differences from the version for manifest v2
+### Differences from the version for Manifest V2
 
 The `browser_action` manifest entry had to be changed into an `action` manifest key and all calls to
 `browser.browserAction.*` had to be replaced by `browser.action.*`.

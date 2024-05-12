@@ -1,9 +1,9 @@
-// Thunderbird can terminate idle backgrounds in manifest v3.
+// Thunderbird can terminate idle backgrounds in Manifest V3.
 // Any listener directly added during add-on startup will be registered as a
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-// Note: The onBeforeSend event is not yet 100% compatible with manifest v3. The
+// Note: The onBeforeSend event is not yet 100% compatible with Manifest V3. The
 //       background page can detect if event listeners are returning Promises and
 //       is actually able to ignore termination requests if they have not yet been
 //       fulfilled. However D155071 (Bug 1785294) enforces termination after the

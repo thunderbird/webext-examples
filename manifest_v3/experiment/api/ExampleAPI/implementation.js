@@ -94,7 +94,7 @@
   // This is the important part. It implements the functions and events defined
   // in the schema.json. The name must match what you've been using so far,
   // "ExampleAPI" in this case.
-  // For manifest v3, the used class must be ExtensionAPIPersistent(), otherwise
+  // For Manifest V3, the used class must be ExtensionAPIPersistent(), otherwise
   // its events are not registered as being persistent and will fail to wake up
   // the background. 
   class ExampleAPI extends ExtensionCommon.ExtensionAPIPersistent {

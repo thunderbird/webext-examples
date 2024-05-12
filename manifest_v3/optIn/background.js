@@ -1,10 +1,10 @@
-// Thunderbird can terminate idle backgrounds in manifest v3.
+// Thunderbird can terminate idle backgrounds in Manifest V3.
 // Any listener directly added during add-on startup will be registered as a
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
 /**
- * The manifest v2 version of this extension was adding a temporary `runtime.onMessage`
+ * The Manifest V2 version of this extension was adding a temporary `runtime.onMessage`
  * event listener for the opened prompt tab. Such listeners are not registered as
  * a persistent listener and will not wake up the background, after the tab stays
  * open longer then the background idle timeout without the user interacting with

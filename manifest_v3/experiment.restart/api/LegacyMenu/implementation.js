@@ -338,7 +338,7 @@
   }
 
 
-  // For manifest v3, the used class must be ExtensionAPIPersistent(), otherwise
+  // For Manifest V3, the used class must be ExtensionAPIPersistent(), otherwise
   // its events are not registered as being persistent and will fail to wake up
   // the background. 
   class LegacyMenu extends ExtensionCommon.ExtensionAPIPersistent {
