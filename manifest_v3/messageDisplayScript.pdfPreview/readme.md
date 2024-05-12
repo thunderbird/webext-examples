@@ -6,14 +6,15 @@ The PDF Icon is taken from [freeicons.io](https://freeicons.io/logos/pdf-icon-23
 
 ### Differences from the version for manifest v2
 
-The `messageDisplayScripts` API is not yet compatible with manifest v3. Its usage
-was replaced by a `messageDisplay.onMessageDisplayed` listener:
+The `messageDisplayScripts` API is not yet compatible with Manifest V3. Its usage
+was replaced by a `messageDisplay.onMessageDisplayed` listener and the scripting API:
 
 ```
 browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
   // Inject script.
-  await browser.tabs.executeScript(tab.id, {
-    file: "initial.js"
+  await browser.scripting.executeScript({
+    target: { tabId: tab.id},
+    files: ["initial.js"]
   })
 });
 ```
