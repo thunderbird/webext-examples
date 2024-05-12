@@ -5,12 +5,14 @@
 
 browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
   // Inject styles.
-  await browser.tabs.insertCSS(tab.id, {
-    file: "/src/message-content-styles.css"
+  await browser.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["/src/message-content-styles.css"]
   });
   // Inject script.
-  await browser.tabs.executeScript(tab.id, {
-    file: "/src/message-content-script.js"
+  await browser.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["/src/message-content-script.js"]
   })
 });
 
