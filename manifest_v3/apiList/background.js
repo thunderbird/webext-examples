@@ -8,11 +8,13 @@ browser.action.onClicked.addListener(async () => {
 });
 
 async function injectIntoContent(tab, info) {
-  await browser.tabs.insertCSS(tab.id, {
-    file: "apis.css"
+  await browser.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["apis.css"]
   });
-  await browser.tabs.executeScript(tab.id, {
-    file: "apis.js"
+  await browser.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["apis.js"]
   })
 }
 
