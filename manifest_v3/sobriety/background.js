@@ -3,24 +3,44 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-// Note: The onBeforeSend event is not yet 100% compatible with Manifest V3. The
-//       background page can detect if event listeners are returning Promises and
-//       is actually able to ignore termination requests if they have not yet been
-//       fulfilled. However D155071 (Bug 1785294) enforces termination after the
-//       second termination request (ca 60s). That dead-locks the compose window.
+// Note: The `onBeforeSend` event could cause a long idle time, which will
+//   terminate the background page and dead-lock the compose window. To mitigate
+//   this limitation introduced in Manifest V3, we use the alarms API to ping
+//   the background page.
 
 let promiseMap = new Map();
 browser.composeAction.disable();
 
-browser.compose.onBeforeSend.addListener(tab => {
-  browser.composeAction.enable(tab.id);
-  browser.composeAction.openPopup();
+async function promiseWithoutTermination(name, promise) {
+  const listener = (alarmInfo) => {
+    if (alarmInfo.name == name) {
+      console.info(`Waiting for ${name}`)
+    }
+  }
+  browser.alarms.create(
+    name,
+    {
+      periodInMinutes: 0.25, // 15 seconds
+    }
+  );
+  browser.alarms.onAlarm.addListener(listener);
+
+  const rv = await promise;
+
+  await browser.alarms.clear(name);
+  browser.alarms.onAlarm.removeListener(listener);
+  return rv;
+}
+
+browser.compose.onBeforeSend.addListener(async tab => {
+  await browser.composeAction.enable(tab.id);
+  await browser.composeAction.openPopup();
 
   // Do NOT lose this Promise. Most of the compose window UI will be locked
   // until it is resolved. That's a very good way to annoy users.
-  return new Promise(resolve => {
-    promiseMap.set(tab.id, resolve);
-  });
+  let { promise, resolve } = Promise.withResolvers();
+  promiseMap.set(tab.id, resolve);
+  return promiseWithoutTermination("onBeforeSend", promise);
 });
 
 browser.runtime.onMessage.addListener(message => {

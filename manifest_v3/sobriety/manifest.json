@@ -9,7 +9,8 @@
     }
   },
   "permissions": [
-    "compose"
+    "compose",
+    "alarms"
   ],
   "background": {
     "scripts": [
