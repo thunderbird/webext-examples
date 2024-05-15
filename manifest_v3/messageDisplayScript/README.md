@@ -1,6 +1,6 @@
-# Notification Banner messageDisplayScript example
+## Message Display Script Example - Notification Banner
 
-Brief example on Thunderbirds `messageDisplayScript` API by displaying a notification banner in the message reading pane. The notification banner shows the subject of the currently selected message and offer a button to mark the message as unread. 
+Brief example on Thunderbirds `scripting.messageDisplay` API by displaying a notification banner in the message reading pane. The notification banner shows the subject of the currently selected message and offer a button to mark the message as unread. 
 
 The `background.js` script contains the main logic, like wire up the event handlers and perform actions on email messages, while the `message-content-script.js` contains only a function to create the UI elements needed for a simple notification bar.
 
@@ -20,20 +20,12 @@ The background script receives the message and check for its `command` property,
 
 ### Differences from the version for Manifest V2
 
-The `messageDisplayScripts` API is not yet compatible with Manifest V3. Its usage
-was replaced by a `messageDisplay.onMessageDisplayed` listener and the scripting API:
+The `messageDisplayScripts` API has been replaced by the `scripting.messageDisplay` API:
 
 ```
-browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
-  // Inject styles.
-  await browser.scripting.insertCSS({
-    target: { tabId: tab.id },
-    files: ["/src/message-content-styles.css"]
-  });
-  // Inject script.
-  await browser.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["/src/message-content-script.js"]
-  })
-});
+await browser.scripting.messageDisplay.registerScripts([{
+  id: "message-display-script-example-1",
+  css: ["/src/message-content-styles.css"],
+  js: ["/src/message-content-script.js"],
+}]);
 ```

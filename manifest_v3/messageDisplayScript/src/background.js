@@ -3,18 +3,11 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
-  // Inject styles.
-  await browser.scripting.insertCSS({
-    target: { tabId: tab.id },
-    files: ["/src/message-content-styles.css"]
-  });
-  // Inject script.
-  await browser.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["/src/message-content-script.js"]
-  })
-});
+browser.scripting.messageDisplay.registerScripts([{
+  id: "message-display-script-example-1",
+  css: ["/src/message-content-styles.css"],
+  js: ["/src/message-content-script.js"],
+}]);
 
 /**
  * command handler: handles the commands received from the content script
