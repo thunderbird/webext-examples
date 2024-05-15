@@ -5,7 +5,7 @@
   "name": "Menu Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "menu@sample.extensions.thunderbird.net"
+      "id": "menu@mv2.sample.extensions.thunderbird.net"
     }
   },
   "background": {

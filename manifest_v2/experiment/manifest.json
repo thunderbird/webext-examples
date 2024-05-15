@@ -5,7 +5,7 @@
   "name": "Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment@sample.extensions.thunderbird.net",
+      "id": "experiment@mv2.sample.extensions.thunderbird.net",
       "strict_max_version": "110.*"
     }
   },

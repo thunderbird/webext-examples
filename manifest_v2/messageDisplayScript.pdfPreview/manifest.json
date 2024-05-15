@@ -5,7 +5,7 @@
   "name": "Advanced Message Display Script Example (PDF Preview)",
   "browser_specific_settings": {
     "gecko": {
-      "id": "messageDisplayScript.pdfPreview@sample.extensions.thunderbird.net"
+      "id": "messageDisplayScript.pdfPreview@mv2.sample.extensions.thunderbird.net"
     }
   },
   "permissions": [

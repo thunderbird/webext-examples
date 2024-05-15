@@ -6,7 +6,7 @@
   "description": "__MSG_extensionDescription__",
   "browser_specific_settings": {
     "gecko": {
-      "id": "layout@sample.extensions.thunderbird.net"
+      "id": "layout@mv2.sample.extensions.thunderbird.net"
     }
   },
   "browser_action": {

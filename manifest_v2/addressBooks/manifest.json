@@ -6,7 +6,7 @@
   "description": "__MSG_extensionDescription__",
   "browser_specific_settings": {
     "gecko": {
-      "id": "addressBooks@sample.extensions.thunderbird.net"
+      "id": "addressBooks@mv2.sample.extensions.thunderbird.net"
     }
   },
   "background": {

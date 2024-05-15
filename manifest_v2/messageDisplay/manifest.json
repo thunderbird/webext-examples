@@ -5,7 +5,7 @@
   "name": "Message Display Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "messageDisplay@sample.extensions.thunderbird.net"
+      "id": "messageDisplay@mv2.sample.extensions.thunderbird.net"
     }
   },
   "permissions": [
