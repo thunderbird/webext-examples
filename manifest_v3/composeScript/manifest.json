@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team & Aramir",
+  "name": "Compose Script Example",
+  "description": "A very basic example of message body manipulation using a compose script",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "composeScript@mv3.sample.extensions.thunderbird.net",
+      "strict_min_version": "128.0a1"
+    }
+  },
+  "permissions": [
+    "scripting",
+    "compose"
+  ],
+  "background": {
+    "page": "background.html"
+  }
+}
