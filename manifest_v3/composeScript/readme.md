@@ -14,3 +14,5 @@ await browser.scripting.compose.registerScripts([{
   js: ["compose.js"]
 }]);
 ```
+
+The `scripting` permission is now required to inject compose scripts, together with the `compose` permission.

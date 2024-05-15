@@ -14,3 +14,5 @@ browser.scripting.messageDisplay.registerScripts([{
   js: ["initial.js"],
 }]);
 ```
+
+The `messagesModify` permission is no longer needed. The `scripting` permission is now required to inject message display scripts, together with the `messagesRead` permission.
