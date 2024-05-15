@@ -157,10 +157,7 @@ browser.runtime.onMessage.addListener((data, sender) => {
   }
 });
 
-browser.messageDisplay.onMessageDisplayed.addListener(async (tab, message) => {
-  // Inject script.
-  await browser.scripting.executeScript({
-    target: { tabId: tab.id},
-    files: ["initial.js"]
-  })
-});
+browser.scripting.messageDisplay.registerScripts([{
+  id: "message-display-script-example-2",
+  js: ["initial.js"],
+}]);
