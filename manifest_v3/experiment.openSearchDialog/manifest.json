@@ -5,7 +5,7 @@
   "name": "Open Search Dialog Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.openSearchDialog@sample.extensions.thunderbird.net",
+      "id": "experiment.openSearchDialog@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },

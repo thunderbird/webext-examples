@@ -6,7 +6,7 @@
   "description": "Changing the border color of the write new message button using a theme_experiment.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "theme_experiment@sample.extensions.thunderbird.net",
+      "id": "theme_experiment@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },

@@ -5,7 +5,7 @@
   "name": "Sobriety",
   "browser_specific_settings": {
     "gecko": {
-      "id": "sobriety@sample.extensions.thunderbird.net",
+      "id": "sobriety@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },

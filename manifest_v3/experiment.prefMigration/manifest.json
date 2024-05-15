@@ -5,7 +5,7 @@
   "name": "Legacy Preference Migration Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.prefMigration@sample.extensions.thunderbird.net",
+      "id": "experiment.prefMigration@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },

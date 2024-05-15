@@ -3,10 +3,10 @@
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "Compose Body Example",
-  "description": "A very basic example of message body manipulation",
+  "description": "A very basic example of message body manipulation using the compose API",
   "browser_specific_settings": {
     "gecko": {
-      "id": "composebody@sample.extensions.thunderbird.net",
+      "id": "composebody@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },

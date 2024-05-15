@@ -5,7 +5,7 @@
   "name": "Await Popup Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "awaitpopup@sample.extensions.thunderbird.net",
+      "id": "awaitpopup@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0a1"
     }
   },
