@@ -46,7 +46,6 @@
     "menus.overrideContext",
     "messagesMove",
     "messagesRead",
-    "messagesModify",
     "nativeMessaging",
     "notifications",
     "pkcs11",

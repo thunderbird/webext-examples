@@ -16,7 +16,6 @@
     ]
   },
   "permissions": [
-    "messagesModify",
     "messagesRead",
     "scripting"
   ]
