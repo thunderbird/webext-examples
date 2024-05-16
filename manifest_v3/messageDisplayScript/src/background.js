@@ -3,11 +3,14 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
+// A restarting background will try to re-register the message display scripts,
+// and fail. Catch the error.
 browser.scripting.messageDisplay.registerScripts([{
   id: "message-display-script-example-1",
   css: ["/src/message-content-styles.css"],
   js: ["/src/message-content-script.js"],
-}]);
+  runAt: "document_start",
+}]).catch(console.info);
 
 /**
  * command handler: handles the commands received from the content script

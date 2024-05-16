@@ -1,9 +1,11 @@
 import { parse5322 } from './modules/email-addresses.js';
 
-await browser.scripting.compose.registerScripts([{
+// A restarting background will try to re-register the compose scripts, and fail.
+// Catch the error.
+browser.scripting.compose.registerScripts([{
   id: "compose-script-example-1",
   js: ["compose.js"]
-}]);
+}]).catch(console.info);
 
 /**
  * Handles commands received from the compose script, to send make the
