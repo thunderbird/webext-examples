@@ -21,7 +21,7 @@ const doHandleCommand = async (message, sender) => {
     tab: { id: tabId },
   } = sender;
 
-  const messageHeader = await browser.messageDisplay.getDisplayedMessage(tabId);
+  const [messageHeader] = await browser.messageDisplay.getDisplayedMessages(tabId);
 
   // Check for known commands.
   switch (command.toLocaleLowerCase()) {

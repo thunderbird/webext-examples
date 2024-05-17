@@ -3,7 +3,7 @@ browser.tabs.query({
   currentWindow: true,
 }).then(tabs => {
   let tabId = tabs[0].id;
-  browser.messageDisplay.getDisplayedMessage(tabId).then((message) => {
+  browser.messageDisplay.getDisplayedMessages(tabId).then(([message]) => {
     document.body.textContent = message.subject;
   });
 });
