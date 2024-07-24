@@ -7,7 +7,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "messageDisplayScript@mv3.sample.extensions.thunderbird.net",
-      "strict_min_version": "128.0a1"
+      "strict_min_version": "128.0"
     }
   },
   "background": {
@@ -16,6 +16,7 @@
     ]
   },
   "permissions": [
+    "messagesUpdate",
     "messagesRead",
     "scripting"
   ]

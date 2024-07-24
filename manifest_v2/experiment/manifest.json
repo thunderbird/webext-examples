@@ -6,7 +6,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "experiment@mv2.sample.extensions.thunderbird.net",
-      "strict_max_version": "110.*"
+      "strict_min_version": "128.0"
     }
   },
   "background": {

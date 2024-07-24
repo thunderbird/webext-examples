@@ -1,11 +1,5 @@
 /* eslint-disable object-shorthand */
 
-// Get various parts of the WebExtension framework that we need.
-var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
-
-// You probably already know what this does.
-var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-
 // This is the base preference name for all your legacy prefs.
 const MY_EXTENSION_BASE_PREF_NAME = "myaddon.";
 

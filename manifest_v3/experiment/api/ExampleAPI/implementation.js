@@ -5,14 +5,10 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // Get various parts of the WebExtension framework that we need.
-  var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
-
-  // You probably already know what this does.
-  var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-
   // A helpful class for listening to windows opening and closing.
-  var { ExtensionSupport } = ChromeUtils.import("resource:///modules/ExtensionSupport.jsm");
+  var { ExtensionSupport } = ChromeUtils.importESModule(
+    "resource:///modules/ExtensionSupport.sys.mjs"
+  );
 
   /**
    * This object is just what we're using to listen for toolbar clicks. The implementation
@@ -60,7 +56,6 @@
         ExtensionSupport.registerWindowListener(this.listenerId, {
           chromeURLs: [
             "chrome://messenger/content/messenger.xhtml",
-            "chrome://messenger/content/messenger.xul",
           ],
           onLoadWindow: function (window) {
             let toolbox = window.document.getElementById("unifiedToolbarContainer");
@@ -79,9 +74,8 @@
         for (let window of ExtensionSupport.openWindows) {
           if ([
             "chrome://messenger/content/messenger.xhtml",
-            "chrome://messenger/content/messenger.xul",
           ].includes(window.location.href)) {
-            let toolbox = window.document.getElementById("mail-toolbox");
+            let toolbox = window.document.getElementById("unifiedToolbarContainer");
             toolbox.removeEventListener("click", this.handleEvent);
           }
         }

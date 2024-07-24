@@ -15,6 +15,7 @@
     ]
   },
   "permissions": [
+    "messagesUpdate",
     "messagesModify",
     "messagesRead"
   ]

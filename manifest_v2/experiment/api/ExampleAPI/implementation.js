@@ -5,14 +5,10 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // Get various parts of the WebExtension framework that we need.
-  var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
-
-  // You probably already know what this does.
-  var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-
   // A helpful class for listening to windows opening and closing.
-  var { ExtensionSupport } = ChromeUtils.import("resource:///modules/ExtensionSupport.jsm");
+  var { ExtensionSupport } = ChromeUtils.importESModule(
+    "resource:///modules/ExtensionSupport.sys.mjs"
+  );
 
   /**
    * This object is just what we're using to listen for toolbar clicks. The implementation
@@ -46,13 +42,9 @@
     }
 
     handleEvent(event) {
-      // Only react to the secondary mouse button.
-      if (event.button == 2) {
-        let toolbar = event.target.closest("toolbar");
-        // Emit "toolbar-clicked" and send toolbar.id, event.clientX, event.clientY to
-        // the registered callbacks.
-        windowListener.emit("toolbar-clicked", toolbar.id, event.clientX, event.clientY);
-      }
+      // Emit "toolbar-clicked" and send event.clientX, event.clientY to
+      // the registered callbacks.
+      windowListener.emit("toolbar-clicked", event.clientX, event.clientY);
     }
 
     add(callback) {
@@ -64,10 +56,9 @@
         ExtensionSupport.registerWindowListener(this.listenerId, {
           chromeURLs: [
             "chrome://messenger/content/messenger.xhtml",
-            "chrome://messenger/content/messenger.xul",
           ],
           onLoadWindow: function (window) {
-            let toolbox = window.document.getElementById("mail-toolbox");
+            let toolbox = window.document.getElementById("unifiedToolbarContainer");
             toolbox.addEventListener("click", windowListener.handleEvent);
           },
         });
@@ -83,9 +74,8 @@
         for (let window of ExtensionSupport.openWindows) {
           if ([
             "chrome://messenger/content/messenger.xhtml",
-            "chrome://messenger/content/messenger.xul",
           ].includes(window.location.href)) {
-            let toolbox = window.document.getElementById("mail-toolbox");
+            let toolbox = window.document.getElementById("unifiedToolbarContainer");
             toolbox.removeEventListener("click", this.handleEvent);
           }
         }
@@ -126,8 +116,8 @@
             // function that removes those listeners. To have the event fire in your extension,
             // call fire.async.
             register(fire) {
-              function callback(event, id, x, y) {
-                return fire.async(id, x, y);
+              function callback(event, x, y) {
+                return fire.async(x, y);
               }
 
               windowListener.add(callback);
