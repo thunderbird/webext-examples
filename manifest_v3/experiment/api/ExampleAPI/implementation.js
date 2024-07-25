@@ -5,16 +5,19 @@
 // Using a closure to not leak anything but the API to the outside world.
 (function (exports) {
 
-  // A helpful class for listening to windows opening and closing.
-  var { ExtensionSupport } = ChromeUtils.importESModule(
+  const { ExtensionSupport } = ChromeUtils.importESModule(
     "resource:///modules/ExtensionSupport.sys.mjs"
   );
+  const { ExtensionUtils } = ChromeUtils.importESModule(
+    "resource://gre/modules/ExtensionUtils.sys.mjs"
+  );
+  const { ExtensionError } = ExtensionUtils;
 
   /**
-   * This object is just what we're using to listen for toolbar clicks. The implementation
-   * isn't what this example is about, but you might be interested as it's a common pattern.
-   * We count the number of callbacks waiting for events so that we're only listening if we
-   * need to be.
+   * This object is just what we're using to listen for toolbar clicks. The
+   * implementation isn't what this example is about, but you might be interested
+   * as it's a common pattern. We count the number of callbacks waiting for events
+   * so that we're only listening if we need to be.
    * 
    * An EventEmitter has the following basic functions:
    * 
@@ -25,10 +28,9 @@
    *   Unregisters a callback for a custom emitter.
    * 
    * EventEmitter.emit(emitterName)
-   *   Emit a custom emitter, all provided parameters will be forwarded to the registered callbacks.
+   *   Emit a custom emitter, all provided parameters will be forwarded to the
+   *   registered callbacks.
    */
-
-  let windowListener;
 
   class WindowListener extends ExtensionCommon.EventEmitter {
     constructor(extension) {
@@ -83,7 +85,59 @@
       }
     }
   };
+  // The variable for our WindowListener instance. Since we need the extension
+  // object, we cannot create it here directly.
+  let windowListener;
 
+
+  // A helper to manage custom resource:// urls.
+  const resourceUrl = {
+    register(customNamespace, extension, folder) {
+      const resProto = Cc[
+        "@mozilla.org/network/protocol;1?name=resource"
+      ].getService(Ci.nsISubstitutingProtocolHandler);
+
+      if (resProto.hasSubstitution(customNamespace)) {
+        throw new ExtensionError(`There is already a resource:// url for the namespace "${customNamespace}"`);
+      }
+
+      let uri = Services.io.newURI(
+        folder || ".",
+        null,
+        extension.rootURI
+      );
+      resProto.setSubstitutionWithFlags(
+        customNamespace,
+        uri,
+        resProto.ALLOW_CONTENT_ACCESS
+      );
+    },
+
+    unloadAllModules(customNamespace) {
+      for (let module of Cu.loadedModules) {
+        let [schema, , namespace] = module.split("/");
+        if (
+          schema == "resource:" && 
+          customNamespace.toLowerCase() == namespace.toLowerCase()
+        ) {
+          console.log("Unloading module", module);
+          Cu.unload(module);
+        }
+      }
+    },
+    
+    unregister(customNamespace) {
+      const resProto = Cc[
+        "@mozilla.org/network/protocol;1?name=resource"
+      ].getService(Ci.nsISubstitutingProtocolHandler);
+      console.log("Unloading namespace", customNamespace);
+      resProto.setSubstitution(customNamespace, null);
+    },
+  }
+  // The variable for our TestModule, which we are going to load once our resource://
+  // url has been registered. Since we need the extension object, we cannot do that
+  // here directly.
+  let TestModule;
 
   // This is the important part. It implements the functions and events defined
   // in the schema.json. The name must match what you've been using so far,
@@ -99,6 +153,18 @@
     constructor(extension) {
       super(extension);
       windowListener = new WindowListener(extension);
+
+      // Register a resource:// url which points to the module folder. The name
+      // should be unique to avoid conflicts with other add-ons.
+      resourceUrl.register("exampleAddon1234", extension, "modules/");
+  
+      // Load our own TestModule. This should be used as a last resort and only if
+      // the code is too complex to be part of the implementation file directly.
+      // Since TestModule is not defined here, outer parentheses are required. See
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#assignment_separate_from_declaration_2
+      ({ TestModule } = ChromeUtils.importESModule(
+        "resource://exampleAddon1234/TestModule.sys.mjs"
+      ));
     }
 
     PERSISTENT_EVENTS = {
@@ -139,7 +205,7 @@
 
           // A function.
           sayHello: async function (name) {
-            Services.wm.getMostRecentWindow("mail:3pane").alert(name);
+            TestModule.alert(name);
           },
 
           // A persistent event. Most of this is boilerplate you don't need to
@@ -156,18 +222,28 @@
     }
 
     onShutdown(isAppShutdown) {
-      // This function is called if the extension is disabled or removed, or Thunderbird closes.
-      // We usually do not have to do any cleanup, if Thunderbird is shutting down entirely
+      // This function is called if the extension is disabled or removed, or
+      // Thunderbird closes. We usually do not have to do any cleanup, if
+      // Thunderbird is shutting down entirely.
       if (isAppShutdown) {
         return;
       }
+      
+      // Unload all modules which have been loaded with our resource:// url.
+      resourceUrl.unloadAllModules("exampleAddon1234");
+
+      // Unregister our resource:// url.
+      resourceUrl.unregister("exampleAddon1234");
+
+      // Flush all caches.
+      Services.obs.notifyObservers(null, "startupcache-invalidate");
 
       console.log("Goodbye world!");
     }
   };
 
-  // Export the api by assigning in to the exports parameter of the anonymous closure
-  // function, which is the global this.
+  // Export the api by assigning in to the exports parameter of the anonymous
+  // closure function, which is the global this.
   exports.ExampleAPI = ExampleAPI;
 
 })(this)
