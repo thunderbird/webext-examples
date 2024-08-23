@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Example for menu typed action buttons",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "menu-action-button@mv2.sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "type": "module"
+  },
+  "compose_action": {
+    "default_title": "MenuActionButton",
+    "type": "menu"
+  },
+  "permissions": [
+    "menus"
+  ]
+}
