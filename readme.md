@@ -32,3 +32,7 @@ To run any of the listed extensions, clone or download this repository and eithe
 
 * zip the directory of your choice (`manifest.json` should be at the top level of the zip file) and install it like any other Add-On in Thunderbird.
 * select "Debug Add-Ons" from the Add-On Manager menu, click "Load Temporary Add-On" and select `manifest.json` from your source (or any other file part of your Add-On). Temporary loaded Add-Ons do not need to be zipped.
+
+## Hello World tutorial
+
+The `hello-world` folder contains the full sources of our ["Hello World" Extension Tutorial](https://developer.thunderbird.net/add-ons/hello-world-add-on).
