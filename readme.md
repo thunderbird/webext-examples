@@ -1,6 +1,6 @@
-# Sample Extensions
+# WebExtension Examples
 
-This is a collection of MailExtensions (Thunderbird add-ons based on WebExtension technology) to showcase how the available WebExtension APIs can be used in Thunderbird. Each example exists for Manifest V2 and V3. The Manifest V3 compatible versions include comments to highlight the required changes.
+This is a collection of WebExtensions for Thunderbird to showcase how the available WebExtension APIs can be used. Each example exists for Manifest V2 and V3. The Manifest V3 compatible versions include comments to highlight the required changes.
 
 Manifest V3 is officially supported since Thunderbird 128. Running Manifest V3 add-ons in older versions of Thunderbird is not recommended.
 
