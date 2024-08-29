@@ -3,7 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  *
  * This file is provided by the addon-developer-support repository at
- * https://github.com/thundernest/addon-developer-support
+ * https://github.com/thunderbird/addon-developer-support
  * 
  * Do not remove or change this comment.
  *
