@@ -18,7 +18,7 @@ Manifest V3 is officially supported since Thunderbird 128. Running Manifest V3 a
 | experiment.restart              | Uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and to perform a Thunderbird restart. |
 | mailTabs                        | Uses the `mailTabs` APIs to manipulate the appearance of the main Thunderbird window.|
 | managedStorage                  | Uses `storage.managed` to access data defined by enterprise policies.|
-| menu                            | Use the menus API to add entries to different menus and shows how to override the context menu of content pages (in popups or tabs).|
+| menu                            | Uses the menus API to add entries to different menus and shows how to override the context menu of content pages (in popups or tabs).|
 | menuActionButton                | Shows how to use menu typed action buttons (a compose action button in this case).|
 | messageDisplay                  | Uses the `messageDisplay` and `messageDisplayAction` APIs to show how to add a button to the message header, and how to react when a message is displayed.|
 | messageDisplayScript            | Uses the `messageDisplayScript` API to display a banner with information from the currently selected message along with a button to trigger an action in the background script via `runtime.sendMessage`. |
