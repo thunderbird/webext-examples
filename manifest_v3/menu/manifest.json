@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Menu Example",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "menu@mv3.sample.extensions.thunderbird.net"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MenuExample",
+    "allowed_spaces": []
+  },
+  "permissions": [
+    "tabs",
+    "menus",
+    "menus.overrideContext",
+    "accountsRead"
+  ]
+}
