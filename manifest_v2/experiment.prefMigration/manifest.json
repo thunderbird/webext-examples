@@ -9,6 +9,7 @@
     }
   },
   "background": {
+    "type": "module",
     "scripts": [
       "background.js"
     ]
@@ -17,18 +18,18 @@
     "storage"
   ],
   "experiment_apis": {
-    "migratePrefs": {
-      "schema": "schema.json",
+    "PrefMigration": {
+      "schema": "api/PrefMigration/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "migratePrefs"
+            "PrefMigration"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/PrefMigration/implementation.js"
       }
     }
   }
