@@ -1,0 +1,18 @@
+[
+  {
+    "namespace": "MessageDisplayAttachment",
+    "functions": [
+      {
+        "name": "removeAttachments",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tabId",
+            "type": "integer"
+          }
+        ]
+      }
+    ]
+  }
+]

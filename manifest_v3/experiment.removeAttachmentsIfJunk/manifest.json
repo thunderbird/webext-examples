@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Remove Attachments If Junk Experiment",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.removeAttachmentsIfJunk@mv3.sample.extensions.thunderbird.net",
+      "strict_min_version": "128.0"
+    }
+  },
+  "background": {
+    "type": "module",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "messagesRead",
+    "storage"
+  ],
+  "experiment_apis": {
+    "MessageDisplayAttachment": {
+      "schema": "api/MessageDisplayAttachment/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "MessageDisplayAttachment"
+          ]
+        ],
+        "script": "api/MessageDisplayAttachment/implementation.js"
+      }
+    }
+  }
+}
