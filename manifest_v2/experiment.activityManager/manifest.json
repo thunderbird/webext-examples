@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Experiment Example to manipulate the ActivityManager",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.ActivityManager@mv2.sample.extensions.thunderbird.net",
+      "strict_min_version": "115.0"
+    }
+  },
+  "background": {
+    "type": "module",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "experiment_apis": {
+    "ActivityManager": {
+      "schema": "api/ActivityManager/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "ActivityManager"
+          ]
+        ],
+        "script": "api/ActivityManager/implementation.js",
+        "events": ["startup"]
+      }
+    }
+  }
+}
