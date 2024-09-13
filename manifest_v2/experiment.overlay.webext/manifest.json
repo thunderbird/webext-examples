@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "Thunderbird Team",
+  "name": "Experiment Overlay Example (WebExtension window detection)",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "experiment.overlay@mv2.sample.extensions.thunderbird.net",
+      "strict_min_version": "128.0"
+    }
+  },
+  "background": {
+    "type": "module",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "messagesRead"
+  ],
+  "experiment_apis": {
+    "MessageDisplayAttachment": {
+      "schema": "api/MessageDisplayAttachment/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "MessageDisplayAttachment"
+          ]
+        ],
+        "script": "api/MessageDisplayAttachment/implementation.js"
+      }
+    }
+  }
+}
