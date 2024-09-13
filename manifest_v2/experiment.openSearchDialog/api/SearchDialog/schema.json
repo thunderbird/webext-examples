@@ -1,6 +1,6 @@
 [
   {
-    "namespace": "searchDialog",
+    "namespace": "SearchDialog",
     "functions": [
       {
         "name": "open",

@@ -1,3 +1,3 @@
 browser.browserAction.onClicked.addListener(() => {
-  browser.searchDialog.open();
+  browser.SearchDialog.open();
 });

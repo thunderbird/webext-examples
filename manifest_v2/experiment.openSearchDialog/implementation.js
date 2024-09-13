@@ -1,7 +1,7 @@
-var searchDialog = class extends ExtensionCommon.ExtensionAPI {
+var SearchDialog = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
     return {
-      searchDialog: {
+      SearchDialog: {
         async open() {
           let recentWindow = Services.wm.getMostRecentWindow("mail:3pane");
           if (recentWindow) {

@@ -9,18 +9,18 @@
     }
   },
   "experiment_apis": {
-    "searchDialog": {
-      "schema": "schema.json",
+    "SearchDialog": {
+      "schema": "api/SearchDialog/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "searchDialog"
+            "SearchDialog"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/SearchDialog/implementation.js"
       }
     }
   },
