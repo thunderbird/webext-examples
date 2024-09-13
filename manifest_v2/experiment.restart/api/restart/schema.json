@@ -1,11 +1,35 @@
 [
   {
-    "namespace": "restart",
+    "namespace": "Restart",
     "functions": [
       {
         "name": "execute",
         "type": "function",
         "parameters": []
+      },
+      {
+        "name": "addMenuEntry",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "windowId",
+            "type": "integer"
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "onCommand",
+        "type": "function",
+        "description": "Fires when the user clicks on the restart menu entry.",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "windowId",
+            "description": "The windowId of the window, where the menu item was clicked."
+          }
+        ]
       }
     ]
   }

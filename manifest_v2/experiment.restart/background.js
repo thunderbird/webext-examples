@@ -1,45 +1,25 @@
-function addRestartMenuEntry(window) {
-    // Skip in case it is not the window we want to manipulate.
-    // https://webextension-api.thunderbird.net/en/latest/windows.html#windowtype  
-    if (`${window.type}` !== "normal") {
-      return;
-    }
+// Add event to react to click on custom restart menu entry.
+await browser.Restart.onCommand.addListener(async (windowId) => {
+    browser.notifications.create({
+        "type": "basic",
+        "title": "Restart",
+        "message": `The restart menu item was clicked in window with id ${windowId}. Restart in 5 seconds.`
+    })
+    await new Promise(resolve => window.setTimeout(resolve, 5000));
 
-    // Use the LegacyMenu Experiment API to add a menu entry for the restart menu item.
-    const id = `${window.id}`;
-    const description = {
-      "id":  "menu_FileRestartItem",
-      "type": "menu-label",
-      "reference": "menu_FileQuitItem",
-      "position": "before",
-      "label": "Restart",
-      "accesskey": "R"
-    };
-    messenger.LegacyMenu.add(id, description);   
+    // Use the restart Experiment API to restart TB.
+    messenger.Restart.execute();
+});
+
+// Overlay all already open normal windows.
+let windows = await browser.windows.getAll({ windowTypes: ["normal"] })
+for (let window of windows) {
+    await addRestartMenu(window);
 }
 
-async function onCommand(windowsId, itemId) {
-    switch (itemId) {
-        case "menu_FileRestartItem":
-            // Use the restart Experiment API to restart TB.
-            messenger.restart.execute();
-            break;
-    }
+// Overlay any new normal window being opened.
+browser.windows.onCreated.addListener(addRestartMenu);
+
+async function addRestartMenu(window) {
+    await browser.Restart.addMenuEntry(window.id)
 }
-
-async function main () {
-    // Register a listener for the onClick/onCommand event for any added menu entry.
-    messenger.LegacyMenu.onCommand.addListener(onCommand);
-
-    // Loop over all already open windows and add the restart menu entry.
-    const windows = await messenger.windows.getAll();
-    for (let window of windows) {
-        addRestartMenuEntry(window);
-    }
-
-    // Register a listener for all newly opened windows so they get manipulated as well.
-    messenger.windows.onCreated.addListener(addRestartMenuEntry);
-}
-
-//Execute the asynchronous init() function.
-main();

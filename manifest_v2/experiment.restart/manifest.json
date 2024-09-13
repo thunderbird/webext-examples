@@ -10,38 +10,28 @@
     }
   },
   "background": {
+    "type": "module",
     "scripts": [
       "background.js"
     ]
   },
+  "permissions": [
+    "notifications"
+  ],
   "experiment_apis": {
-    "restart": {
-      "schema": "api/restart/schema.json",
+    "Restart": {
+      "schema": "api/Restart/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "restart"
+            "Restart"
           ]
         ],
-        "script": "api/restart/implementation.js"
+        "script": "api/Restart/implementation.js"
       }
-    },
-    "LegacyMenu": {
-      "schema": "api/LegacyMenu/schema.json",
-      "parent": {
-        "scopes": [
-          "addon_parent"
-        ],
-        "paths": [
-          [
-            "LegacyMenu"
-          ]
-        ],
-        "script": "api/LegacyMenu/implementation.js"
-      }
-    }    
+    }
   }
 }
