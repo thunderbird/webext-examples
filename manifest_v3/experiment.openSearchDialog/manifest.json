@@ -5,23 +5,22 @@
   "name": "Open Search Dialog Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.openSearchDialog@mv3.sample.extensions.thunderbird.net",
-      "strict_min_version": "128.0"
+      "id": "experiment.openSearchDialog@mv3.sample.extensions.thunderbird.net"
     }
   },
   "experiment_apis": {
-    "searchDialog": {
-      "schema": "schema.json",
+    "SearchDialog": {
+      "schema": "api/SearchDialog/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "searchDialog"
+            "SearchDialog"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/SearchDialog/implementation.js"
       }
     }
   },
