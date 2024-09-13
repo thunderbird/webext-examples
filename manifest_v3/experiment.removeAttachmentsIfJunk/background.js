@@ -10,10 +10,12 @@ browser.messageDisplay.onMessagesDisplayed.addListener(removeAttachmentsIfJunk);
 async function removeAttachmentsIfJunk(tab, messageList) {
   // We only want the first one.
   const { messages } = messageList;
-  const [message] = messages;
+  if (!messages) {
+    return;
+  }
 
-  // Only remove attachments, if message is junk.
-  if (!message.junk) {
+  // Only remove attachments, if the displayed message is junk.
+  if (messages.length != 1 || !messages[0].junk) {
     return;
   }
 
@@ -33,11 +35,8 @@ if (startup) {
   // Handle all already open/displayed messages.
   let tabs = await browser.tabs.query({ type: ["messageDisplay", "mail"] })
   for (let tab of tabs) {
-    const { messages } = await browser.messageDisplay.getDisplayedMessages(tab.id);
-    const [message] = messages;
-    if (message) {
-      await removeAttachmentsIfJunk(tab, message);
-    }
+    const messageList = await browser.messageDisplay.getDisplayedMessages(tab.id);
+    await removeAttachmentsIfJunk(tab, messageList);
   }
 }
 
