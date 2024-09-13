@@ -1,7 +1,7 @@
 var MessageDisplayAttachment = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
 
-    // Get the actual about:message window from the tabId.
+    // Get the native about:message window from the tabId.
     function getMessageWindow(tabId) {
       let { nativeTab } = context.extension.tabManager.get(tabId);
       if (nativeTab instanceof Ci.nsIDOMWindow) {

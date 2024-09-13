@@ -3,14 +3,14 @@ let tabs = await browser.tabs.query({ type: ["messageDisplay", "mail"] })
 for (let tab of tabs) {
   let message = await browser.messageDisplay.getDisplayedMessage(tab.id);
   if (message) {
-    await handleMessage(tab, message);
+    await removeAttachmentsIfJunk(tab, message);
   }
 }
 
 // React on any new message being displayed.
-browser.messageDisplay.onMessageDisplayed.addListener(handleMessage);
+browser.messageDisplay.onMessageDisplayed.addListener(removeAttachmentsIfJunk);
 
-async function handleMessage(tab, message) {
+async function removeAttachmentsIfJunk(tab, message) {
   // Only remove attachments, if message is junk.
   if (!message.junk) {
     return;

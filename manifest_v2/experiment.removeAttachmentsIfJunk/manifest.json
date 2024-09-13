@@ -2,10 +2,10 @@
   "manifest_version": 2,
   "version": "1.0",
   "author": "Thunderbird Team",
-  "name": "Experiment Overlay Example (WebExtension window detection)",
+  "name": "Remove Attachments If Junk Experiment",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.overlay@mv2.sample.extensions.thunderbird.net",
+      "id": "experiment.removeAttachmentsIfJunk@mv2.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0"
     }
   },
