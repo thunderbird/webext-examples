@@ -5,11 +5,11 @@
   "name": "Legacy Preference Migration Experiment Example",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.prefMigration@mv3.sample.extensions.thunderbird.net",
-      "strict_min_version": "128.0"
+      "id": "experiment.prefMigration@mv3.sample.extensions.thunderbird.net"
     }
   },
   "background": {
+    "type": "module",
     "scripts": [
       "background.js"
     ]
@@ -18,18 +18,18 @@
     "storage"
   ],
   "experiment_apis": {
-    "migratePrefs": {
-      "schema": "schema.json",
+    "PrefMigration": {
+      "schema": "api/PrefMigration/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "migratePrefs"
+            "PrefMigration"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/PrefMigration/implementation.js"
       }
     }
   }

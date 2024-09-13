@@ -1,6 +1,6 @@
 [
   {
-    "namespace": "migratePrefs",
+    "namespace": "PrefMigration",
     "functions": [
       {
         "name": "getPref",

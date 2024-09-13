@@ -14,43 +14,42 @@ const kPrefDefaults = {
   unicode_string_pref: "",
 };
 
-async function migratePrefs() {
+async function PrefMigration() {
   // You could use any sub-section that you want here, it doesn't have
   // to be called "preferences".
-  const results = await browser.storage.local.get("preferences");
+  const { preferences } = await browser.storage.local.get({ preferences: kPrefDefaults });
 
-  const currentMigration =
-    results.preferences && results.preferences.migratedLegacy
-      ? results.preferences.migratedLegacy
+  const currentMigration = preferences.migratedLegacy
+      ? preferences.migratedLegacy
       : 0;
 
   if (currentMigration >= kCurrentLegacyMigration) {
     return;
   }
 
-  let prefs = results.preferences || {};
-
+  // This is the migration step "1". You can later add additional migration steps.
   if (currentMigration < 1) {
     for (const prefName of Object.getOwnPropertyNames(kPrefDefaults)) {
-      prefs[prefName] = await browser.migratePrefs.getPref(prefName);
-      if (prefs[prefName] === undefined) {
-        prefs[prefName] = kPrefDefaults[prefName];
+      let value = await browser.PrefMigration.getPref(prefName);
+      if (value !== undefined) {
+        preferences[prefName] = value;
       }
     }
   }
 
-  prefs.migratedLegacy = kCurrentLegacyMigration;
-  await browser.storage.local.set({ preferences: prefs });
+  preferences.migratedLegacy = kCurrentLegacyMigration;
+  await browser.storage.local.set({ preferences });
 }
 
-// This is just a debug wrapper so you can see it in action. You could call
-// `migratePrefs().catch(console.error);` directly.
-async function main() {
+try {
+
   // This triggers the migration.
-  await migratePrefs();
+  await PrefMigration();
+  const { preferences } = await browser.storage.local.get({ preferences: kPrefDefaults });
+  console.log({ preferences });
 
-  const results = await browser.storage.local.get("preferences");
-  console.log({ results });
+} catch (ex) {
+
+  console.error(ex);
+
 }
-
-main().catch(console.error);
