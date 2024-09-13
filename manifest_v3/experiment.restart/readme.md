@@ -1,33 +1,27 @@
 ## Restart Experiment
 
-This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* and a second Experiment to perform the restart.
+This extension uses an Experiment to add a *Restart* entry to Thunderbird's *file menu* to perform a restart.
+
+In order to add the restart button to already open windows and all windows which are opened in the future, the example uses the WebExtension `windows` API. The Experiment defines a `Restart.onCommand` event, which is fired when the custom *Restart* menu item clicked. The background script registers a listener for this event and calls `Restart.execute()` after a delay of 5s.
 
 ### Differences from the version for Manifest V2
 
-The two used event listeners are are added inside an async function which is executed
-during add-on startup. One of them was registered AFTER the first async `await`
-had been encountered which caused this listener to not be registered as a persistent
-listener. It had to be moved before the first async `await`.
+The implementation of the `Restart` Experiment had to be updated to support
+persistent event listeners. 
 
-The implementation of the `LegacyMenu` Experiment had to be updated to support
-persistent event listeners. Additionally, its usage of 
+The background script is executed every time the extension is resumed by a persistent listener. This causes the code which overlays all open windows to be re-run.
 
-```
-context.callOnClose({
-    close: () => { clearAllWindows(); }
-});
-```
-
-had to be replaced by 
+This could have been fixed in the Experiment by not re-adding the element if it exists already. However, the mitigation implemented here uses a flag in the session storage (it is only cleared on normal add-on shut down, but not when terminated):
 
 ```
-onShutdown(isAppShutdown) {
-      if (isAppShutdown) {
-        return; // the application gets unloaded anyway
-      }
-      clearAllWindows();
+let { startup } = await browser.storage.session.get({ startup: true });
+if (startup) {
+    await browser.storage.session.set({ startup: false });
+
+    // Overlay all already open normal windows.
+    let windows = await browser.windows.getAll({ windowTypes: ["normal"] })
+    for (let window of windows) {
+        await addRestartMenu(window);
     }
+}
 ```
-
-as the `close()` function registered via `callOnClose()` will be called on
-background termination as well.
