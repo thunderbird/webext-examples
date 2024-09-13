@@ -3,8 +3,7 @@ let tabs = await browser.tabs.query({ type: ["messageDisplay", "mail"] })
 for (let tab of tabs) {
   let message = await browser.messageDisplay.getDisplayedMessage(tab.id);
   if (message) {
-    // Do not await this call, just fire all requests in parallel.
-    handleMessage(tab, message);
+    await handleMessage(tab, message);
   }
 }
 
