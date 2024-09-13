@@ -1,5 +1,7 @@
 ## Remove Attachments If Junk Experiment
 
-This example leverages WebExtension APIs to detect open windows/tabs to be able to remove attachments from displayed junk messages.
+This extension uses an Experiment to remove attachments from the message display area, if the message is classified as junk.
+
+In order to manipulate the message display area of already open messages and all messages which are opened in the future, the example uses the WebExtension `tabs` and `messageDisplay` APIs.
 
 The example is used in the WebExtension Update Guide.
