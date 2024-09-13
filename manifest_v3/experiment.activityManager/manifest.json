@@ -1,11 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "version": "1.0",
   "author": "Thunderbird Team",
   "name": "Experiment Example to manipulate the ActivityManager",
   "browser_specific_settings": {
     "gecko": {
-      "id": "experiment.ActivityManager@mv2.sample.extensions.thunderbird.net",
+      "id": "experiment.ActivityManager@mv3.sample.extensions.thunderbird.net",
       "strict_min_version": "128.0"
     }
   },
