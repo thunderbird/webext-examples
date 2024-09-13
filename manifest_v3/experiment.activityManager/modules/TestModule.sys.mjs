@@ -1,6 +1,4 @@
-var EXPORTED_SYMBOLS = ["TestModule"];
-
-var TestModule = {
+export var TestModule = {
     onLoad(window, extension, emitter) {
         // Add our event listener, which emits "activity-manager-clear".
         window._exampleAddOnClickHandler = (e) => {

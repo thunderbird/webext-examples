@@ -7,15 +7,9 @@
     "resource:///modules/ExtensionSupport.sys.mjs"
   );
 
-  // This example loads a JSM file with additional code. Recent versions of
-  // Thunderbird have moved to modern ES6 system modules. However, these cannot
-  // be used by extensions, because they cannot be unloaded. Unloading modules is
-  // crucial for extension to read updated implementations after an add-on update.
-  // Since support for JSM files will be dropped, its usage should be removed entirely.
-  
-  // The JSM file can only be loaded after a custom resource:// url has been
-  // registered. Since we need the extension object, we cannot do that here
-  // directly, but in startup().
+  // This example loads a system module with additional code. The file can only
+  // be loaded after a custom resource:// url has been registered. Since we need
+  // the extension object, we cannot do that here/ directly, but in startup().
   let TestModule;
 
   // Class to manage custom resource:// urls.
@@ -23,7 +17,7 @@
     constructor() {
       this.customNamespaces = [];
     }
-    
+
     register(customNamespace, extension, folder) {
       const resProto = Cc[
         "@mozilla.org/network/protocol;1?name=resource"
@@ -52,19 +46,6 @@
       );
     }
 
-    unloadModules() {
-      for (let module of Cu.loadedModules) {
-        let [schema, , namespace] = module.split("/");
-        if (
-          schema == "resource:" && 
-          this.customNamespaces.includes(namespace.toLowerCase())
-        ) {
-          console.log("Unloading module", module);
-          Cu.unload(module);
-        }
-      }
-    }
-    
     unregister() {
       const resProto = Cc[
         "@mozilla.org/network/protocol;1?name=resource"
@@ -115,17 +96,17 @@
 
     onStartup() {
       const { extension } = this;
-      
+
       // Register a resource:// url which points to the module folder. The name
       // should be unique to avoid conflicts with other add-ons. The name must be
       // written entirely in lowercase letters.
       resourceUrl.register("exampleaddon1234", extension, "modules/");
-  
+
       // Load our own TestModule. Since TestModule is not defined here, outer
       // parentheses are required. See
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#assignment_separate_from_declaration_2
-      ({TestModule} = ChromeUtils.import(
-        "resource://exampleaddon1234/TestModule.jsm"
+      ({ TestModule } = ChromeUtils.importESModule(
+        "resource://exampleaddon1234/TestModule.sys.mjs?" + Date.now()
       ))
       
       // Register a listener for newly opened activity windows. This calls a
@@ -134,7 +115,7 @@
         chromeURLs: [
           "chrome://messenger/content/activity.xhtml",
         ],
-        onLoadWindow (window) {
+        onLoadWindow(window) {
           TestModule.onLoad(window, extension, emitter);
         },
       });
@@ -147,7 +128,7 @@
       if (isAppShutdown) {
         return;
       }
-      
+
       // Remove our manipulations of the activity monitor. This calls a function
       // of our TestModule.
       const { extension } = this;
@@ -161,9 +142,6 @@
 
       // Unregister our listener for newly opened windows.
       ExtensionSupport.unregisterWindowListener(extension.id);
-
-      // Unload all modules which have been loaded with our resource:// url.
-      resourceUrl.unloadModules();
 
       // Unregister all our resource:// urls.
       resourceUrl.unregister();
