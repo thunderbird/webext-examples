@@ -2,9 +2,8 @@
 let tabs = await browser.tabs.query({ type: ["messageDisplay", "mail"] })
 for (let tab of tabs) {
   let message = await browser.messageDisplay.getDisplayedMessage(tab.id);
-  // Do not await this but just fire all requests in parallel and let them finish
-  // on its own.
   if (message) {
+    // Do not await this call, just fire all requests in parallel.
     handleMessage(tab, message);
   }
 }
