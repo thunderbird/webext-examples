@@ -26,8 +26,7 @@ async function addRestartMenu(window) {
 
 // In Manifest V3, the background script is executed when the extension is
 // resuming after being terminated. In this case we do not want to retrigger our
-// overlay code. We use the session storage, which is cleared every time the
-// add-on is shut down normally, but not when terminated.
+// overlay code. We use a flag in the session storage to skip this code on resume.
 let { startup } = await browser.storage.session.get({ startup: true });
 if (startup) {
     await browser.storage.session.set({ startup: false });
