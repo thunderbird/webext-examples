@@ -1,11 +1,10 @@
 ## Activity Manager Experiment Example
 
-This extension uses an Experiment to add an event to the *Clear List* button of the Activity Manager.
+This extension uses an Experiment to add a custom event to the *Clear List* button of the Activity Manager.
 
-Since the Activity Manager is not supported by WebExtension APIs, it is also not detectable through WebExtension APIs. The window-opened detection code has to live inside an Experiment. This example is using the `startup` event of the Experiment to register a global window listener to be able to manipulate the Activity Manager.
+Since the Activity Manager is not supported by WebExtension APIs, it is not detectable through WebExtension APIs. The window-opened detection code has to live inside an Experiment. This example is using the `startup` event of the Experiment to register a global window listener to be able to manipulate the Activity Manager.
 
-The Experiment defines a `ActivityManager.onCommand` event, which is fired when the *Clear List* button
-is clicked.
+The Experiment defines an `ActivityManager.onCommand` event, which is fired when the *Clear List* button is clicked.
 
 This extension also shows how to load code from a JSM file, which involves registering a custom `resource://` url.
 

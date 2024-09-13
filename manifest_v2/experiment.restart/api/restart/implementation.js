@@ -163,7 +163,7 @@
                 id="menu_FileRestartItem"
                 insertbefore="menu_FileQuitItem"
                 label="Restart"/>
-            `, true)
+            `)
             window.document.getElementById("menu_FileRestartItem").addEventListener("click", (e) => {
               emitter.emit("menu-item-clicked", e.target.ownerGlobal);
             })
