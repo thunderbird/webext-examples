@@ -2,7 +2,7 @@
 
 This extension uses an Experiment to add a custom event to the *Clear List* button of the Activity Manager.
 
-Since the Activity Manager is not supported by WebExtension APIs, it is not detectable through WebExtension APIs. The window-opened detection code has to live inside an Experiment. This example is using the `startup` event of the Experiment to register a global window listener to be able to manipulate the Activity Manager.
+Since the Activity Manager is not supported by WebExtension APIs, the `windows` API cannot be used to detect the window being opened. Instead, this example is using the `startup` event of the Experiment to register a global window listener to detect and manipulate the Activity Manager.
 
 The Experiment defines an `ActivityManager.onCommand` event, which is fired when the *Clear List* button is clicked.
 
