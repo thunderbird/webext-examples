@@ -4,7 +4,7 @@ await browser.LegacyHelper.registerLegacyUrls([
   ["resource", "exampleaddon1234", "modules/"],
 ]);
 
-await browser.ActivityManager.registerOverlays();
+await browser.ActivityManager.registerWindowListener();
 
 // We defined this event in our schema.
 browser.ActivityManager.onCommand.addListener(async function (x, y) {

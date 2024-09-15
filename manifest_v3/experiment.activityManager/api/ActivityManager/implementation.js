@@ -53,7 +53,7 @@
     return {
       // This key must match the class name.
       ActivityManager: {
-        registerOverlays() {
+        registerWindowListener() {
           // Register a listener for newly opened activity windows. This calls a
           // function of our TestModule.
           ExtensionSupport.registerWindowListener(context.extension.id, {

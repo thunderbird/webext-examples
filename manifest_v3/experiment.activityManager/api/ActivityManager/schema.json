@@ -3,7 +3,7 @@
     "namespace": "ActivityManager",
     "functions": [
       {
-        "name": "registerOverlays",
+        "name": "registerWindowListener",
         "type": "function",
         "description": "Register a listener for newly opened windows to apply our overlays",
         "parameters": []
