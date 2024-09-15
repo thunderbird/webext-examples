@@ -1,6 +1,14 @@
 [
   {
     "namespace": "ActivityManager",
+    "functions": [
+      {
+        "name": "registerOverlays",
+        "type": "function",
+        "description": "Register a listener for newly opened windows to apply our overlays",
+        "parameters": []
+      }
+    ],
     "events": [
       {
         "name": "onCommand",

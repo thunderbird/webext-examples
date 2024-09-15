@@ -8,55 +8,15 @@
   );
 
   // This example loads a system module with additional code. The file can only
-  // be loaded after a custom resource:// url has been registered. Since we need
-  // the extension object, we cannot do that here/ directly, but in startup().
-  let TestModule;
-
-  // Class to manage custom resource:// urls.
-  class ResourceUrl {
-    constructor() {
-      this.customNamespaces = [];
-    }
-
-    register(customNamespace, extension, folder) {
-      const resProto = Cc[
-        "@mozilla.org/network/protocol;1?name=resource"
-      ].getService(Ci.nsISubstitutingProtocolHandler);
-
-      if (customNamespace != customNamespace.toLowerCase()) {
-        throw new ExtensionError(`The namespace is invalid, it must be written entirely in lowercase letters: "${customNamespace}"`);
-      };
-
-      customNamespace != customNamespace.toLowerCase()
-
-      if (resProto.hasSubstitution(customNamespace)) {
-        throw new ExtensionError(`There is already a resource:// url for the namespace "${customNamespace}"`);
-      }
-      this.customNamespaces.push(customNamespace);
-
-      let uri = Services.io.newURI(
-        folder || ".",
-        null,
-        extension.rootURI
-      );
-      resProto.setSubstitutionWithFlags(
-        customNamespace,
-        uri,
-        resProto.ALLOW_CONTENT_ACCESS
-      );
-    }
-
-    unregister() {
-      const resProto = Cc[
-        "@mozilla.org/network/protocol;1?name=resource"
-      ].getService(Ci.nsISubstitutingProtocolHandler);
-      for (let customNamespace of this.customNamespaces) {
-        console.log("Unloading namespace", customNamespace);
-        resProto.setSubstitution(customNamespace, null);
-      }
-    }
-  }
-  const resourceUrl = new ResourceUrl();
+  // be loaded after a custom resource:// url has been registered. This example
+  // is using the LegacyHelper API to register the resource:// url. The following
+  // call will fail, if that resource url has not yet been defined.
+  // Note: System modules cannot be unloaded. To use the new module implementation
+  //       after a reload or update, a unique string is appended as a query, to
+  //       never use a cached version of the module.
+  const { TestModule } = ChromeUtils.importESModule(
+    "resource://exampleaddon1234/TestModule.sys.mjs?" + Date.now()
+  )
 
   // An EventEmitter has the following basic functions:
   // * EventEmitter.on(emitterName, callback): Registers a callback for a
@@ -75,6 +35,19 @@
       return {
         // This key must match the class name.
         ActivityManager: {
+          registerOverlays() {
+            // Register a listener for newly opened activity windows. This calls a
+            // function of our TestModule.
+            ExtensionSupport.registerWindowListener(context.extension.id, {
+              chromeURLs: [
+                "chrome://messenger/content/activity.xhtml",
+              ],
+              onLoadWindow(window) {
+                TestModule.onLoad(window, context.extension, emitter);
+              },
+            });
+          },
+          
           onCommand: new ExtensionCommon.EventManager({
             context,
             name: "ActivityManager.onCommand",
@@ -92,33 +65,6 @@
           }).api(),
         },
       };
-    }
-
-    onStartup() {
-      const { extension } = this;
-
-      // Register a resource:// url which points to the module folder. The name
-      // should be unique to avoid conflicts with other add-ons. The name must be
-      // written entirely in lowercase letters.
-      resourceUrl.register("exampleaddon1234", extension, "modules/");
-
-      // Load our own TestModule. Since TestModule is not defined here, outer
-      // parentheses are required. See
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#assignment_separate_from_declaration_2
-      ({ TestModule } = ChromeUtils.importESModule(
-        "resource://exampleaddon1234/TestModule.sys.mjs?" + Date.now()
-      ))
-      
-      // Register a listener for newly opened activity windows. This calls a
-      // function of our TestModule.
-      ExtensionSupport.registerWindowListener(extension.id, {
-        chromeURLs: [
-          "chrome://messenger/content/activity.xhtml",
-        ],
-        onLoadWindow(window) {
-          TestModule.onLoad(window, extension, emitter);
-        },
-      });
     }
 
     onShutdown(isAppShutdown) {
@@ -142,12 +88,6 @@
 
       // Unregister our listener for newly opened windows.
       ExtensionSupport.unregisterWindowListener(extension.id);
-
-      // Unregister all our resource:// urls.
-      resourceUrl.unregister();
-
-      // Flush all caches.
-      Services.obs.notifyObservers(null, "startupcache-invalidate");
 
       console.log("Good Bye!")
     }

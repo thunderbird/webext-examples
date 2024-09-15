@@ -4,6 +4,14 @@
 // each time the event is fired. Listeners have to be registered before the first
 // occurrence of an await keyword.
 
+// Our ActivityManager API loads a module, which needs a resource:// url. This
+// example is using the LegacyHelper API to register it.
+await browser.LegacyHelper.registerLegacyUrls([
+  ["resource", "exampleaddon1234", "modules/"],
+]);
+
+await browser.ActivityManager.registerOverlays();
+
 // We defined this event in our schema.
 browser.ActivityManager.onCommand.addListener(async function (x, y) {
   browser.notifications.create({

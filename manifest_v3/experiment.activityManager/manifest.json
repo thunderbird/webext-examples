@@ -30,8 +30,21 @@
             "ActivityManager"
           ]
         ],
-        "script": "api/ActivityManager/implementation.js",
-        "events": ["startup"]
+        "script": "api/ActivityManager/implementation.js"
+      }
+    },
+    "LegacyHelper": {
+      "schema": "api/LegacyHelper/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "LegacyHelper"
+          ]
+        ],
+        "script": "api/LegacyHelper/implementation.js"
       }
     }
   }
