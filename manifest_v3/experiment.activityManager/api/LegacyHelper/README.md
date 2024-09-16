@@ -23,7 +23,7 @@ Add the [LegacyHelper API](https://github.com/thunderbird/webext-support/tree/ma
 
 This API provides the following functions:
 
-### async registerLegacyUrls(data)
+### async registerGlobalUrls(data)
 
 Register `chrome://*/content/` and `resource://*/` urls. The function accepts a `data` parameter, which is an array of url definition items. For example:
 

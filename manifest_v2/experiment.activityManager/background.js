@@ -1,6 +1,6 @@
 // Our ActivityManager API loads a module, which needs a resource:// url. This
 // example is using the LegacyHelper API to register it.
-await browser.LegacyHelper.registerLegacyUrls([
+await browser.LegacyHelper.registerGlobalUrls([
   ["resource", "exampleaddon1234", "modules/"],
 ]);
 

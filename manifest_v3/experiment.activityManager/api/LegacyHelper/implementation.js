@@ -14,7 +14,7 @@
     getAPI(context) {
       return {
         LegacyHelper: {
-          registerLegacyUrls(data) {
+          registerGlobalUrls(data) {
             const manifestURI = Services.io.newURI(
               "manifest.json",
               null,
