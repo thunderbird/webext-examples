@@ -28,7 +28,7 @@ This API provides the following functions:
 Register `chrome://*/content/` and `resource://*/` urls. The function accepts a `data` parameter, which is an array of url definition items. For example:
 
 ```
-await browser.LegacyHelper.registerChromeUrl([
+await browser.LegacyHelper.registerGlobalUrls([
   ["content", "myaddon", "legacy/"],
   ["resource", "myaddon", "modules/"],
 ]);
