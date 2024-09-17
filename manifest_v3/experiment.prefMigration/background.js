@@ -20,7 +20,7 @@ if (!migrated) {
 }
 
 // Log current prefs.
-for (let [prefName, defaultValue] of Object.entries(prefs.DEFAULTS)) {
+for (let [prefName, defaultValue] of prefs.getDefaults()) {
   let currentValue = await prefs.getPref(prefName);
   let userValue = await prefs.getUserPref(prefName);
   console.log({

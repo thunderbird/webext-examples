@@ -3,7 +3,7 @@
 Convenient wrapper functions to manager add-on preferences. Designed to specify default values directly inside the module file:
 
 ```
-export const DEFAULTS = {
+const DEFAULTS = {
     // Default preference values
     enableDebug: false
 }
