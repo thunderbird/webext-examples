@@ -1,11 +1,25 @@
+/*
+ * This file is provided by the webext-support repository at
+ * https://github.com/thunderbird/webext-support
+ *
+ * For usage descriptions, please check:
+ * https://github.com/thunderbird/webext-support/tree/master/modules/preferences
+ *
+ * Version 1.1
+ *
+ */
+
 const DEFAULTS = {
     // Default preference values
     enableDebug: false
 }
 
-// Return the current default values as an array of tuples.
+// Return the current default values as an array of { prefName, defaultValue }
+// objects.
 export function getDefaults() {
-    return Object.entries(DEFAULTS)
+    return Object.entries(DEFAULTS).map(
+        e => ({ prefName: e[0], defaultValue: e[1]})
+    )
 }
 
 // Remove stored preference value.

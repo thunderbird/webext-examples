@@ -3,7 +3,7 @@ import * as prefs from "./modules/preferences/preferences.mjs";
 // Migrate preferences from extensions.myaddon.* to local storage.
 let migrated = await prefs.getPref("_migrated");
 if (!migrated) {
-  for (let prefName of Object.keys(prefs.DEFAULTS)) {
+  for (let { prefName } of prefs.getDefaults()) {
     let prefValue = await browser.LegacyPrefs.getUserPref(
       `extensions.myaddon.${prefName}`
     );
@@ -20,7 +20,7 @@ if (!migrated) {
 }
 
 // Log current prefs.
-for (let [prefName, defaultValue] of prefs.getDefaults()) {
+for (let { prefName, defaultValue } of prefs.getDefaults()) {
   let currentValue = await prefs.getPref(prefName);
   let userValue = await prefs.getUserPref(prefName);
   console.log({
