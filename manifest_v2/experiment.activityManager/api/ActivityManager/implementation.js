@@ -93,7 +93,7 @@
     }
   };
 
-  // Export the api by assigning it to the exports parameter of the anonymous
+  // Export the API by assigning it to the exports parameter of the anonymous
   // closure function, which is the global this.
   exports.ActivityManager = ActivityManager;
 
