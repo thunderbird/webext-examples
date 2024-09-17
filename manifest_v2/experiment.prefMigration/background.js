@@ -1,55 +1,32 @@
-// This is the current "migration" version. You can increase it later
-// if you happen to need to do more pref (or maybe other migrations) only once
-// for a user.
-const kCurrentLegacyMigration = 1;
+import * as prefs from "./modules/preferences/preferences.mjs";
 
-// This is the list of defaults for the legacy preferences. Note, you only
-// need to handle the defaults here. Regardless of if there are preferences
-// to be migrated or not, these values will be saved if the preference doesn't
-// exist.
-const kPrefDefaults = {
-  bool_pref: false,
-  integer_pref: 23,
-  ascii_string_pref: "default",
-  unicode_string_pref: "",
-};
-
-async function PrefMigration() {
-  // You could use any sub-section that you want here, it doesn't have
-  // to be called "preferences".
-  const { preferences } = await browser.storage.local.get({ preferences: kPrefDefaults });
-
-  const currentMigration = preferences.migratedLegacy
-      ? preferences.migratedLegacy
-      : 0;
-
-  if (currentMigration >= kCurrentLegacyMigration) {
-    return;
-  }
-
-  // This is the migration step "1". You can later add additional migration steps.
-  if (currentMigration < 1) {
-    for (const prefName of Object.getOwnPropertyNames(kPrefDefaults)) {
-      let value = await browser.PrefMigration.getPref(prefName);
-      if (value !== undefined) {
-        preferences[prefName] = value;
-      }
+// Migrate preferences from extensions.myaddon.* to local storage.
+let migrated = await prefs.getPref("_migrated");
+if (!migrated) {
+  for (let prefName of Object.keys(prefs.DEFAULTS)) {
+    let prefValue = await browser.LegacyPrefs.getUserPref(
+      `extensions.myaddon.${prefName}`
+    );
+    if (prefValue === null) {
+      continue;
     }
+    console.log(`Migrating extensions.myaddon.${prefName}: ${prefValue}`)
+    await prefs.setPref(prefName, prefValue);
+    await browser.LegacyPrefs.clearUserPref(
+      `extensions.myaddon.${prefName}`
+    );
   }
-
-  preferences.migratedLegacy = kCurrentLegacyMigration;
-  await browser.storage.local.set({ preferences });
+  await prefs.setPref("_migrated", true);
 }
 
-try {
-
-  // This triggers the migration.
-  await PrefMigration();
-  const { preferences } = await browser.storage.local.get({ preferences: kPrefDefaults });
-  console.log({ preferences });
-
-} catch (ex) {
-
-  console.error(ex);
-
+// Log current prefs.
+for (let [prefName, defaultValue] of Object.entries(prefs.DEFAULTS)) {
+  let currentValue = await prefs.getPref(prefName);
+  let userValue = await prefs.getUserPref(prefName);
+  console.log({
+    prefName,
+    defaultValue,
+    currentValue,
+    userValue
+  })
 }
