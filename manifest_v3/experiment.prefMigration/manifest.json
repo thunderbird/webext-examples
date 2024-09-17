@@ -18,18 +18,18 @@
     "storage"
   ],
   "experiment_apis": {
-    "PrefMigration": {
-      "schema": "api/PrefMigration/schema.json",
+    "LegacyPrefs": {
+      "schema": "api/LegacyPrefs/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
         ],
         "paths": [
           [
-            "PrefMigration"
+            "LegacyPrefs"
           ]
         ],
-        "script": "api/PrefMigration/implementation.js"
+        "script": "api/LegacyPrefs/implementation.js"
       }
     }
   }
