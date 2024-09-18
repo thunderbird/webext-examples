@@ -8,7 +8,7 @@ It uses `window.getSelection()` to move the cursor behind the added content and 
 
 The `composeScript` API has been replaced by the `scripting.compose` API:
 
-```
+```javascript
 await browser.scripting.compose.registerScripts([{
   id: "compose-script-example-1",
   js: ["compose.js"]

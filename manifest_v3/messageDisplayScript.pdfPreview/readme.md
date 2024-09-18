@@ -8,7 +8,7 @@ The PDF Icon is taken from [freeicons.io](https://freeicons.io/logos/pdf-icon-23
 
 The `messageDisplayScripts` API has been replaced by the `scripting.messageDisplay` API:
 
-```
+```javascript
 browser.scripting.messageDisplay.registerScripts([{
   id: "message-display-script-example-2",
   js: ["initial.js"],

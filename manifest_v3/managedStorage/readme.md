@@ -2,14 +2,15 @@
 
 WebExtensions can allow enterprise IT administrators to override/pre-configure extension preferences, but the extension needs to actively look up those values. To get for example the `colour` value of the managed storage, an extension has to do this:
 
-```
+```javascript
 let managed_colour = await messenger.storage.managed.get("colour");
 ```
 
 Once an extension supports the managed storage, IT administrators can deploy a global configuration using enterprise policies. This example extension can be used to test this concept:
 
 1. Follow the instructions given in our [policies repository](https://github.com/thunderbird/policy-templates) to deploy enterprise policies. For example on Windows, create a directory called `distribution` where Thunderbird's EXE file is located and place a `policies.json` file there, with the following content:
-```
+
+```json
 {
   "policies": {
     "3rdparty": {

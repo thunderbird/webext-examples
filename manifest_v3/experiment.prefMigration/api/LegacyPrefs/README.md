@@ -6,7 +6,7 @@ Use this API to access Thunderbird's system preferences or to migrate your own p
 
 Add the [LegacyPrefs API](https://github.com/thunderbird/webext-support/tree/master/experiments/LegacyPrefs) to your add-on. Your `manifest.json` needs an entry like this:
 
-```
+```json
   "experiment_apis": {
     "LegacyPrefs": {
       "schema": "api/LegacyPrefs/schema.json",
@@ -49,7 +49,7 @@ Register a listener which is notified each time a value in the specified branch 
 
 Example:
 
-```
+```javascript
 browser.LegacyPrefs.onChanged.addListener(async (name, value) => {
   console.log(`Changed value in "mailnews.": ${name} = ${value}`);
 }, "mailnews.");

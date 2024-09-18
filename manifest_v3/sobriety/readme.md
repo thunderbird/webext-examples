@@ -16,7 +16,7 @@ user will be unable to do anything with the message (even save it).
 The `onBeforeSend` event could cause a long idle time, which will terminate the background page and
 dead-lock the compose window. To mitigate this limitation introduced in Manifest V3 ([D155071](https://phabricator.services.mozilla.com/D155071)), we use the alarms API to ping the background page:
 
-```
+```javascript
 async function promiseWithoutTermination(name, promise) {
   const listener = (alarmInfo) => {
     if (alarmInfo.name == name) {

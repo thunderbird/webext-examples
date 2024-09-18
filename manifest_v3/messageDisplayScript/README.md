@@ -13,6 +13,7 @@ The button communicates with the background script via `sendMessage` by sending 
     command: "markUnread"
 }
 ```
+
 ***Hint:** the message can be of any structure which can be [serialized](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities#data_cloning_algorithm), there isn't a rule what structure needs to be used.*
 
 
@@ -22,7 +23,7 @@ The background script receives the message and check for its `command` property,
 
 The `messageDisplayScripts` API has been replaced by the `scripting.messageDisplay` API:
 
-```
+```javascript
 await browser.scripting.messageDisplay.registerScripts([{
   id: "message-display-script-example-1",
   css: ["/src/message-content-styles.css"],

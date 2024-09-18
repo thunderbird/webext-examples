@@ -6,7 +6,7 @@ This API is a temporary helper while converting legacy extensions to modern WebE
 
 Add the [LegacyHelper API](https://github.com/thunderbird/webext-support/tree/master/experiments/LegacyHelper) to your add-on. Your `manifest.json` needs an entry like this:
 
-```
+```json
   "experiment_apis": {
     "LegacyHelper": {
       "schema": "api/LegacyHelper/schema.json",
@@ -27,7 +27,7 @@ This API provides the following functions:
 
 Register `chrome://*/content/` and `resource://*/` urls. The function accepts a `data` parameter, which is an array of url definition items. For example:
 
-```
+```javascript
 await browser.LegacyHelper.registerGlobalUrls([
   ["content", "myaddon", "legacy/"],
   ["resource", "myaddon", "modules/"],
@@ -42,7 +42,7 @@ This registers the following urls:
 
 Open a XUL dialog. The `name` parameter is a unique name identifying the dialog. If the dialog with that name is already open, it will be focused instead of being re-opened. The `path` parameter is a `chrome://*/content/` url pointing to the XUL dialog file (*.xul or *.xhtml).
 
-```
+```javascript
 browser.LegacyHelper.openDialog(
   "XulAddonOptions",
   "chrome://myaddon/content/options.xhtml"

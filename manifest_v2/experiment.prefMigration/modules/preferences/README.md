@@ -2,7 +2,7 @@
 
 Convenient wrapper functions to manager add-on preferences. Designed to specify default values directly inside the module file:
 
-```
+```javascript
 const DEFAULTS = {
     // Default preference values
     enableDebug: false
@@ -12,7 +12,7 @@ const DEFAULTS = {
 
 The module can be used as follows:
 
-```
+```javascript
 import * as prefs from "preferences.mjs"
 
 async function printDebugStatus() {

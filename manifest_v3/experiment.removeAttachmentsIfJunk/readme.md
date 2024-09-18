@@ -10,7 +10,7 @@ One of the two used event listeners was originally defined AFTER the first occur
 
 The background script is executed every time the extension is resumed by a persistent listener. This causes the code which overlays all open message tabs to be re-run. The mitigation implemented here uses a flag in the session storage (it is only cleared on normal add-on shut down, but not when terminated):
 
-```
+```javascript
 let { startup } = await browser.storage.session.get({ startup: true });
 if (startup) {
   await browser.storage.session.set({ startup: false });

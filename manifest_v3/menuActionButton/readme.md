@@ -7,7 +7,7 @@ a native menu when the action button is clicked.
 
 To define an action button as a menu button, set its `type` to `menu`:
 
-```
+```json
   "compose_action": {
     "default_title": "MenuActionButton",
     "type": "menu"

@@ -13,7 +13,7 @@ The background script is executed every time the extension is resumed by a persi
 
 This could have been fixed in the Experiment by not re-adding the element if it exists already. However, the mitigation implemented here uses a flag in the session storage (it is only cleared on normal add-on shut down, but not when terminated):
 
-```
+```javascript
 let { startup } = await browser.storage.session.get({ startup: true });
 if (startup) {
     await browser.storage.session.set({ startup: false });
