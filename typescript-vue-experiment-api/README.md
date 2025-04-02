@@ -13,25 +13,25 @@ In order to see the results, make sure to have either Error Console or Dev Tools
 
 You will need to [install Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs) (v20+).
 
-You can use `npm`, `pnpm`, or `yarn`, but this README shows examples using `pnpm`.
+You can use `npm`, `pnpm`, or `yarn`.
 
 Then:
 - `cd typescript-vue-experiment-api`
-- and install this project's dependencies: `pnpm i`
+- and install this project's dependencies: `npm i`
 
 ## Compiling the add-on
 
 To compile the project:
 
 ```sh
-pnpm build
+npm run build
 ```
 ### Optional: Rebuild on file change
 
 Alternatively, if you are using Linux, macOS, or WSL you can automatically rebuild the add-on when a `.vue`, `.js`, `.ts`, or `.json` file changes:
 ```sh
 # Make sure to install this first: https://github.com/eradman/entr
-pnpm watch
+npm run watch
 ```
 
 ## Loading the add-on
