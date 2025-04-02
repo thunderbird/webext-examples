@@ -6,7 +6,7 @@
   "description": "Experiments API + Vite",
   "browser_specific_settings": {
     "gecko": {
-      "id": "abc@123.xyz",
+      "id": "vue-vite-typescript@sample.extensions.thunderbird.net",
       "strict_min_version": "128.0"
     }
   },
