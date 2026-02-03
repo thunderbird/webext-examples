@@ -3,6 +3,7 @@
 // persistent listener and the background will wake up (restart) each time the
 // event is fired. 
 
-browser.messageDisplay.onMessageDisplayed.addListener((tab, message) => {
-  console.log(`Message displayed in tab ${tab.id}: ${message.subject}`);
+browser.messageDisplay.onMessagesDisplayed.addListener((tab, messageList) => { 
+  const { messages } = messageList;
+  console.log(`Message displayed in tab ${tab.id}: ${messages[0].subject}`);
 });

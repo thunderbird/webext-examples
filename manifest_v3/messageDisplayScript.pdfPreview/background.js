@@ -139,7 +139,7 @@ browser.runtime.onMessage.addListener((data, sender) => {
   // Handle inline-preview requests.
   if (data.command == "addInlinePreviews") {
     let tabId = sender.tab.id;
-    browser.messageDisplay.getDisplayedMessages(tabId).then(([message]) => {
+    browser.messageDisplay.getDisplayedMessages(tabId).then(({ messages: [message] }) => {
       addInlinePreviews(tabId, message.id);
     });
   }
